@@ -1,0 +1,135 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h4 class="card-title">Property Details</h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="table-responsive">
+              <table class="table">
+                <tr>
+                  <th>City</th>
+                  <td>
+                    {{ propertyData.city }}
+                  </td>
+                </tr>
+                <tr>
+                  <th>State</th>
+                  <td>
+                    {{ propertyData.state }}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Zip Code</th>
+                  <td>
+                    {{ propertyData.zipCode }}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Address</th>
+                  <td>
+                    {{ propertyData.address }}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Tenant Name</th>
+                  <td>
+                    {{ propertyData.propertyMapping?.tenant?.firstName }} {{ propertyData.propertyMapping?.tenant?.lastName }} 
+                  </td>
+                </tr>
+                <tr>
+                  <th>Tenant Phone</th>
+                  <td>
+                    {{ propertyData.propertyMapping?.tenant?.phone }}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Rent</th>
+                  <td>
+                    {{ propertyData?.propertyMapping?.rent }}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Security Deposit</th>
+                  <td>
+                    {{ propertyData?.propertyMapping?.securityDeposit }}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Late Fees</th>
+                  <td>
+                    {{ propertyData?.propertyMapping?.lateFees }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <a class="btn btn-info btn-sm" style="width:150px;" href="/#/property/{{ propertyData.id }}/edit">Update</a>
+            <a class="btn btn-success btn-sm" style="width:150px;" href="/#/property/{{ propertyData.id }}/assign">Assign New Tenant</a>
+            <input type="button" mat-raised-button class="btn btn-danger btn-sm" style="width:150px;" value="Sell Property" (click)="openDialog(1)" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr />
+            <h4>
+              <b>Upcoming Expenses</b>
+              <a href="/#/property/{{ propertyData.id }}/relatedexpenses" style="padding-left: 20px"
+                ><i class="fa fa-plus" aria-hidden="true"></i
+              ></a>
+            </h4>
+            <hr />
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+                <th>Title</th>
+                <th>Expense Date</th>
+                <th>Amount Due</th>
+                <th>Description</th>
+                <th>Actions</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let relatedExpense of relatedExpenses">
+                  <td>
+                    {{ relatedExpense.title }}
+                  </td>
+                  <td>
+                    {{ relatedExpense.expenseDate }}
+                  </td>
+                  <td>
+                    {{ relatedExpense.amount }}
+                  </td>
+                  <td>
+                    {{ relatedExpense.description }}
+                  </td>
+                  <td>
+                    <a><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                    <i
+                      (click)="openDialog(relatedExpense.id)"
+                      style="cursor: pointer"
+                      class="fa fa-info fa-lg"
+                      aria-hidden="true"
+                    ></i>
+                    <a href="/#/relatedexpense/{{ relatedExpense.id }}"
+                      ><i
+                        style="cursor: pointer"
+                        class="fa fa-pencil fa-lg"
+                        aria-hidden="true"
+                      ></i
+                    ></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

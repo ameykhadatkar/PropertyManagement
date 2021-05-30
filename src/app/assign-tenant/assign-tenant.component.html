@@ -1,0 +1,164 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Assign Tenant</h4>
+          </div>
+          <div class="card-body">
+            <form
+              [formGroup]="productForm"
+              (ngSubmit)="onFormSubmit(productForm.value)"
+            >
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      aria-required="true"
+                      formControlName="firstName"
+                      matInput
+                      [(ngModel)]="firstName"
+                      required
+                      type="text"
+                      placeholder="First Name"
+                      name="firstName"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      aria-required="true"
+                      formControlName="lastName"
+                      required
+                      matInput
+                      [(ngModel)]="lastName"
+                      placeholder="Last Name"
+                      type="text"
+                      name="lastName"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      aria-required="true"
+                      formControlName="email"
+                      required
+                      matInput
+                      [(ngModel)]="email"
+                      placeholder="Email"
+                      type="email"
+                      name="email"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      aria-required="true"
+                      formControlName="phone"
+                      required
+                      matInput
+                      [(ngModel)]="phone"
+                      required
+                      type="text"
+                      placeholder="Phone"
+                      name="phone"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      aria-required="true"
+                      formControlName="rent"
+                      required
+                      matInput
+                      [(ngModel)]="rent"
+                      placeholder="Rent"
+                      type="number"
+                      name="rent"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      aria-required="true"
+                      formControlName="securityDeposit"
+                      required
+                      matInput
+                      [(ngModel)]="securityDeposit"
+                      placeholder="Security Deposit"
+                      type="number"
+                      name="securityDeposit"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      aria-required="true"
+                      formControlName="lateFees"
+                      required
+                      matInput
+                      [(ngModel)]="lateFees"
+                      required
+                      type="number"
+                      placeholder="Late Fees"
+                      name="lateFees"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      aria-required="true"
+                      formControlName="startDate"
+                      required
+                      matInput
+                      [(ngModel)]="startDate"
+                      required
+                      type="date"
+                      placeholder="Start Date"
+                      name="startDate"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      aria-required="true"
+                      formControlName="endDate"
+                      required
+                      matInput
+                      [(ngModel)]="endDate"
+                      required
+                      type="date"
+                      placeholder="End Date"
+                      name="endDate"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <button
+                mat-raised-button
+                type="submit"
+                class="btn btn-danger pull-right"
+              >
+                Assign
+              </button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

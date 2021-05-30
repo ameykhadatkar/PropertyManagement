@@ -1,0 +1,53 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Transactions</h4>
+            <div>
+              <a href="/#/transactions/add" class="btn btn-success pull-right">Log Transaction</a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-primary">
+                  <th>Property</th>
+                  <th>Personal</th>
+                  <th>Re-imbursible</th>
+                  <th>Transaction Date</th>
+                  <th>Amount</th>
+                  <th>Actions</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let prop of transactions">
+                    <td>
+                      <a href="/#/property/{{ prop?.property?.id || 0 }}">{{ prop?.property?.name || "" }}</a>
+                    </td>
+                    <td>
+                      {{ prop.personal }}
+                    </td>
+                    <td>
+                      {{ prop.reimbursible }}
+                    </td>
+                    <td>
+                      {{ prop.paymentDateTime }}
+                    </td>
+                    <td>
+                      {{ prop.amount }}
+                    </td>
+                    <td>
+                      <a><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                      <a href="/#/property/{{ prop.id }}/edit"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Update Upcoming Expense</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="productForm" (ngSubmit)="onFormSubmit(productForm.value)">
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input aria-required="true" formControlName="title" matInput [(ngModel)]="title" required placeholder="Title" name="title" />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input aria-required="true" formControlName="expenseDate" matInput [(ngModel)]="expenseDate" placeholder="Expense Date" type="date" name="expenseDate" />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input aria-required="true" formControlName="amount" matInput [(ngModel)]="amount" placeholder="Amount" type="number" name="amount" />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-9">
+                  <mat-form-field class="example-full-width">
+                    <textarea matInput formControlName="description" [(ngModel)]="description" placeholder="Description" name="description"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
