@@ -71,7 +71,7 @@
           <div class="col-md-12">
             <a class="btn btn-info btn-sm" style="width:150px;" href="/#/property/{{ propertyData.id }}/edit">Update</a>
             <a class="btn btn-success btn-sm" style="width:150px;" href="/#/property/{{ propertyData.id }}/assign">Assign New Tenant</a>
-            <input type="button" mat-raised-button class="btn btn-danger btn-sm" style="width:150px;" value="Sell Property" (click)="openDialog(1)" />
+            <input type="button" mat-raised-button class="btn btn-danger btn-sm" style="width:150px;" value="Sell Property" (click)="sellProperty(propertyData.id)" />
           </div>
         </div>
         <div class="row">
