@@ -9224,6 +9224,8 @@ button:focus {
   .card .card-plain .card-header-icon {
     margin-right: 15px !important; }
 
+    .ct-labels span {width: inherit !important;}
+
 .table-sales {
   margin-top: 40px; }
 
