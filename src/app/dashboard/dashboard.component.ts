@@ -79,7 +79,7 @@ export class DashboardComponent implements OnInit {
       return Math.ceil(num * precision) / precision;
     }
 
-    this.http.get<any>("https://localhost:44346/api/report/last6month", { headers }).subscribe((data) => {
+    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/report/last6month", { headers }).subscribe((data) => {
       var chartData = {
         labels: [],
         series: [[]],
@@ -122,7 +122,7 @@ export class DashboardComponent implements OnInit {
     });
 
     
-    this.http.get<any>("https://localhost:44346/api/report/incomeexpense", { headers }).subscribe((data) => {
+    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/report/incomeexpense", { headers }).subscribe((data) => {
       var chartData = {
         labels: [],
         series: [[], []],

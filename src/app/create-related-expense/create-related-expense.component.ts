@@ -60,7 +60,7 @@ export class CreateRelatedExpenseComponent implements OnInit {
     };
     this.http
       .post<any>(
-        "https://localhost:44346/api/property/" +
+        "https://propertymanagemet20210611034324.azurewebsites.net/api/property/" +
           this.propertyId +
           "/relatedexpenses",
         this.relatedExpense,

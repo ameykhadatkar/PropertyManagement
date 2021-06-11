@@ -39,12 +39,12 @@ export class PropertyDetailsComponent implements OnInit {
       "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
       "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
     };
-    this.http.get<any>("https://localhost:44346/api/property/" + this.id, { headers }).subscribe((data) => {
+    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/" + this.id, { headers }).subscribe((data) => {
       this.propertyData = data.data;
       console.log(this.propertyData);
     });
 
-    this.http.get<any>("https://localhost:44346/api/property/" + this.id + "/relatedexpenses", { headers }).subscribe((data) => {
+    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/" + this.id + "/relatedexpenses", { headers }).subscribe((data) => {
       this.relatedExpenses = data.records;
       this.relatedExpenses.forEach(function (relatedExpense, index) {
         var formattedDate = relatedExpense.expenseDate.substring(0, relatedExpense.expenseDate.indexOf("T"));
@@ -87,7 +87,7 @@ export class PropertyDetailsComponent implements OnInit {
         "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
         "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
       };
-      this.http.post<any>("https://localhost:44346/api/property/" + this.id + "/sell", data, { headers }).subscribe((data) => {
+      this.http.post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/" + this.id + "/sell", data, { headers }).subscribe((data) => {
         if(data.responseCode = 'OK'){
           location.href="/#/properties"
         }

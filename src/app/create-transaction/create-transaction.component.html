@@ -12,8 +12,8 @@
                 <mat-form-field class="example-full-width">
                   <mat-label>Property</mat-label>
                   <input type="text" matInput [(ngModel)]="PropertyId" [formControl]="propertyControl" [matAutocomplete]="auto" />
-                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                    <mat-option *ngFor="let option of propertyFilteredOptions | async" [value]="option.id">
+                  <mat-autocomplete #auto="matAutocomplete" >
+                    <mat-option *ngFor="let option of propertyFilteredOptions | async" [value]="option.name">
                       {{ option.name }}
                     </mat-option>
                   </mat-autocomplete>

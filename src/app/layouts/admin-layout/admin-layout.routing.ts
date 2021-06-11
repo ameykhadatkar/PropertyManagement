@@ -14,6 +14,8 @@ import { RelatedExpenseEditComponent } from '../../related-expense-edit/related-
 import { CreateRelatedExpenseComponent } from '../../create-related-expense/create-related-expense.component';
 import { AssignTenantComponent } from '../../assign-tenant/assign-tenant.component';
 import { TransactionsComponent } from '../../transactions/transactions.component';
+import { TenantComponent } from '../../tenant/tenant.component';
+import { AccountComponent } from '../../account-monitoring/account.component';
 import { CreateTransactionComponent } from '../../create-transaction/create-transaction.component';
 
 export const AdminLayoutRoutes: Routes = [
@@ -31,5 +33,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'property/:propertyId/relatedexpenses',     component: CreateRelatedExpenseComponent },
     { path: 'property/:propertyId/assign',     component: AssignTenantComponent },
     { path: 'transactions',     component: TransactionsComponent },
+    { path: 'tenant',     component: TenantComponent },
+    { path: 'account-monitoring',     component: AccountComponent },
     { path: 'transactions/add',     component: CreateTransactionComponent },
 ];

@@ -11,6 +11,8 @@ import { PropertyDetailsComponent } from '../../property-details/property-detail
 import { RelatedExpenseEditComponent } from '../../related-expense-edit/related-expense-edit.component';
 import { CreateRelatedExpenseComponent } from '../../create-related-expense/create-related-expense.component';
 import { TransactionsComponent } from '../../transactions/transactions.component';
+import { TenantComponent } from '../../tenant/tenant.component';
+import { AccountComponent } from '../../account-monitoring/account.component';
 import { CreateTransactionComponent } from '../../create-transaction/create-transaction.component';
 import { AssignTenantComponent } from '../../assign-tenant/assign-tenant.component';
 import { TableListComponent } from '../../table-list/table-list.component';
@@ -59,6 +61,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     AssignTenantComponent,
     TransactionsComponent,
     CreateTransactionComponent,
+    TenantComponent,
+    AccountComponent
   ]
 })
 

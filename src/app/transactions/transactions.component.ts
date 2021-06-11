@@ -20,7 +20,7 @@ export class TransactionsComponent implements OnInit {
       "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
     };
     this.http
-      .get<any>("https://localhost:44346/api/expense", { headers })
+      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense", { headers })
       .subscribe((data) => {
         this.transactions = data.records;
         this.transactions.forEach(function(item, index){

@@ -82,7 +82,7 @@ export class AssignTenantComponent implements OnInit {
       "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
     };
     this.http
-      .post<any>("https://localhost:44346/api/tenant", this.tenantdata, {
+      .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/tenant", this.tenantdata, {
         headers,
       })
       .subscribe((data) => {
@@ -90,7 +90,7 @@ export class AssignTenantComponent implements OnInit {
         this.tenantId = data.data.id;
         this.propertyMapping.tenantId = this.tenantId;
         this.http
-          .post<any>("https://localhost:44346/api/tenant/" + this.tenantId + "/property", this.propertyMapping, {
+          .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/tenant/" + this.tenantId + "/property", this.propertyMapping, {
             headers,
           })
           .subscribe((data) => {

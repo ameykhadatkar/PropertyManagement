@@ -1,0 +1,132 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-8">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Account Monitoring</h4>
+                  </div>
+                  <div class="card-body">
+                      <form>
+                          <div class="row">
+                              <div class="col-md-8">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Account Balance" [(ngModel)]="account.accountBalance" name = "accountBalance">
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-3">
+                                  <mat-form-field class="example-full-width">                                  
+                                    <input matInput placeholder="Credit Card expense" [(ngModel)]="account.creditCardexpense" name = "creditCardexpense" readonly>                            
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Account Expense" [(ngModel)]="account.acountExpense" name = "acountExpense"  readonly>
+                                  </mat-form-field>
+                              </div> 
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Account Income" type="text" [(ngModel)]="account.accountIncome" name = "accountIncome" readonly>
+                                </mat-form-field>
+                              </div>
+            
+                            </div>  <div> <button mat-raised-button type="update" class="btn btn-danger pull-right" (click)="UpdateBalance();">Update Balance</button>
+                            <button mat-raised-button type="update" class="btn btn-danger pull-right" (click)="ShowTransactionDetails('account');">Account Expense details</button>
+                           <button mat-raised-button type="update" class="btn btn-danger pull-right"  (click)="ShowTransactionDetails('credit');">Credit Card Expense</button> </div>
+                      </form>
+                      <div class="table-responsive table-height" *ngIf="(showCredit ===1)">
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th>Property</th>
+                              <th>Personal</th>
+                              <th>Re-imbursible</th>
+                              <th>Transaction Date</th>
+                              <th>Amount</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let prop of transactions">
+                              <td>
+                                <a href="/#/property/{{ prop?.property?.id || 0 }}">{{ prop?.property?.name || "" }}</a>
+                              </td>
+                              <td>
+                                {{ prop.personal }}
+                              </td>
+                              <td>
+                                {{ prop.reimbursible }}
+                              </td>
+                              <td>
+                                {{ prop.paymentDateTime }}
+                              </td>
+                              <td>
+                                {{ prop.amount }}
+                              </td>
+                              <td>
+                                <a><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                                <a href="/#/property/{{ prop.id }}/edit"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <!-- <ng-template #noData>
+                            <tbody *ngIf="!addNew">
+                              <tr>
+                                <td colspan="6" class="text-center">No data available</td>
+                              </tr>
+                            </tbody>
+                          </ng-template> -->
+                        </table>
+                      </div>
+                      <div class="table-responsive table-height" *ngIf="(showAccount ===1)">
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th>Property</th>
+                              <th>Personal</th>
+                              <th>Re-imbursible</th>
+                              <th>Transaction Date</th>
+                              <th>Amount</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let prop of accountTransactions">
+                              <td>
+                                <a href="/#/property/{{ prop?.property?.id || 0 }}">{{ prop?.property?.name || "" }}</a>
+                              </td>
+                              <td>
+                                {{ prop.personal }}
+                              </td>
+                              <td>
+                                {{ prop.reimbursible }}
+                              </td>
+                              <td>
+                                {{ prop.paymentDateTime }}
+                              </td>
+                              <td>
+                                {{ prop.amount }}
+                              </td>
+                              <td>
+                                <a><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                                <a href="/#/property/{{ prop.id }}/edit"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <!-- <ng-template #noData>
+                            <tbody *ngIf="!addNew">
+                              <tr>
+                                <td colspan="6" class="text-center">No data available</td>
+                              </tr>
+                            </tbody>
+                          </ng-template> -->
+                        </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

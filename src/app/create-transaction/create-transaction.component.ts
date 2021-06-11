@@ -53,11 +53,10 @@ export class CreateTransactionComponent implements OnInit {
       "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
     };
     this.http
-      .get<any>("https://localhost:44346/api/property", { headers })
+      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property", { headers })
       .subscribe((data) => {
         this.properties = data.records;
         console.log(this.properties);
-
         this.propertyFilteredOptions = this.propertyControl.valueChanges.pipe(
           startWith(""),
           map((value) => (typeof value === "string" ? value : value.name)),
@@ -65,15 +64,20 @@ export class CreateTransactionComponent implements OnInit {
         );
       });
     this.http
-      .get<any>("https://localhost:44346/api/expense/paymenttypes", { headers })
+      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense/paymenttypes", { headers })
       .subscribe((data) => {
         this.paymentTypes = data.records;
       });
   }
+  getPropertyName(id){
 
-  displayFn(prop: any): string {
-    return prop && prop.name ? prop.name : "";
+    var j = id;
+
   }
+  // displayFn(prop: any): string {
+  //   return "test";
+  //   return prop && prop.name ? prop.name : "";
+  // }
 
   private _filter(name: string): Property[] {
     const filterValue = name.toLowerCase();
@@ -99,7 +103,7 @@ export class CreateTransactionComponent implements OnInit {
       "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
     };
     this.http
-      .post<any>("https://localhost:44346/api/expense", this.transaction, { headers })
+      .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense", this.transaction, { headers })
       .subscribe((data) => {
         location.href = "/#/transactions";
       });
