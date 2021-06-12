@@ -17,6 +17,7 @@ import { TransactionsComponent } from '../../transactions/transactions.component
 import { TenantComponent } from '../../tenant/tenant.component';
 import { AccountComponent } from '../../account-monitoring/account.component';
 import { CreateTransactionComponent } from '../../create-transaction/create-transaction.component';
+import { SignupComponent } from '../../signup/signup.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -35,5 +36,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'transactions',     component: TransactionsComponent },
     { path: 'tenant',     component: TenantComponent },
     { path: 'account-monitoring',     component: AccountComponent },
-    { path: 'transactions/add',     component: CreateTransactionComponent },
+    { path: 'transactions/add',     component: CreateTransactionComponent }
 ];

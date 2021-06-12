@@ -108,4 +108,8 @@ export class CreateTransactionComponent implements OnInit {
         location.href = "/#/transactions";
       });
   }
+
+  setPropertyId(item) {
+    this.PropertyId = item.id;
+  }
 }

@@ -1,0 +1,100 @@
+<div class="main">
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <h2 class="form-title">Sign up</h2>
+                    <div class="register-form">
+                        <form [formGroup]="signupForm">
+                            <div class="col-md-12 row">
+                                <div class="form-group col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <!-- <label for="name"><i class="material-icons">person</i></label> -->
+                                        <input type="text" matInput formControlName="firstName" required
+                                            placeholder="First Name" />
+                                        <mat-error *ngIf="handleError('firstName', 'required')">
+                                            Name is required.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <!-- <label for="name"><i class="material-icons">person</i></label> -->
+                                        <input type="text" matInput formControlName="lastName" required
+                                            placeholder="Last Name" />
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                            <div class="col-md-12 row">
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <label for="email"><i class="material-icons">email</i></label>
+                                        <input matInput type="email" formControlName="email" required
+                                            placeholder="Your Email" />
+                                        <mat-error *ngIf="handleError('email', 'required')">
+                                            Email is required.
+                                        </mat-error>
+                                        <mat-error *ngIf="handleError('email', 'pattern')">
+                                            Enter valid Email.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-12 row">
+                                <div class="form-group col-md-8">
+                                    <mat-form-field class="example-full-width">
+                                        <!-- <label for="pass"><i class="material-icons">lock</i></label> -->
+                                        <input matInput type="text" formControlName="username" required 
+                                            placeholder="User Name" />
+                                        <mat-error *ngIf="handleError('username', 'required')">
+                                            User Name is required.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <label for="pass"><i class="material-icons">lock</i></label>
+                                        <input matInput type="password" formControlName="password" required id="pass"
+                                            placeholder="Password" />
+                                        <mat-error *ngIf="handleError('password', 'required')">
+                                            Password is required.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 row">
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput type="text" formControlName="securityQuestion"
+                                            placeholder="Security Question">
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 row">
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput type="text" formControlName="answer" placeholder="Answer">
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="form-group form-button">
+                                <button mat-raised-button (click)="signup()"
+                                    class="btn btn-danger pull-right">Register</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="signup-image">
+                    <figure><img src="./assets/img/signup-image.jpg" alt="sing up image"></figure>
+                    <a routerLink="/login" class="signup-image-link">I am already member</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
