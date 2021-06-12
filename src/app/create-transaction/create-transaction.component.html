@@ -11,7 +11,7 @@
               <div class="col-md-4">
                 <mat-form-field class="example-full-width">
                   <mat-label>Property</mat-label>
-                  <input type="text" matInput [(ngModel)]="PropertyId" [formControl]="propertyControl" [matAutocomplete]="auto" />
+                  <input type="text" matInput [(ngModel)]="PropertyId" [formControl]="propertyControl" [matAutocomplete]="auto" required/>
                   <mat-autocomplete #auto="matAutocomplete" >
                     <mat-option *ngFor="let option of propertyFilteredOptions | async" [value]="option.name" (onSelectionChange)="setPropertyId(option)">
                       {{ option.name }}
@@ -22,9 +22,19 @@
               <div class="col-md-4">
                 <mat-form-field appearance="fill">
                   <mat-label>Payment Type</mat-label>
-                  <mat-select [(ngModel)]="PaymentTypeId" name="paymenttype">
-                    <mat-option *ngFor="let paymentType of paymentTypes" [value]="paymentType.id">
+                  <mat-select [(ngModel)]="PaymentTypeId" name="paymenttype" required >
+                    <mat-option *ngFor="let paymentType of paymentTypes" [value]="paymentType.id" >
                       {{ paymentType.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field appearance="fill">
+                  <mat-label>Transaction Mode</mat-label>
+                  <mat-select [(ngModel)]="TransactionMode" name="transactionMode" required>
+                    <mat-option *ngFor="let transactionMode of transactionModeTypes" [value]="transactionMode.transactionMode">
+                      {{ transactionMode.transactionMode }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -34,7 +44,7 @@
               <div class="col-md-4">
                 <div class="form-check">
                   <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" [(ngModel)]="Reimbursible" />
+                    <input class="form-check-input" type="checkbox"  [(ngModel)]="Reimbursible"  (click)="checkExpenseType(0)"/>
                     Reimbursible?
                     <span class="form-check-sign">
                       <span class="check"></span>
@@ -45,7 +55,7 @@
               <div class="col-md-4">
                 <div class="form-check">
                   <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" [(ngModel)]="Personal" />
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="Personal"  ng-checked="Personal===true"  (click)="checkExpenseType(1)"/>
                     Personal?
                     <span class="form-check-sign">
                       <span class="check"></span>
@@ -56,7 +66,7 @@
               <div class="col-md-4">
                 <div class="form-check">
                   <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" [(ngModel)]="AllPropertyExpense" />
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="AllPropertyExpense" ng-checked="AllPropertyExpense===true"  (click)="checkExpenseType(2)" />
                     All Property Expense?
                     <span class="form-check-sign">
                       <span class="check"></span>
@@ -68,12 +78,12 @@
             <div class="row">
               <div class="col-md-4">
                 <mat-form-field class="example-full-width">
-                  <input aria-required="true" matInput [(ngModel)]="Amount" placeholder="Amount" type="number" name="amount" />
+                  <input aria-required="true" required matInput [(ngModel)]="Amount" placeholder="Amount" type="number" name="amount" />
                 </mat-form-field>
               </div>
               <div class="col-md-4">
                 <mat-form-field class="example-full-width">
-                  <input aria-required="true" matInput [(ngModel)]="PaymentDatetime" placeholder="Expense Date" type="date" name="expenseDate" />
+                  <input aria-required="true" required matInput [(ngModel)]="PaymentDatetime" placeholder="Expense Date" type="date" name="expenseDate" />
                 </mat-form-field>
               </div>
             </div>

@@ -7,6 +7,7 @@ import { catchError, retry, map, startWith } from "rxjs/operators";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { Property } from "app/models/propertymodel";
 import { TransactionModel } from "app/models/TransactionModel";
+import swal from 'sweetalert';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from "@angular/forms";
 
 @Component({
@@ -20,11 +21,13 @@ export class CreateTransactionComponent implements OnInit {
   properties: Property[];
   propertyFilteredOptions: Observable<Property[]>;
   paymentTypes: any[];
+  transactionModeTypes : any[];
   paymentTypeId: number;
   reimbursible = false;
   transaction: TransactionModel = new TransactionModel();
 
   PropertyId: number;
+  PropertyValue: number;
   TenantId: number;
   PaymentTypeId: number;
   AllPropertyExpense: boolean;
@@ -32,6 +35,9 @@ export class CreateTransactionComponent implements OnInit {
   Personal: boolean;
   PaymentDatetime: string;
   Amount: number;
+  TransactionMode:""
+  propertyForm: FormGroup;
+  error: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder) {}
 
@@ -52,6 +58,14 @@ export class CreateTransactionComponent implements OnInit {
       "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
       "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
     };
+    this.transactionModeTypes = [{
+        id:1,
+        transactionMode:"Checking Account"
+     },{
+        id:2,
+        transactionMode:"Credit Card"
+    }]
+
     this.http
       .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property", { headers })
       .subscribe((data) => {
@@ -74,6 +88,20 @@ export class CreateTransactionComponent implements OnInit {
     var j = id;
 
   }
+  checkExpenseType(id:number){
+    if(id === 1){
+      this.AllPropertyExpense = false;
+    }
+    if(id === 2){
+      this.Personal = false;
+      this.setPropertyId("");
+      this.propertyFilteredOptions = this.propertyControl.valueChanges.pipe(
+        startWith(""),
+        map((value) => (typeof value === "string" ? value : value.name)),
+        map((name) => (name ? this._filter(name) : this.properties.slice()))
+      );
+    }
+  }
   // displayFn(prop: any): string {
   //   return "test";
   //   return prop && prop.name ? prop.name : "";
@@ -84,8 +112,20 @@ export class CreateTransactionComponent implements OnInit {
     return this.properties.filter((option) => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  onFormSubmit(): void {
-    this.transaction.PropertyId = this.PropertyId;
+  onFormSubmit(): void {  
+    if(this.AllPropertyExpense === false && (this.PropertyValue===undefined || this.PropertyValue === 0)){
+    swal("Property missing","Please select a property to save transaction", "error");
+    return;
+    }
+    else if((this.AllPropertyExpense === false ||this.AllPropertyExpense ===undefined)  && (this.Reimbursible === false || this.Reimbursible=== undefined) && (this.Personal === false || this.Personal === undefined)){
+      swal("Expense Type missing","Please select if it is a Personal,Reimburse or All property expense", "error");
+      return;
+      }
+    else if(this.PropertyValue===undefined || this.paymentTypes === undefined || this.Amount === undefined || this.PaymentDatetime === undefined){
+    swal("Incomplete Details","Please select all required fields to save transaction", "error");
+    return ;
+    }
+    this.transaction.PropertyId = this.PropertyValue;
     this.transaction.PaymentTypeId = this.PaymentTypeId;
     this.transaction.AllPropertyExpense = this.AllPropertyExpense;
     this.transaction.Reimbursible = this.Reimbursible;
@@ -110,6 +150,10 @@ export class CreateTransactionComponent implements OnInit {
   }
 
   setPropertyId(item) {
-    this.PropertyId = item.id;
+    this.PropertyValue = item.id;
+    this.AllPropertyExpense = false;
+  }
+   handleError = (control: string, error: string) => {
+    return this.propertyForm.controls[control].hasError(error);
   }
 }

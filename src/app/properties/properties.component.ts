@@ -27,4 +27,21 @@ export class PropertiesComponent implements OnInit {
         console.log(this.properties);
       });
   }
+  deleteProperty(propertyId:number): void {
+    const headers = {
+      Authorization: "Bearer my-token",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+    };
+    this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Property/" + propertyId , { headers }).subscribe((data) => {
+      if(data.responseCode = 'OK'){
+        alert("Property has been removed")
+        this.properties.forEach((value,index)=>{
+          if(value.id===propertyId) this.properties.splice(index,1);
+      });
+        
+      }
+    });
+  }
 }

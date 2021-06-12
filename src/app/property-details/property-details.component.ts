@@ -6,6 +6,7 @@ import { catchError, retry } from "rxjs/operators";
 import { Property } from "app/models/propertymodel";
 //import { RelatedExpenseModel } from "app/models/relatedExpense";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { NumberFormatValidator } from "ajv";
 
 export interface RelatedExpenseModel {
   id: number;
@@ -72,7 +73,23 @@ export class PropertyDetailsComponent implements OnInit {
       console.log(result);
     });
   }
-
+  deleteRelatedExpense(expenseID:number): void {
+    const headers = {
+      Authorization: "Bearer my-token",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+    };
+    this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/relatedexpense/" + expenseID , { headers }).subscribe((data) => {
+      if(data.responseCode = 'OK'){
+        alert("Related expense has been removed")
+        this.relatedExpenses.forEach((value,index)=>{
+          if(value.id===expenseID) this.relatedExpenses.splice(index,1);
+      });
+        
+      }
+    });
+  }
   sellProperty(id): void {
     var sellAmount = prompt("Please enter the selling amount", "0");
     if (sellAmount != null) {
@@ -108,4 +125,5 @@ export class DialogElementsExampleDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
 }

@@ -33,5 +33,22 @@ export class TransactionsComponent implements OnInit {
         console.log(this.transactions);
       });
   }
+  deleteTransaction(expenseID:number): void {
+    const headers = {
+      Authorization: "Bearer my-token",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+    };
+    this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Expense/" + expenseID , { headers }).subscribe((data) => {
+      if(data.responseCode = 'OK'){
+        alert("Transaction has been removed")
+        this.transactions.forEach((value,index)=>{
+          if(value.id===expenseID) this.transactions.splice(index,1);
+      });
+        
+      }
+    });
+  }
 
 }

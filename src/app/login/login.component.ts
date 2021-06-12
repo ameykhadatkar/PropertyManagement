@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient , HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import swal from 'sweetalert';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -25,25 +25,31 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login() {
-
+  login() {   
     const headers = {
       Authorization: "Bearer my-token",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
       "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
     };
-    this.http
+    try {
+      this.http
       .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Auth/login", this.loginForm.value, { headers })
       .subscribe((response) => {
+        
+        
         if(response.message == "Success") {
           sessionStorage.setItem("isLogin", "true");
           this.router.navigate(['/dashboard'], { relativeTo: this.route });
-        } else {
-          this.error = response.message;
         }
-        // console.log(data);
+      },
+      (error:HttpErrorResponse) => {
+        swal("Invalid Authentication","Please enter valid email and password to login", "error");
       });
+    } catch (error) {
+      swal("Hello world!");
+    }
+   
 
   }
   handleError = (control: string, error: string) => {
