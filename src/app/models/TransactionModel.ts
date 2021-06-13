@@ -9,4 +9,5 @@ export class TransactionModel {
     PaymentDatetime: string;
     Amount: number;
     Type: string;
+    transactionMode:string;
 }

@@ -452,7 +452,7 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
     font-size: 18px; }
   
   .signin-content {
-    padding-top: 67px;
+    padding-top: 0px;
     padding-bottom: 87px; }
   
   .social-login {

@@ -133,6 +133,7 @@ export class CreateTransactionComponent implements OnInit {
     this.transaction.PaymentDatetime = this.PaymentDatetime;
     this.transaction.Amount = this.Amount;
     this.transaction.Type = "Expense";
+    this.transaction.transactionMode = this.TransactionMode;
     console.log(this.transaction);
 
     const headers = {
