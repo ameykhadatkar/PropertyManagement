@@ -24,15 +24,15 @@
                           <tr *ngFor="let tenant of tenantList">
                             <td>
                               <span *ngIf="(tenant.editMode ===0)">{{tenant.firstName}}</span>
-                              <span *ngIf="(tenant.editMode ===1)"> <input matInput type="text" placeholder="Firstname" [(ngModel)]="tenant.firstName"></span>
+                              <span *ngIf="(tenant.editMode ===1)"> <input matInput type="text" style="width: 125px;" placeholder="Firstname" [(ngModel)]="tenant.firstName"></span>
                             </td>
                             <td>
                               <span *ngIf="(tenant.editMode ===0)">{{tenant.lastName}}</span>
-                              <span *ngIf="(tenant.editMode ===1)"> <input matInput  type="text" placeholder="LastName" [(ngModel)]="tenant.lastName"></span>
+                              <span *ngIf="(tenant.editMode ===1)"> <input matInput  type="text" style="width: 125px;" placeholder="LastName" [(ngModel)]="tenant.lastName"></span>
                             </td>
                             <td>
                               <span *ngIf="(tenant.editMode ===0)">{{tenant.phone}}</span>
-                              <span *ngIf="(tenant.editMode ===1)"> <input matInput  type="text" placeholder="Phone" [(ngModel)]="tenant.phone"></span>
+                              <span *ngIf="(tenant.editMode ===1)"> <input matInput placeholder="Phone" style="width: 125px;" [(ngModel)]="tenant.phone"></span>
                             </td>
                             <td>
                               <span *ngIf="(tenant.editMode ===0)">property will be populated later</span>
@@ -41,7 +41,7 @@
                             
                             <td>
                               <span *ngIf="(tenant.editMode ===0)">{{tenant.email}}</span>
-                              <span *ngIf="(tenant.editMode ===1)"> <input matInput placeholder="Email" [(ngModel)]="tenant.email"></span>
+                              <span *ngIf="(tenant.editMode ===1)"> <input matInput placeholder="Email" style="width: 125px;" [(ngModel)]="tenant.email"></span>
                             </td>
 
                             <td>

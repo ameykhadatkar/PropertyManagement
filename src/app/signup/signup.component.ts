@@ -7,6 +7,7 @@ import { catchError, retry, map, startWith } from "rxjs/operators";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { Property } from "app/models/propertymodel";
 import { TransactionModel } from "app/models/TransactionModel";
+import swal from 'sweetalert';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from "@angular/forms";
 
 
@@ -56,7 +57,8 @@ export class SignupComponent implements OnInit {
     this.http
       .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Auth/register", this.signupForm.value, { headers })
       .subscribe((data) => {
-        console.log(data);
+        swal("You Have Been Registered Successfully");
+        location.href = "/#/login";
       });
 
   }
