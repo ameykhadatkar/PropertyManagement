@@ -13,20 +13,26 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 })
 export class PropertyEditComponent implements OnInit {
 
-  constructor(private http: HttpClient, private route:ActivatedRoute) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
   id: number;
   propertyData: Property;
+  loading: boolean;
   ngOnInit(): void {
     this.id = this.route.snapshot.params['Id'];
+    this.loading = true;
     this.http.get<any>('https://propertymanagemet20210611034324.azurewebsites.net/api/property/' + this.id).subscribe(data => {
-        this.propertyData = data.data;
-        console.log(this.propertyData);
+      this.propertyData = data.data;
+      this.loading = false;
+      console.log(this.propertyData);
     });
   }
 
-  onFormSubmit(form:NgForm): void {
+  onFormSubmit(form: NgForm): void {
+    this.loading = true;
+
     this.http.put<any>('https://propertymanagemet20210611034324.azurewebsites.net/api/property', this.propertyData).subscribe(data => {
-        location.href="/#/property/" + this.propertyData.id;
+      this.loading = false;
+      location.href = "/#/property/" + this.propertyData.id;
     });
   }
 

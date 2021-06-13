@@ -6,10 +6,11 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <mat-tab-group (selectedTabChange)="onTabClick($event)">
               <mat-tab label="Property">
-                <div class="table-responsive">
+                <app-property-edit></app-property-edit>
+                <!-- <div class="table-responsive">
                   <table class="table">
                     <tr>
                       <th>City</th>
@@ -36,10 +37,11 @@
                       </td>
                     </tr>
                   </table>
-                </div>
+                </div> -->
               </mat-tab>
               <mat-tab label="Tenant">
-                <div class="table-responsive">
+                <app-assign-tenant [tenant]="propertyData.propertyMapping"></app-assign-tenant>
+                 <!-- <div class="table-responsive"></div>
                   <table class="table">
                     <tr>
                       <th>Tenant Name</th>
@@ -73,16 +75,16 @@
                       </td>
                     </tr>
                   </table>
-                </div>
+                </div>  -->
               </mat-tab>
             </mat-tab-group>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <a class="btn btn-info btn-sm" style="width:150px;" href="/#/property/{{ propertyData.id }}/edit">Update</a>
+            <!-- <a class="btn btn-info btn-sm" style="width:150px;" href="/#/property/{{ propertyData.id }}/edit">Update</a>
             <a class="btn btn-success btn-sm" style="width:150px;"
-              href="/#/property/{{ propertyData.id }}/assign">Assign New Tenant</a>
+              href="/#/property/{{ propertyData.id }}/assign">Assign New Tenant</a> -->
             <input *ngIf="showButton" type="button" mat-raised-button class="btn btn-danger btn-sm" style="width:150px;"
               value="Sell Property" (click)="sellProperty(propertyData.id)" />
           </div>

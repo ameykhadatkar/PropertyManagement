@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { TenantModel } from "app/models/TenantModel";
@@ -34,7 +34,8 @@ export class AssignTenantComponent implements OnInit {
   endDate: string;
   tenantdata: TenantModel;
   propertyMapping: PropertyMappingModel;
-
+  loading: boolean;
+  @Input() tenant: any;
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -43,7 +44,7 @@ export class AssignTenantComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.propertyId = this.route.snapshot.params["propertyId"];
+    this.propertyId = this.route.snapshot.params["Id"];
     this.productForm = this.formBuilder.group({
       firstName: [null, Validators.required],
       lastName: [null, Validators.required],
@@ -55,6 +56,19 @@ export class AssignTenantComponent implements OnInit {
       securityDeposit: [null, Validators.required],
       lateFees: [null, Validators.required],
     });
+
+    if(this.tenant != null) {
+      this.firstName = this.tenant.tenant.firstName;
+      this.lastName = this.tenant.tenant.lastName;
+      this.rent = this.tenant.rent;
+      this.securityDeposit = this.tenant.securityDeposit;
+      this.lateFees = this.tenant.lateFees;
+      this.startDate = this.tenant.tenant.startDate;
+      this.endDate = this.tenant.tenant.endDate;
+      this.email = this.tenant.tenant.email;
+      this.phone = this.tenant.tenant.phone;
+
+    }
     this.tenantdata = new TenantModel();
     this.propertyMapping = new PropertyMappingModel();
   }
@@ -73,26 +87,15 @@ export class AssignTenantComponent implements OnInit {
     this.propertyMapping.endDate = this.endDate;
     var propertyIdNumber: number = +this.propertyId;
     this.propertyMapping.propertyId = propertyIdNumber;
-
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
+    this.loading = true;
     this.http
-      .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/tenant", this.tenantdata, {
-        headers,
-      })
+      .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/tenant", this.tenantdata)
       .subscribe((data) => {
-        console.log(data);
+        this.loading = false;
         this.tenantId = data.data.id;
         this.propertyMapping.tenantId = this.tenantId;
         this.http
-          .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/tenant/" + this.tenantId + "/property", this.propertyMapping, {
-            headers,
-          })
+          .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/tenant/" + this.tenantId + "/property", this.propertyMapping)
           .subscribe((data) => {
             location.href="/#/property/" + this.propertyId;
           });

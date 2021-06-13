@@ -35,12 +35,6 @@ export class ExportReportsComponent implements OnInit {
       transactionMode: "Credit Card"
     }];
 
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
     this.http
       .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property")
       .subscribe((data) => {

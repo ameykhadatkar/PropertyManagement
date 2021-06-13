@@ -50,11 +50,7 @@ import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
     MatTabsModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.cubeGrid,
-      // backdropBackgroundColour: 'rgba(0,0,0,0.1)', 
       backdropBorderRadius: '4px',
-      // primaryColour: '#8edd80',
-      // secondaryColour: '#ffffff',
-      // tertiaryColour: '#ffffff'
     }),
   ],
   declarations: [
