@@ -594,5 +594,9 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
       margin-right: 0px;
       margin-bottom: 10px; } }
   
+    .classLink {
+      padding-left: 57px;
+      padding-top: 30px;
+    }
   /*# sourceMappingURL=style.css.map */
   

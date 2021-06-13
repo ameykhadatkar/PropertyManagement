@@ -11,19 +11,17 @@ export class TenantComponent implements OnInit {
   transactions: Array<any>;
   tenantList : any = [];
   tenantUpdate : any = [];
-  disableEdit = 0
+  disableEdit = 0;
+  loading: boolean;
   constructor(private http: HttpClient, public datepipe: DatePipe) { }
 
   ngOnInit(): void {
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
+    this.loading = true;
     this.http
-    .get<any>(" https://propertymanagemet20210611034324.azurewebsites.net/api/Tenant", { headers })
+    .get<any>(" https://propertymanagemet20210611034324.azurewebsites.net/api/Tenant")
     .subscribe((data) => {
+    this.loading = false;
+
      // this.tenantList = data.records;
       data.records.forEach((element, index) => {
         this.tenantList.push({
@@ -53,12 +51,7 @@ export class TenantComponent implements OnInit {
       if (tenant === element.id) {
         element.editMode = 0;
      //   this.disableEdit = 0;
-     const headers = {
-      Authorization: "Bearer my-token",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
+     
     this.tenantUpdate = {
     id:element.id,
     firstName:element.firstName,
@@ -69,7 +62,7 @@ export class TenantComponent implements OnInit {
     lastModifiedDateTime : element.lastModifiedDateTime,
     email:element.email}
      this.http
-     .put<any>(" https://propertymanagemet20210611034324.azurewebsites.net/api/Tenant",this.tenantUpdate, { headers })
+     .put<any>(" https://propertymanagemet20210611034324.azurewebsites.net/api/Tenant",this.tenantUpdate)
      .subscribe((data) => {
          this.disableEdit = 1;
      });
@@ -79,6 +72,7 @@ export class TenantComponent implements OnInit {
   }
 
   sendEmail(tenant) {
+    
     this.tenantList.map((element) => {
       if (tenant === element.id) {
         alert("Email has been sent to " + element.name);

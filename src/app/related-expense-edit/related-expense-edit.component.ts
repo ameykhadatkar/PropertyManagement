@@ -19,8 +19,7 @@ export class RelatedExpenseEditComponent implements OnInit {
   relatedExpense: RelatedExpenseModel;
   ngOnInit(): void {
     this.id = this.route.snapshot.params['Id'];
-    const headers = { 'Authorization': 'Bearer my-token', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token' }
-    this.http.get<any>('https://propertymanagemet20210611034324.azurewebsites.net/api/property/relatedexpenses/' + this.id, { headers }).subscribe(data => {
+    this.http.get<any>('https://propertymanagemet20210611034324.azurewebsites.net/api/property/relatedexpenses/' + this.id).subscribe(data => {
         this.relatedExpense = data.data;
         var formattedDate = this.relatedExpense.expenseDate.substring(
           0,
@@ -32,8 +31,7 @@ export class RelatedExpenseEditComponent implements OnInit {
   }
 
   onFormSubmit(form:NgForm): void {
-    const headers = { 'Authorization': 'Bearer my-token', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token' }
-    this.http.put<any>('https://propertymanagemet20210611034324.azurewebsites.net/api/property/relatedexpenses', this.relatedExpense, { headers }).subscribe(data => {
+    this.http.put<any>('https://propertymanagemet20210611034324.azurewebsites.net/api/property/relatedexpenses', this.relatedExpense).subscribe(data => {
         location.href="/#/property/" + this.relatedExpense.propertyId;
     });
   }

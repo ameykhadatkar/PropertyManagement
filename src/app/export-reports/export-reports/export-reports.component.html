@@ -1,0 +1,59 @@
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="offset-md-1  col-md-10">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Export Report</h4>
+                        <p class="card-category">Export reports here</p>
+                    </div>
+                    <div class="card-body mt-4">
+                        <form>
+                            <div class="row col-md-12">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput [(ngModel)]="startDate" placeholder="Start Date" type="date" name="startDate">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput  [(ngModel)]="endDate" placeholder="End Date" type="date" name="endDate">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Property</mat-label>
+                                        <input type="text" matInput [formControl]="propertyControl" [matAutocomplete]="auto" required />
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                            <mat-option *ngFor="let option of propertyFilteredOptions | async"
+                                                [value]="option.name" (onSelectionChange)="setPropertyId(option)">
+                                                {{ option.name }}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <mat-form-field>
+                                        <mat-select [(ngModel)]="transactionMode" name="transactionMode" placeholder="Transaction Mode">
+                                            <mat-option *ngFor="let transactionMode of transactionModeTypes"
+                                                [value]="transactionMode.transactionMode">
+                                                {{ transactionMode.transactionMode }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" (click)="export();"
+                                class="btn btn-danger pull-right">Export</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-loading [show]="loading"></ngx-loading>

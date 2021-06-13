@@ -9,21 +9,18 @@ import { DatePipe } from '@angular/common';
 })
 export class TransactionsComponent implements OnInit {
   transactions: Array<any>;
-
+  loading: boolean;
   constructor(private http: HttpClient, public datepipe: DatePipe) { }
 
   ngOnInit(): void {
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
+    this.loading = true;
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense", { headers })
+      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense")
       .subscribe((data) => {
+        this.loading = false;
+
         this.transactions = data.records;
-        this.transactions.forEach(function(item, index){
+        this.transactions.forEach(function (item, index) {
           var formattedDate = item.paymentDateTime.substring(
             0,
             item.paymentDateTime.indexOf("T")
@@ -33,20 +30,18 @@ export class TransactionsComponent implements OnInit {
         console.log(this.transactions);
       });
   }
-  deleteTransaction(expenseID:number): void {
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
-    this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Expense/" + expenseID , { headers }).subscribe((data) => {
-      if(data.responseCode = 'OK'){
+  deleteTransaction(expenseID: number): void {
+    this.loading = true;
+
+    this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Expense/" + expenseID).subscribe((data) => {
+      if (data.responseCode = 'OK') {
+        this.loading = false;
+
         alert("Transaction has been removed")
-        this.transactions.forEach((value,index)=>{
-          if(value.id===expenseID) this.transactions.splice(index,1);
-      });
-        
+        this.transactions.forEach((value, index) => {
+          if (value.id === expenseID) this.transactions.splice(index, 1);
+        });
+
       }
     });
   }

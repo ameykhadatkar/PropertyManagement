@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   error: any;
+  loading: boolean;
   constructor( private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
@@ -26,28 +27,25 @@ export class LoginComponent implements OnInit {
   }
 
   login() {   
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
+    this.loading = true;
     try {
       this.http
-      .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Auth/login", this.loginForm.value, { headers })
+      .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Auth/login", this.loginForm.value)
       .subscribe((response) => {
         
-        
+        this.loading = false;
         if(response.message == "Success") {
           sessionStorage.setItem("isLogin", "true");
           this.router.navigate(['/dashboard'], { relativeTo: this.route });
         }
       },
       (error:HttpErrorResponse) => {
+        this.loading = false;
         swal("Invalid Authentication","Please enter valid email and password to login", "error");
       });
     } catch (error) {
-      swal("Hello world!");
+      this.loading = false;
+      swal("Something went wrong", "Please try again", "info");
     }
    
 

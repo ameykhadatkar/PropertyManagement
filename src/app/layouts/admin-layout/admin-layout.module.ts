@@ -28,6 +28,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
+
 
 @NgModule({
   imports: [
@@ -44,6 +47,15 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     MatTooltipModule,
     MatDialogModule,
     MatAutocompleteModule,
+    MatTabsModule,
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.cubeGrid,
+      // backdropBackgroundColour: 'rgba(0,0,0,0.1)', 
+      backdropBorderRadius: '4px',
+      // primaryColour: '#8edd80',
+      // secondaryColour: '#ffffff',
+      // tertiaryColour: '#ffffff'
+    }),
   ],
   declarations: [
     DashboardComponent,

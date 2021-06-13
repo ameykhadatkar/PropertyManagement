@@ -599,4 +599,10 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
         top: 50%;
         bottom: 50%;
     }
+
+    .classLink {
+      padding-right: 20px;
+      padding-top: 32px;
+      margin-left: 25px;
+    }
   

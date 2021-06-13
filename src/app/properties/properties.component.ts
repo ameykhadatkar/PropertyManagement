@@ -11,36 +11,32 @@ import { Property } from "app/models/propertymodel";
 })
 export class PropertiesComponent implements OnInit {
   properties: Array<Property>;
-  constructor(private http: HttpClient) {}
+  loading: boolean;
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
+    this.loading = true;
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net//api/property", { headers })
+      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net//api/property")
       .subscribe((data) => {
+        this.loading = false;
+
         this.properties = data.records;
         console.log(this.properties);
       });
   }
-  deleteProperty(propertyId:number): void {
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
-    this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Property/" + propertyId , { headers }).subscribe((data) => {
-      if(data.responseCode = 'OK'){
+  deleteProperty(propertyId: number): void {
+    this.loading = true;
+
+    this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Property/" + propertyId).subscribe((data) => {
+      if (data.responseCode = 'OK') {
+        this.loading = false;
+
         alert("Property has been removed")
-        this.properties.forEach((value,index)=>{
-          if(value.id===propertyId) this.properties.splice(index,1);
-      });
-        
+        this.properties.forEach((value, index) => {
+          if (value.id === propertyId) this.properties.splice(index, 1);
+        });
+
       }
     });
   }

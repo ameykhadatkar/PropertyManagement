@@ -8,7 +8,8 @@ import * as Chartist from "chartist";
   styleUrls: ["./dashboard.component.css"],
 })
 export class DashboardComponent implements OnInit {
-  constructor(private http: HttpClient) {}
+  loading: boolean;
+  constructor(private http: HttpClient) { }
   startAnimationForLineChart(chart) {
     let seq: any, delays: any, durations: any;
     seq = 0;
@@ -68,18 +69,15 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
+
     function roundUp(num, precision) {
       precision = Math.pow(10, precision);
       return Math.ceil(num * precision) / precision;
     }
+    this.loading = true;
+    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/report/last6month").subscribe((data) => {
+      this.loading = false;
 
-    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/report/last6month", { headers }).subscribe((data) => {
       var chartData = {
         labels: [],
         series: [[]],
@@ -117,12 +115,15 @@ export class DashboardComponent implements OnInit {
       };
 
       var dailySalesChart = new Chartist.Line("#dailySalesChart", chartData, optionsDailySalesChart);
-      
+
       this.startAnimationForLineChart(dailySalesChart);
     });
 
-    
-    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/report/incomeexpense", { headers }).subscribe((data) => {
+    this.loading = true;
+
+    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/report/incomeexpense").subscribe((data) => {
+      this.loading = false;
+
       var chartData = {
         labels: [],
         series: [[], []],

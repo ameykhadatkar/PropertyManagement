@@ -26,6 +26,7 @@ export interface RelatedExpenseModel {
   styleUrls: ["./property-details.component.css"],
 })
 export class PropertyDetailsComponent implements OnInit {
+  showButton: boolean = true;
   constructor(private http: HttpClient, private route: ActivatedRoute, public dialog: MatDialog) {}
   id: number;
   propertyData: any;
@@ -34,18 +35,13 @@ export class PropertyDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params["Id"];
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
-    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/" + this.id, { headers }).subscribe((data) => {
+   
+    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/" + this.id).subscribe((data) => {
       this.propertyData = data.data;
       console.log(this.propertyData);
     });
 
-    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/" + this.id + "/relatedexpenses", { headers }).subscribe((data) => {
+    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/" + this.id + "/relatedexpenses").subscribe((data) => {
       this.relatedExpenses = data.records;
       this.relatedExpenses.forEach(function (relatedExpense, index) {
         var formattedDate = relatedExpense.expenseDate.substring(0, relatedExpense.expenseDate.indexOf("T"));
@@ -74,13 +70,8 @@ export class PropertyDetailsComponent implements OnInit {
     });
   }
   deleteRelatedExpense(expenseID:number): void {
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
-    this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/relatedexpense/" + expenseID , { headers }).subscribe((data) => {
+    
+    this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/relatedexpense/" + expenseID ).subscribe((data) => {
       if(data.responseCode = 'OK'){
         alert("Related expense has been removed")
         this.relatedExpenses.forEach((value,index)=>{
@@ -98,18 +89,16 @@ export class PropertyDetailsComponent implements OnInit {
         PropertyId: id
       }
 
-      const headers = {
-        Authorization: "Bearer my-token",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-      };
-      this.http.post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/" + this.id + "/sell", data, { headers }).subscribe((data) => {
+      this.http.post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/" + this.id + "/sell", data).subscribe((data) => {
         if(data.responseCode = 'OK'){
           location.href="/#/properties"
         }
       });
     }
+  }
+
+  onTabClick(event) {
+    this.showButton = (event.index) ? false : true;
   }
 }
 

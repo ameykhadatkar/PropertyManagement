@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 
@@ -24,6 +24,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ExportReportsComponent } from './export-reports/export-reports/export-reports.component';
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { BasicAuthInterceptor } from 'interceptors/basic-auth.interceptor';
 
 
 @NgModule({
@@ -46,16 +49,30 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     MatTooltipModule,
     MatTooltipModule,
     MatDialogModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.cubeGrid,
+      backdropBorderRadius: '4px',
+      primaryColour: '#f44336',
+    }),
+    
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     SignupComponent,
     LoginComponent,
+    ExportReportsComponent,
 
   ],
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BasicAuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

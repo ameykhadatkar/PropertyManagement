@@ -51,20 +51,12 @@ export class CreateRelatedExpenseComponent implements OnInit {
     this.relatedExpense.amount = this.amount;
     this.relatedExpense.description = this.description;
 
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
     this.http
       .post<any>(
         "https://propertymanagemet20210611034324.azurewebsites.net/api/property/" +
           this.propertyId +
           "/relatedexpenses",
-        this.relatedExpense,
-        { headers }
+        this.relatedExpense
       )
       .subscribe((data) => {
         location.href = "/#/property/" + this.propertyId;

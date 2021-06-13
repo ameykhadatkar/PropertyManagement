@@ -52,12 +52,6 @@ export class CreateTransactionComponent implements OnInit {
       Amount: [null, Validators.required],
     });
 
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
     this.transactionModeTypes = [{
         id:1,
         transactionMode:"Checking Account"
@@ -67,7 +61,7 @@ export class CreateTransactionComponent implements OnInit {
     }]
 
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property", { headers })
+      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property")
       .subscribe((data) => {
         this.properties = data.records;
         console.log(this.properties);
@@ -78,7 +72,7 @@ export class CreateTransactionComponent implements OnInit {
         );
       });
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense/paymenttypes", { headers })
+      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense/paymenttypes")
       .subscribe((data) => {
         this.paymentTypes = data.records;
       });
@@ -136,15 +130,9 @@ export class CreateTransactionComponent implements OnInit {
     this.transaction.transactionMode = this.TransactionMode;
     console.log(this.transaction);
 
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
+    
     this.http
-      .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense", this.transaction, { headers })
+      .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense", this.transaction)
       .subscribe((data) => {
         location.href = "/#/transactions";
       });

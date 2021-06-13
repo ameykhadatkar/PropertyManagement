@@ -17,12 +17,6 @@ export class AccountComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
     this.account = {
       accountBalance : 80000,
       creditCardexpense:4000,

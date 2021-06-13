@@ -1,0 +1,3 @@
+::ng-deep .ct-chart .ct-label.ct-vertical.ct-start {
+    justify-content: unset !important;
+}
