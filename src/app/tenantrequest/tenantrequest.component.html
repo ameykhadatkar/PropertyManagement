@@ -17,7 +17,7 @@
 
                           </div>
                           <div class="col-md-12 row">
-                              <div class="form-group col-md-12">
+                              <div class="form-group col-md-6">
                                   <mat-form-field class="example-full-width">
                                       <!-- <label for="email"><i class="material-icons">Email</i></label> -->
                                       <input matInput type="text" formControlName="tenantEmail" required
@@ -26,7 +26,7 @@
                               </div>
                           </div>
                           <div class="col-md-12 row">
-                              <div class="form-group col-md-8">
+                              <div class="form-group col-md-6">
                                   <mat-form-field class="example-full-width">
                                       <!-- <label for="pass"><i class="material-icons">lock</i></label> -->
                                       <input matInput type="text" formControlName="tenantPhone" required
@@ -45,7 +45,13 @@
                                   </mat-form-field>
                               </div>
                           </div>
+                          <!-- <div class="col-md-12 row">
+                            <div class="form-group col-md-12">
+                                    <button type="button"  (click)="fileInput.click()">Choose File</button>
+                                    <input  hidden (change)="onFileSelected()" formControlName="fileBase64String" #fileInput type="file" id="file" name = "file">
 
+                            </div>
+                        </div> -->
                           <div class="col-md-12 row">
                           </div>
                           <div class="row col-md-12">  

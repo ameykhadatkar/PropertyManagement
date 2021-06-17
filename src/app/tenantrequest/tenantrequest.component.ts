@@ -25,6 +25,18 @@ export class TenantRequestComponent implements OnInit {
     });
 
   }
+  onFileSelected() {
+    const inputNode: any = document.querySelector('#file');
+  
+    if (typeof (FileReader) !== 'undefined') {
+      const reader = new FileReader();
+  
+      reader.onload = (e: any) => {
+       // this.srcResult = e.target.result;
+      };
+      reader.readAsArrayBuffer(inputNode.files[0]);
+    }
+  }
   AddRequest(){
     this.http
     .post<any>(" https://propertymanagemet20210611034324.azurewebsites.net/api/TenantRequest",this.tenantRequestForm.value)
