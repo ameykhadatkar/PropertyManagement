@@ -12,36 +12,41 @@
                           <div class="row">
                               <div class="col-md-3">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Username"  [(ngModel)]="userDetails.UserName" name = "UserName">
+                                    <input matInput placeholder="Username"  [(ngModel)]="userDetails.username" name = "UserName">
                                   </mat-form-field>
                               </div>
                               <div class="col-md-4">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Email address" type="email" [(ngModel)]="userDetails.Email" name = "Email">
+                                    <input matInput placeholder="Email address" type="email" [(ngModel)]="userDetails.email" name = "Email">
                                   </mat-form-field>
                               </div> 
                           </div>
                           <div class="row">
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="FirstName"  [(ngModel)]="userDetails.FirstName" name = "FirstName">
+                                  <input matInput placeholder="FirstName"  [(ngModel)]="userDetails.firstName" name = "FirstName">
                                 </mat-form-field>
                               </div>
+                              <!-- <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="LastName"  [(ngModel)]="userDetails.lastName" name = "LastName">
+                                </mat-form-field>
+                              </div> -->
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="LastName"  [(ngModel)]="userDetails.LastName" name = "LastName">
+                                  <input matInput placeholder="LastName"  [(ngModel)]="userDetails.lastName" name = "LastName">
                                 </mat-form-field>
                               </div>
                           </div>
                           <div class="row">
                             <div class="col-md-6">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Security Question"  [(ngModel)]="userDetails.SecurityQuestion" name = "SecurityQuestion">
+                                <input matInput placeholder="Security Question"   name = "SecurityQuestion">
                               </mat-form-field>
                             </div>
                               <div class="col-md-12">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Answer" type="text" [(ngModel)]="userDetails.Answer" name = "Answer">
+                                  <input matInput placeholder="Answer" type="text"  name = "Answer">
                                 </mat-form-field>
                               </div>
                           </div>

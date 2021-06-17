@@ -61,7 +61,7 @@
                                 <i class="fa fa-times-circle-o"></i>
                               </button>
                               <button  class="btn btn-primary btn-sm  mt-1"
-                              (click)="sendEmail(tenant.id);">Send Email</button>
+                              (click)="sendEmail(tenant.email);">Send Email</button>
                             </td>
                           </tr>
                         </tbody>
@@ -73,6 +73,10 @@
                           </tbody>
                         </ng-template> -->
                       </table>
+                      <div class="container">
+                        <button (click)="exportHtml()">Export</button>
+                        <email-editor></email-editor>
+                      </div>
                     </div>
                   </div>
               </div>
@@ -80,5 +84,3 @@
       </div>
   </div>
 </div>
-<ngx-loading [show]="loading"></ngx-loading>
-

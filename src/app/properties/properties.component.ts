@@ -3,7 +3,10 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError, retry } from "rxjs/operators";
 import { Property } from "app/models/propertymodel";
-
+import { MatDialog } from '@angular/material/dialog';
+import { PropertyEditComponent } from '../property-edit/property-edit.component';
+import { PropertyManageService } from '../services/propertymanage.service';
+import swal from 'sweetalert';
 @Component({
   selector: "app-properties",
   templateUrl: "./properties.component.html",
@@ -12,7 +15,10 @@ import { Property } from "app/models/propertymodel";
 export class PropertiesComponent implements OnInit {
   properties: Array<Property>;
   loading: boolean;
-  constructor(private http: HttpClient) { }
+  propertyEditComponent : PropertyEditComponent
+  constructor(private http: HttpClient,private dialog: MatDialog,private propertyManagementService:PropertyManageService) {
+  
+  }
 
   ngOnInit(): void {
     this.loading = true;
@@ -20,24 +26,63 @@ export class PropertiesComponent implements OnInit {
       .get<any>("https://propertymanagemet20210611034324.azurewebsites.net//api/property")
       .subscribe((data) => {
         this.loading = false;
-
         this.properties = data.records;
         console.log(this.properties);
       });
   }
-  deleteProperty(propertyId: number): void {
-    this.loading = true;
-
-    this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Property/" + propertyId).subscribe((data) => {
-      if (data.responseCode = 'OK') {
-        this.loading = false;
-
-        alert("Property has been removed")
-        this.properties.forEach((value, index) => {
-          if (value.id === propertyId) this.properties.splice(index, 1);
-        });
-
+  AddNewProperty(){
+    const dialogref = this.dialog.open(PropertyEditComponent, {
+      width: '50%',
+      height: 'auto',
+      maxHeight: '70%',
+      // disableClose: true,
+      backdropClass: 'cdk-overlay-transparent-backdrop',
+      data: {}
+    });
+    dialogref.afterClosed().subscribe(dialogResult => {
+      if (dialogResult != 0) {
+        this.loading = true;
+        this.http
+          .get<any>("https://propertymanagemet20210611034324.azurewebsites.net//api/property")
+          .subscribe((data) => {
+            this.loading = false;
+    
+            this.properties = data.records;
+            console.log(this.properties);
+          });
       }
     });
+  }
+  deleteProperty(propertyId: number): void {
+    this.loading = true;
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this property",
+      icon: "warning",
+      buttons: [
+        'Cancel',
+        'OK'
+      ],
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Property/" + propertyId).subscribe((data) => {
+          if (data.responseCode = 'OK') {
+            this.loading = false;
+    
+            swal("Property has been removed")
+            this.loading = false
+            this.properties.forEach((value, index) => {
+              if (value.id === propertyId) this.properties.splice(index, 1);
+            });
+    
+          }
+        });
+      } else {
+        this.loading = false
+      }
+    });
+
   }
 }

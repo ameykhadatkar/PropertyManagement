@@ -13,6 +13,8 @@ import { CreateRelatedExpenseComponent } from '../../create-related-expense/crea
 import { TransactionsComponent } from '../../transactions/transactions.component';
 import { TenantComponent } from '../../tenant/tenant.component';
 import { AccountComponent } from '../../account-monitoring/account.component';
+// import { TenantRequestComponent } from '../../tenantrequest/tenantrequest.component';
+import { EmailComponent } from '../../emailservice/email.component';
 import { CreateTransactionComponent } from '../../create-transaction/create-transaction.component';
 import { AssignTenantComponent } from '../../assign-tenant/assign-tenant.component';
 import { TableListComponent } from '../../table-list/table-list.component';
@@ -70,7 +72,9 @@ import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
     TransactionsComponent,
     CreateTransactionComponent,
     TenantComponent,
-    AccountComponent
+    AccountComponent,
+    EmailComponent
+    // TenantRequestComponent
   ]
 })
 

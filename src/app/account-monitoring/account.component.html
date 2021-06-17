@@ -1,7 +1,7 @@
 <div class="main-content">
   <div class="container-fluid">
       <div class="row">
-          <div class="offset-md-2 col-md-8">
+          <div class="col-md-10">
               <div class="card">
                   <div class="card-header card-header-danger">
                       <h4 class="card-title">Account Monitoring</h4>
@@ -9,35 +9,41 @@
                   <div class="card-body">
                       <form>
                           <div class="row">
-                              <div class="col-md-8">
+                              <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Account Balance" [(ngModel)]="account.accountBalance" name = "accountBalance">
+                                    <input matInput placeholder="Account Balance" [(ngModel)]="account.checkingAccountBalance" name = "accountBalance">
                                   </mat-form-field>
                               </div>
                               <div class="col-md-3">
+                                <mat-form-field class="example-full-width">                                  
+                                  <input matInput placeholder="Credit Card Limit" [(ngModel)]="account.creditCardLimit" name = "creditCardLimit">                            
+                                </mat-form-field>
+                            </div>
+                              <div class="col-md-3">
                                   <mat-form-field class="example-full-width">                                  
-                                    <input matInput placeholder="Credit Card expense" [(ngModel)]="account.creditCardexpense" name = "creditCardexpense" readonly>                            
+                                    <input matInput placeholder="Credit Card expense" [(ngModel)]="account.creditCardExpense" name = "creditCardExpense" readonly>                            
                                   </mat-form-field>
                               </div>
-                              <div class="col-md-4">
+                              <div class="col-md-3">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Account Expense" [(ngModel)]="account.acountExpense" name = "acountExpense"  readonly>
+                                    <input matInput placeholder="Account Expense" [(ngModel)]="account.checkingAccountExpense" name = "acountExpense"  readonly>
                                   </mat-form-field>
                               </div> 
                           </div>
                           <div class="row">
-                              <div class="col-md-6">
+                              <div class="col-md-3">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Account Income" type="text" [(ngModel)]="account.accountIncome" name = "accountIncome" readonly>
+                                  <input matInput placeholder="Account Income" type="text" [(ngModel)]="account.checkingAccountIncome" name = "accountIncome" readonly>
                                 </mat-form-field>
                               </div>
             
                             </div>  <div> <button mat-raised-button type="update" class="btn btn-danger pull-right" (click)="UpdateBalance();">Update Balance</button>
-                            <button mat-raised-button type="update" class="btn btn-danger pull-right" (click)="ShowTransactionDetails('account');">Account Expense details</button>
-                           <button mat-raised-button type="update" class="btn btn-danger pull-right"  (click)="ShowTransactionDetails('credit');">Credit Card Expense</button> </div>
+                            <!-- <button mat-raised-button type="update" class="btn btn-danger pull-right" (click)="ShowTransactionDetails('account');">Account Expense details</button>
+                           <button mat-raised-button type="update" class="btn btn-danger pull-right"  (click)="ShowTransactionDetails('credit');">Credit Card Expense</button>  -->
+                           </div>
                       </form>
-                      <div class="table-responsive table-height" *ngIf="(showCredit ===1)">
-                        <table class="table table-bordered table-striped">
+                      <div class="table-responsive table-height">
+                        <table class="table table-bordered ">
                           <thead>
                             <tr>
                               <th>Property</th>
@@ -45,6 +51,7 @@
                               <th>Re-imbursible</th>
                               <th>Transaction Date</th>
                               <th>Amount</th>
+                              <th>Type</th>
                               <th>Actions</th>
                             </tr>
                           </thead>
@@ -64,6 +71,9 @@
                               </td>
                               <td>
                                 {{ prop.amount }}
+                              </td>
+                              <td>
+                                {{ prop.type }}
                               </td>
                               <td>
                                 <a><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>

@@ -1,0 +1,37 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-10">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Send Email</h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="col-md-6">
+                      <mat-form-field class="example-full-width">
+                        <input matInput type="text" [(ngModel)]="tenant.toEmails" required placeholder="To :" name="toEmailAddress">
+                      </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput  type="text" [(ngModel)]="tenant.ccEmails" placeholder="cc :" type="text" name="ccEmailAddress">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput  type="text"   [(ngModel)]="tenant.subject" placeholder="Subject :" type="text" name="Subject">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-12">
+                    <mat-form-field class="example-full-width">
+                      <input matInput  type="textarea" [(ngModel)]="tenant.body" placeholder="Body :" type="text" name="Body">
+                    </mat-form-field>
+                  </div>
+                  <button mat-raised-button type="submit"  class="btn btn-danger pull-right" (click)="sendEmail();">Send email</button>
+                  <button mat-raised-button   class="btn btn-danger pull-right" (click)="cancelEmail();">Cancel</button>
+                  </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>

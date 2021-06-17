@@ -96,7 +96,9 @@ export class PropertyDetailsComponent implements OnInit {
       });
     }
   }
-
+  AddProperty(){
+    this.propertyData = []
+  }
   onTabClick(event) {
     this.showButton = (event.index) ? false : true;
   }

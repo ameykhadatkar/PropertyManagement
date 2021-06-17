@@ -16,6 +16,8 @@ import { AssignTenantComponent } from '../../assign-tenant/assign-tenant.compone
 import { TransactionsComponent } from '../../transactions/transactions.component';
 import { TenantComponent } from '../../tenant/tenant.component';
 import { AccountComponent } from '../../account-monitoring/account.component';
+// import { TenantRequestComponent } from '../../tenantrequest/tenantrequest.component';
+import { EmailComponent } from '../../emailservice/email.component';
 import { CreateTransactionComponent } from '../../create-transaction/create-transaction.component';
 import { SignupComponent } from '../../signup/signup.component';
 import { ExportReportsComponent } from 'app/export-reports/export-reports/export-reports.component';
@@ -37,6 +39,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'transactions',     component: TransactionsComponent },
     { path: 'tenant',     component: TenantComponent },
     { path: 'account-monitoring',     component: AccountComponent },
+    { path: 'emailservice',     component: EmailComponent },
     { path: 'transactions/add',     component: CreateTransactionComponent },
     { path: 'export',     component: ExportReportsComponent }
+    // { path: 'tenantrequest',     component: TenantRequestComponent }
 ];

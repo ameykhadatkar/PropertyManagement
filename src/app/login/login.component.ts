@@ -13,6 +13,9 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   error: any;
   loading: boolean;
+  userEmail:"";
+  userPassword:"";
+  loginDetails :any = [];
   constructor( private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
@@ -35,6 +38,8 @@ export class LoginComponent implements OnInit {
         
         this.loading = false;
         if(response.message == "Success") {
+          sessionStorage.setItem("loginID", this.userEmail);
+          sessionStorage.setItem("loginPwd", this.userPassword);
           sessionStorage.setItem("isLogin", "true");
           this.router.navigate(['/dashboard'], { relativeTo: this.route });
         }

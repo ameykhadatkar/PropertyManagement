@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { DatePipe } from '@angular/common';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-transactions',
@@ -32,18 +33,33 @@ export class TransactionsComponent implements OnInit {
   }
   deleteTransaction(expenseID: number): void {
     this.loading = true;
-
-    this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Expense/" + expenseID).subscribe((data) => {
-      if (data.responseCode = 'OK') {
-        this.loading = false;
-
-        alert("Transaction has been removed")
-        this.transactions.forEach((value, index) => {
-          if (value.id === expenseID) this.transactions.splice(index, 1);
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this transaction",
+      icon: "warning",
+      buttons: [
+        'Cancel',
+        'OK'
+      ],
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Expense/" + expenseID).subscribe((data) => {
+          if (data.responseCode = 'OK') {
+            this.loading = false;   
+            swal("Transaction has been removed")
+            this.transactions.forEach((value, index) => {
+              if (value.id === expenseID) this.transactions.splice(index, 1);
+            });
+    
+          }
         });
-
+      } else {
+        this.loading = false
       }
     });
+
   }
 
 }

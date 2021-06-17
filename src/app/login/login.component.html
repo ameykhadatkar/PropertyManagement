@@ -13,7 +13,7 @@
                             <mat-form-field class="example-full-width">
 
                                 <label for="your_name"><i class="material-icons">email</i></label>
-                                <input matInput type="text" formControlName="email" id="your_name"
+                                <input matInput type="text" [(ngModel)]="userEmail" formControlName="email" id="your_name"
                                     placeholder="Email" />
                                 <mat-error *ngIf="handleError('email', 'required')">
                                     Email is required.
@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <mat-form-field class="example-full-width">
                                 <label for="your_pass"><i class="material-icons">lock</i></label>
-                                <input matInput type="password" formControlName="password" id="your_pass"
+                                <input matInput type="password" [(ngModel)]="userPassword" formControlName="password" id="your_pass"
                                     placeholder="Password" />
                                 <mat-error *ngIf="handleError('password', 'required')">
                                     Password is required.

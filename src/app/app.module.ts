@@ -16,6 +16,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { DatePipe } from '@angular/common';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { TenantRequestComponent } from './tenantrequest/tenantrequest.component';
 import { MatButtonModule } from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatRippleModule} from '@angular/material/core';
@@ -63,6 +64,7 @@ import { BasicAuthInterceptor } from 'interceptors/basic-auth.interceptor';
     SignupComponent,
     LoginComponent,
     ExportReportsComponent,
+    TenantRequestComponent
 
   ],
   providers: [
