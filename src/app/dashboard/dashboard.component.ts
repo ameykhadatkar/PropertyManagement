@@ -12,6 +12,10 @@ import swal from 'sweetalert';
 export class DashboardComponent implements OnInit {
   loading: boolean;
   notify: boolean;
+  totalIncomeLast30Days= 0;
+  totalExpenseLast30Days= 0;
+  upcomingExpenseNext30Days =  0;
+  profitPercentageLAst30Days = 0;
   constructor(private http: HttpClient) { }
   startAnimationForLineChart(chart) {
     let seq: any, delays: any, durations: any;
@@ -87,7 +91,7 @@ export class DashboardComponent implements OnInit {
         labels: [],
         series: [[]],
       };
-
+      
       var maxValue = 100;
       var minValue = 0;
       console.log(data);
@@ -101,9 +105,13 @@ export class DashboardComponent implements OnInit {
           minValue = x.profit;
         }
       });
-
-      console.log(chartData);
-      console.log(maxValue);
+      this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/report/tiles").subscribe((data) => {
+        this.totalIncomeLast30Days= data.data.totalIncomeLast30Days;
+        this.totalExpenseLast30Days= data.data.totalExpenseLast30Days;
+        this.upcomingExpenseNext30Days = data.data.upcomingExpenseNext30Days;
+        this.profitPercentageLAst30Days = data.data.profitPercentageLAst30Days;
+    });
+     
 
       const dataDailySalesChart: any = {
         labels: ["M", "T", "W", "T", "F", "S", "S"],

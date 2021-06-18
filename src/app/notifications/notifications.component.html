@@ -11,13 +11,19 @@
                         <mat-expansion-panel *ngFor="let notification of notifications" class="mb-4">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                   <b> {{notification.title}} </b>
+                                   <b> {{notification.title}} </b>        
                                 </mat-panel-title>
                                 <mat-panel-description>
                                     <!-- Currently I am {{panelOpenState ? 'open' : 'closed'}} -->
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
-                            <p>{{notification.description}}</p>
+                            <div>
+                               <p>   From : {{notification.tenantEmail}}</p>
+                            </div>
+                            <div>
+                                <p>   Phone : {{notification.tenantPhone}}</p>
+                             </div>
+                            <p> Description : {{notification.description}}</p>
                             <div class="form-group form-button">
                                 <button mat-raised-button (click)="closeRequest(notification)" class="btn btn-danger pull-right">Close</button>
                             </div>
