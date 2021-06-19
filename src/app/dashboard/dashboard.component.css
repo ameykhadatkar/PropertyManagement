@@ -1,3 +1,19 @@
 ::ng-deep .ct-chart .ct-label.ct-vertical.ct-start {
     justify-content: unset !important;
 }
+
+::ng-deep .alert {
+    z-index: 10000 !important;
+}
+
+.blink{
+    text-align: center;
+}
+.alert{
+    animation: blink 5s linear infinite;
+}
+@keyframes blink{
+    0%{opacity: .2;}
+    50%{opacity: .5;}
+    100%{opacity: 1;}
+}

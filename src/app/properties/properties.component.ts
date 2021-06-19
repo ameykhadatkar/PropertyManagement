@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError, retry } from "rxjs/operators";
 import { Property } from "app/models/propertymodel";
@@ -16,6 +16,8 @@ export class PropertiesComponent implements OnInit {
   properties: Array<Property>;
   loading: boolean;
   propertyEditComponent : PropertyEditComponent
+  evalutions: any;
+  active: boolean = false;
   constructor(private http: HttpClient,private dialog: MatDialog,private propertyManagementService:PropertyManageService) {
   
   }
@@ -84,5 +86,29 @@ export class PropertiesComponent implements OnInit {
       }
     });
 
+  }
+
+  getPropertyEvalutionDetails(id) {
+    this.evalutions = [];
+    this.loading = true;
+    
+    this.http
+      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Report/PropertyEvaluation/"+id)
+      .subscribe((data) => {
+        this.loading = false;
+        if(data.message == "Success") {
+          this.evalutions = data.data;
+        }
+        console.log(data);
+      },
+      (error: HttpErrorResponse) => {
+        this.loading = false;
+        swal("Something went wrong", "Please try again", "error");
+      });
+  }
+
+  toggleClick(event) {
+    this.active = event.checked;
+    console.log(event.checked);
   }
 }

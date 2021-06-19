@@ -36,29 +36,90 @@
                       {{ prop.state }}
                     </td>
                     <td>
-                      <a 
-                        ><i class="fa fa-trash fa-lg" (click)="deleteProperty(prop.id)"></i
-                      ></a>
-                      <a href="/#/property/{{ prop.id }}/edit"
-                        ><i class="fa fa-pencil fa-lg"  ></i
-                      ></a>
-                      <a
-                        ><i
-                          class="fa fa-line-chart fa-lg"
-                          aria-hidden="true"
-                        ></i
-                      ></a>
+                      <a><i class="fa fa-trash fa-lg" (click)="deleteProperty(prop.id)"></i></a>
+                      <a href="/#/property/{{ prop.id }}/edit"><i class="fa fa-pencil fa-lg"></i></a>
+                      <a><i class="fa fa-line-chart fa-lg" (click)="getPropertyEvalutionDetails(prop.id);"
+                          data-toggle="modal" data-target="#buy" aria-hidden="true"></i></a>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div> <button mat-raised-button  class="btn btn-danger pull-right" (click)="AddNewProperty();">Add New Property</button>
+            <div> <button mat-raised-button class="btn btn-danger pull-right" (click)="AddNewProperty();">Add New
+                Property</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="modal modal-angular fade" id="buy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="margin-top text-center">
+            Property Evalution
+          </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          <div class="separator"></div>
+        </div>
+        <div class="modal-body text-center">
+          <div class="pull-right mb-4">
+            <span class="mr-2" [ngClass]="active == false ? 'active': ''">Property Evalution</span>
+            <mat-slide-toggle (change)="toggleClick($event)">
+            </mat-slide-toggle>
+            <span class="ml-2" [ngClass]="active == true ? 'active': ''">Selling Evalution</span>
+            <!-- 
+            <mat-button-toggle-group name="fontStyle" aria-label="Font Style" value="propertyEvalution" (change)="toggleClick($event)">
+              <mat-button-toggle value="propertyEvalution">Property Evalution</mat-button-toggle>
+              <mat-button-toggle value="sellingEvalution">Selling Evalution</mat-button-toggle>
+            </mat-button-toggle-group> -->
+
+          </div>
+          <table class="table table-striped">
+
+            <tr>
+              <td class="text-left"><b>Evalutions Id: </b>{{evalutions ? evalutions.id : 'NA'}}</td>
+              <td class="text-left"><b>Name: </b>{{evalutions ? evalutions.name : 'NA'}}</td>
+            </tr>
+            <tr>
+              <td class="text-left"><b>Total Upcoming Expense: </b>{{evalutions ? evalutions.totalUpcomingExpense :
+                'NA'}}</td>
+              <td class="text-left"><b>Total Income: </b>{{evalutions ? evalutions.totalIncome : 'NA'}}</td>
+
+            </tr>
+            <tr>
+              <td class="text-left"><b>Total Expense: </b>{{evalutions ? evalutions.totalExpense : 'NA'}}</td>
+              <td class="text-left"><b>Profit Loss Percentage: </b>{{evalutions ? evalutions.profitLossPercentage :
+                'NA'}}</td>
+
+            </tr>
+            <tr>
+              <td class="text-left"><b>Profit Loss Amount: </b>{{evalutions ? evalutions.profitLossAmount : 'NA'}}</td>
+              <td class="text-left"><b>Selling Amount: </b>{{evalutions ? evalutions.sellingAmount : 'NA'}}</td>
+
+            </tr>
+            <tr>
+              <td class="text-left"><b>Selling Profit Loss: </b>{{evalutions ? evalutions.sellingProfitLoss :
+                'NA'}}</td>
+              <td class="text-left"><b>Selling Profit Loss Percentage: </b>{{evalutions ?
+                evalutions.sellingProfitLossPercentage : 'NA'}}</td>
+
+            </tr>
+            <tr>
+              <td class="text-left"><b>Selling Date: </b>{{evalutions ? evalutions.sellingDate : 'NA'}}</td>
+              <td class="text-left"><b>Category Wise Expense Income Values: </b>{{evalutions ?
+                evalutions.categoryWiseExpenseIncomeValues : 'NA'}}</td>
+
+            </tr>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 <ngx-loading [show]="loading"></ngx-loading>
-

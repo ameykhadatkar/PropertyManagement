@@ -1,3 +1,9 @@
+<div class="alert alert-warning offset-md-2 col-md-8 mt-2 blink" *ngIf="notify">
+  <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <i class="material-icons">close</i>
+  </button>
+  <span><a routerLink="/notifications">You have new notifications</a></span>
+</div>
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">

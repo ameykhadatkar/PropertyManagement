@@ -1,3 +1,23 @@
 i {
     padding: 5px;
+    cursor: pointer;
+}
+
+.modal {
+    margin-top: 10%;
+}
+
+.modal-content{
+    width: 130%;
+    max-width: auto;
+}
+
+.modal-header{
+    color: #fff;
+    background-color: #f33527;
+    border-color: #e11b0c;
+}
+
+.active {
+    font-weight: bold;
 }

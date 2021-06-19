@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import * as Chartist from "chartist";
+import swal from 'sweetalert';
+
 
 @Component({
   selector: "app-dashboard",
@@ -9,6 +11,7 @@ import * as Chartist from "chartist";
 })
 export class DashboardComponent implements OnInit {
   loading: boolean;
+  notify: boolean;
   constructor(private http: HttpClient) { }
   startAnimationForLineChart(chart) {
     let seq: any, delays: any, durations: any;
@@ -67,6 +70,8 @@ export class DashboardComponent implements OnInit {
     seq2 = 0;
   }
   ngOnInit() {
+
+    this.getNotifications();
     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
 
@@ -171,4 +176,22 @@ export class DashboardComponent implements OnInit {
       this.startAnimationForBarChart(websiteViewsChart);
     });
   }
+
+   getNotifications() {
+    this.loading = true;
+
+    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/TenantRequest").subscribe((data) => {
+      this.loading = false;
+      if (data.message == "Success") {
+        if(data.records.length > 0) {
+          this.notify = true;
+        }
+      }
+    },
+      (error: HttpErrorResponse) => {
+        this.loading = false;
+        swal("Something went wrong", "Please try again", "error");
+      });
+  }
+
 }

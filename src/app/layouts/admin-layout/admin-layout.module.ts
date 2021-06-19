@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -32,6 +32,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { MatExpansionModule } from '@angular/material/expansion';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -54,6 +56,8 @@ import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
       animationType: ngxLoadingAnimationTypes.cubeGrid,
       backdropBorderRadius: '4px',
     }),
+    MatExpansionModule,
+    MatSlideToggleModule,
   ],
   declarations: [
     DashboardComponent,
@@ -75,7 +79,10 @@ import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
     AccountComponent,
     EmailComponent
     // TenantRequestComponent
-  ]
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
 
 export class AdminLayoutModule {}

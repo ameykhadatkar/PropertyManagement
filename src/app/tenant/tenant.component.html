@@ -1,86 +1,93 @@
 <div class="main-content">
   <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-12">
-              <div class="card">
-                  <div class="card-header card-header-danger">
-                      <h4 class="card-title">Tenant Request</h4>
-                  </div>
-                  <div class="card-body">
-                    <div class="table-responsive table-height">
-                      <table class="table table-bordered">
-                        <thead>
-                          <tr>
-                            <th>Firstname</th>
-                            <th>Lastname</th>
-                            <th>Phone</th>
-                            <th class="alignMiddle">Property</th>
-                            <th class="alignMiddle">Email</th>
-                            <th class="alignMiddle">Account Number</th>
-                            <th class="alignMiddle" [ngStyle]="{'width': columnWidth}">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody >
-                          <tr *ngFor="let tenant of tenantList">
-                            <td>
-                              <span *ngIf="(tenant.editMode ===0)">{{tenant.firstName}}</span>
-                              <span *ngIf="(tenant.editMode ===1)"> <input matInput type="text" style="width: 125px;" placeholder="Firstname" [(ngModel)]="tenant.firstName"></span>
-                            </td>
-                            <td>
-                              <span *ngIf="(tenant.editMode ===0)">{{tenant.lastName}}</span>
-                              <span *ngIf="(tenant.editMode ===1)"> <input matInput  type="text" style="width: 125px;" placeholder="LastName" [(ngModel)]="tenant.lastName"></span>
-                            </td>
-                            <td>
-                              <span *ngIf="(tenant.editMode ===0)">{{tenant.phone}}</span>
-                              <span *ngIf="(tenant.editMode ===1)"> <input matInput placeholder="Phone" style="width: 125px;" [(ngModel)]="tenant.phone"></span>
-                            </td>
-                            <td>
-                              <span *ngIf="(tenant.editMode ===0)">property will be populated later</span>
-                              <!-- <span *ngIf="(tenant.editMode ===1)"> <input matInput placeholder="Username" [(ngModel)]="tenant.property"></span> -->
-                            </td>
-                            
-                            <td>
-                              <span *ngIf="(tenant.editMode ===0)">{{tenant.email}}</span>
-                              <span *ngIf="(tenant.editMode ===1)"> <input matInput placeholder="Email" style="width: 125px;" [(ngModel)]="tenant.email"></span>
-                            </td>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Tenant Request</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive table-height">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Phone</th>
+                    <th class="alignMiddle">Property</th>
+                    <th class="alignMiddle">Email</th>
+                    <th class="alignMiddle">Account Number</th>
+                    <th class="alignMiddle" [ngStyle]="{'width': columnWidth}">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let tenant of tenantList">
+                    <td>
+                      <span *ngIf="(tenant.editMode ===0)">{{tenant.firstName}}</span>
+                      <span *ngIf="(tenant.editMode ===1)"> <input matInput type="text" style="width: 125px;"
+                          placeholder="Firstname" [(ngModel)]="tenant.firstName"></span>
+                    </td>
+                    <td>
+                      <span *ngIf="(tenant.editMode ===0)">{{tenant.lastName}}</span>
+                      <span *ngIf="(tenant.editMode ===1)"> <input matInput type="text" style="width: 125px;"
+                          placeholder="LastName" [(ngModel)]="tenant.lastName"></span>
+                    </td>
+                    <td>
+                      <span *ngIf="(tenant.editMode ===0)">{{tenant.phone}}</span>
+                      <span *ngIf="(tenant.editMode ===1)"> <input matInput placeholder="Phone" style="width: 125px;"
+                          [(ngModel)]="tenant.phone"></span>
+                    </td>
+                    <td>
+                      <span *ngIf="(tenant.editMode ===0)">property will be populated later</span>
+                      <!-- <span *ngIf="(tenant.editMode ===1)"> <input matInput placeholder="Username" [(ngModel)]="tenant.property"></span> -->
+                    </td>
 
-                            <td>
-                              <span *ngIf="(tenant.editMode ===0)">{{tenant.accountNumber}}</span>                            
-                            </td>
+                    <td>
+                      <span *ngIf="(tenant.editMode ===0)">{{tenant.email}}</span>
+                      <span *ngIf="(tenant.editMode ===1)"> <input matInput placeholder="Email" style="width: 125px;"
+                          [(ngModel)]="tenant.email"></span>
+                    </td>
 
-                            <td class="alignMiddle">
-                              <button *ngIf="(tenant.editMode ===0)" class="btn btn-default btnAnimation"
-                                (click)="editTenant(tenant.id)" [disabled]="(disableEdit===0)">
-                                <i class="fa fa-pencil"></i>
-                              </button>
-                              <button *ngIf="(tenant.editMode ===1)" class="btn btn-default btnAnimation" (click)="updateTenant(tenant.id)">
-                                <i class="fa fa-check-circle-o"></i>
-                              </button>
-                              <button *ngIf="(tenant.editMode ===1)" class="btn btn-default btnAnimation"
-                                (click)="updateTenant(tenant.id)">
-                                <i class="fa fa-times-circle-o"></i>
-                              </button>
-                              <button  class="btn btn-primary btn-sm  mt-1"
-                              (click)="sendEmail(tenant.email);">Send Email</button>
-                            </td>
-                          </tr>
-                        </tbody>
-                        <!-- <ng-template #noData>
+                    <td>
+                      <span *ngIf="(tenant.editMode ===0)">{{tenant.accountNumber}}</span>
+                    </td>
+
+                    <td class="alignMiddle">
+                      <button *ngIf="(tenant.editMode ===0)" class="btn btn-default btnAnimation"
+                        (click)="editTenant(tenant.id)" [disabled]="(disableEdit===0)">
+                        <i class="fa fa-pencil"></i>
+                      </button>
+                      <button *ngIf="(tenant.editMode ===1)" class="btn btn-default btnAnimation"
+                        (click)="updateTenant(tenant.id)">
+                        <i class="fa fa-check-circle-o"></i>
+                      </button>
+                      <button *ngIf="(tenant.editMode ===1)" class="btn btn-default btnAnimation"
+                        (click)="updateTenant(tenant.id)">
+                        <i class="fa fa-times-circle-o"></i>
+                      </button>
+                      <button class="btn btn-primary btn-sm  mt-1" (click)="sendEmail(tenant.email);">Send
+                        Email</button>
+                    </td>
+                  </tr>
+                </tbody>
+                <!-- <ng-template #noData>
                           <tbody *ngIf="!addNew">
                             <tr>
                               <td colspan="6" class="text-center">No data available</td>
                             </tr>
                           </tbody>
                         </ng-template> -->
-                      </table>
-                      <div class="container">
-                        <button (click)="exportHtml()">Export</button>
-                        <email-editor></email-editor>
-                      </div>
-                    </div>
-                  </div>
+              </table>
+              <div class="container">
+                <div class="form-group form-button">
+                  <button mat-raised-button (click)="exportHtml()" class="btn btn-danger pull-right">Export</button>
+                </div>
+                <email-editor></email-editor>
               </div>
+            </div>
           </div>
+        </div>
       </div>
+    </div>
   </div>
 </div>
