@@ -28,6 +28,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ExportReportsComponent } from './export-reports/export-reports/export-reports.component';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { BasicAuthInterceptor } from 'interceptors/basic-auth.interceptor';
+import { DocumentStorageComponent } from './document-storage/document-storage.component';
+import { MatFileUploadModule } from 'mat-file-upload';
 
 
 @NgModule({
@@ -56,6 +58,7 @@ import { BasicAuthInterceptor } from 'interceptors/basic-auth.interceptor';
       backdropBorderRadius: '4px',
       primaryColour: '#f44336',
     }),
+    MatFileUploadModule
     
   ],
   declarations: [
@@ -64,7 +67,8 @@ import { BasicAuthInterceptor } from 'interceptors/basic-auth.interceptor';
     SignupComponent,
     LoginComponent,
     ExportReportsComponent,
-    TenantRequestComponent
+    TenantRequestComponent,
+    DocumentStorageComponent
 
   ],
   providers: [

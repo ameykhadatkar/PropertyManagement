@@ -10,16 +10,12 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
     { path: '/properties', title: 'Properties',  icon:'holiday_village', class: '' },
-    { path: '/tenant', title: 'Tenant',  icon:'receipt_long', class: '' },
+    { path: '/tenant', title: 'Tenant',  icon:'groups', class: '' },
     { path: '/transactions', title: 'Transactions',  icon:'receipt_long', class: '' },
-    { path: '/account-monitoring', title: 'Account Monitoring',  icon:'receipt_long', class: '' },
+    { path: '/account-monitoring', title: 'Account Monitoring',  icon:'account_balance', class: '' },
     { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
     { path: '/export', title: 'Export',  icon:'insights', class: '' },
-    // { path: '/user-profile', title: 'Scheduler',  icon:'schedule', class: '' },
-    // { path: '/table-list', title: 'Table List',  icon:'content_paste', class: '' },
-    // { path: '/typography', title: 'Typography',  icon:'library_books', class: '' },
-    // { path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
-    // { path: '/maps', title: 'Maps',  icon:'location_on', class: '' },
+    { path: '/document-storage', title: 'Document Storage',  icon:'upload', class: '' },
     { path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' },
 ];
 

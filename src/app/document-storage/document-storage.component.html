@@ -1,0 +1,60 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="offset-md-1  col-md-10">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Document Storage</h4>
+                        <p class="card-category">Upload or download your document here</p>
+                    </div>
+                    <div class="card-body mt-4">
+
+                        <form>
+                            <div class="row col-md-12">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Property</mat-label>
+                                        <input type="text" matInput [formControl]="propertyControl"
+                                            [matAutocomplete]="auto" required />
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                            <mat-option *ngFor="let option of propertyFilteredOptions | async"
+                                                [value]="option.name" (onSelectionChange)="setPropertyId(option)">
+                                                {{ option.name }}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-8">
+                                    <mat-file-upload [labelText]="'Select a file to upload:'"
+                                        [selectButtonText]="'Choose File'" [selectFilesButtonType]="button"
+                                        [uploadButtonText]="'Submit'" [uploadButtonType]="submit"
+                                        [allowMultipleFiles]="false" [showUploadButton]="true"
+                                        (uploadClicked)="onUploadClicked($event)">
+                                    </mat-file-upload>
+
+                                </div>
+                            </div>
+
+                        </form>
+                        <div class="table-responsive col-md-12 tblClass">
+                            <table class="table table-bordered">
+                                <thead class="text-primary">
+                                    <th>File</th>
+                                    <th>Download</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let file of documentList">
+                                        <td>{{file.fileName}}</td>
+                                        <td><span><i class="material-icons"><a
+                                                        href="{{file.link}}">file_download</a></i></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ngx-loading [show]="loading"></ngx-loading>

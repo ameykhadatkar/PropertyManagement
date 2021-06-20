@@ -34,6 +34,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatFileUploadModule } from 'mat-file-upload';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     }),
     MatExpansionModule,
     MatSlideToggleModule,
+    MatFileUploadModule
   ],
   declarations: [
     DashboardComponent,
