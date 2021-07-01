@@ -70,7 +70,7 @@ export class DocumentStorageComponent implements OnInit {
         console.log(_event.target.result);
         let data = {
           "fileName": this.fileData.name,
-          "base64String": _event.target.result,
+          "base64String":btoa(_event.target.result.toString()),
           "propertyId": this.propertyId,
           "tenantRequestId": 0
         }
@@ -79,6 +79,8 @@ export class DocumentStorageComponent implements OnInit {
           .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/DocumentStorage", data)
           .subscribe((res) => {
             this.loading = false;
+            swal("Document has been added successfully")
+            this.getDocuments();
             console.log(res);
           }, (error: HttpErrorResponse) => {
             event = null;

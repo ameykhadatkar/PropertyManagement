@@ -16,7 +16,7 @@ export class TransactionsComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense")
+      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense/list/1")
       .subscribe((data) => {
         this.loading = false;
 

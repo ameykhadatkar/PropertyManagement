@@ -30,6 +30,7 @@ import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { BasicAuthInterceptor } from 'interceptors/basic-auth.interceptor';
 import { DocumentStorageComponent } from './document-storage/document-storage.component';
 import { MatFileUploadModule } from 'mat-file-upload';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { MatFileUploadModule } from 'mat-file-upload';
     LoginComponent,
     ExportReportsComponent,
     TenantRequestComponent,
-    DocumentStorageComponent
+    DocumentStorageComponent,
+    ForgotpasswordComponent
 
   ],
   providers: [

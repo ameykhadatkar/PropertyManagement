@@ -17,14 +17,8 @@ export class TenantComponent implements OnInit {
   constructor(private http: HttpClient, public datepipe: DatePipe,private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    const headers = {
-      Authorization: "Bearer my-token",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    };
     this.http
-    .get<any>(" https://propertymanagemet20210611034324.azurewebsites.net/api/Tenant", { headers })
+    .get<any>(" https://propertymanagemet20210611034324.azurewebsites.net/api/Tenant/list/1")
     .subscribe((data) => {
      // this.tenantList = data.records;
       data.records.forEach((element, index) => {

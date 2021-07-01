@@ -17,6 +17,8 @@ export class PropertiesComponent implements OnInit {
   loading: boolean;
   propertyEditComponent : PropertyEditComponent
   evalutions: any;
+  prop: any;
+  showSellingEvaluationFeilds = 0;
   active: boolean = false;
   constructor(private http: HttpClient,private dialog: MatDialog,private propertyManagementService:PropertyManageService) {
   
@@ -108,6 +110,47 @@ export class PropertiesComponent implements OnInit {
   }
 
   toggleClick(event) {
+   if (event.checked == true){
+    this.showSellingEvaluationFeilds = 1
+    var sellAmount = prompt("Please enter the selling amount", "0");
+    if(sellAmount != null && sellAmount != undefined){
+      this.prop = {
+        propertyId: this.evalutions.id,
+        sellingAmount : Number(sellAmount)
+      }
+      this.http
+      .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Report/SellingEvaluation",this.prop )
+      .subscribe((data) => {
+        this.loading = false;
+        if(data.message == "Success") {
+          this.evalutions = data.data;
+          this.evalutions.sellingAmount = Number(sellAmount)
+        }
+        console.log(data);
+      },
+      (error: HttpErrorResponse) => {
+        this.loading = false;
+        swal("Something went wrong", "Please try again", "error");
+      });
+    }
+   }
+   else{
+    this.showSellingEvaluationFeilds = 0
+    this.http
+    .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Report/PropertyEvaluation/"+this.evalutions.id)
+    .subscribe((data) => {
+      this.loading = false;
+      if(data.message == "Success") {
+        this.evalutions = data.data;
+      }
+      console.log(data);
+    },
+    (error: HttpErrorResponse) => {
+      this.loading = false;
+      swal("Something went wrong", "Please try again", "error");
+    });
+   }
+   
     this.active = event.checked;
     console.log(event.checked);
   }

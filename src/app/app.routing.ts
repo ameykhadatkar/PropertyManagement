@@ -8,6 +8,7 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { TenantRequestComponent } from './tenantrequest/tenantrequest.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 const routes: Routes =[
   {
@@ -26,6 +27,10 @@ const routes: Routes =[
   {
     path: 'tenantrequest',
     component: TenantRequestComponent,
+  },
+  {
+    path: 'forgotpassword',
+    component: ForgotpasswordComponent,
   },
   
   // {

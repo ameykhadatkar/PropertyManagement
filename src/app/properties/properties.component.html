@@ -98,19 +98,19 @@
             </tr>
             <tr>
               <td class="text-left"><b>Profit Loss Amount: </b>{{evalutions ? evalutions.profitLossAmount : 'NA'}}</td>
-              <td class="text-left"><b>Selling Amount: </b>{{evalutions ? evalutions.sellingAmount : 'NA'}}</td>
+              <td class="text-left" *ngIf ="showSellingEvaluationFeilds===1" ><b>Selling Amount: </b>{{evalutions ? evalutions.sellingAmount : 'NA'}}</td>
 
             </tr>
             <tr>
-              <td class="text-left"><b>Selling Profit Loss: </b>{{evalutions ? evalutions.sellingProfitLoss :
+              <td class="text-left" *ngIf ="showSellingEvaluationFeilds===1" ><b>Selling Profit Loss: </b>{{evalutions ? evalutions.sellingProfitLoss :
                 'NA'}}</td>
-              <td class="text-left"><b>Selling Profit Loss Percentage: </b>{{evalutions ?
+              <td class="text-left" *ngIf ="showSellingEvaluationFeilds===1" ><b>Selling Profit Loss Percentage: </b>{{evalutions ?
                 evalutions.sellingProfitLossPercentage : 'NA'}}</td>
 
             </tr>
             <tr>
-              <td class="text-left"><b>Selling Date: </b>{{evalutions ? evalutions.sellingDate : 'NA'}}</td>
-              <td class="text-left"><b>Category Wise Expense Income Values: </b>{{evalutions ?
+              <td class="text-left" *ngIf ="showSellingEvaluationFeilds===1" ><b>Selling Date: </b>{{evalutions ? evalutions.sellingDate : 'NA'}}</td>
+              <td class="text-left" *ngIf ="showSellingEvaluationFeilds===1" ><b>Category Wise Expense Income Values: </b>{{evalutions ?
                 evalutions.categoryWiseExpenseIncomeValues : 'NA'}}</td>
 
             </tr>

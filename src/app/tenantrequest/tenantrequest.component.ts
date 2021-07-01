@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Optional } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert';
+import { MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from "@angular/forms";
 @Component({
   selector: 'app-tenantrequest',
@@ -13,7 +14,7 @@ export class TenantRequestComponent implements OnInit {
   title = ""
   tenantRequestForm: FormGroup;
   signupForm:FormGroup
-  constructor(private http: HttpClient, public datepipe: DatePipe, private formBuilder: FormBuilder) { }
+  constructor(private http: HttpClient, public datepipe: DatePipe, private formBuilder: FormBuilder,@Optional() public dialogRef: MatDialogRef<TenantRequestComponent>) { }
 
   ngOnInit(): void {
     this.tenantRequestForm = this.formBuilder.group({
@@ -50,5 +51,15 @@ export class TenantRequestComponent implements OnInit {
         fileBase64String: ['']
       });
     });
+    if(this.dialogRef != undefined){
+      this.dialogRef.close();
+    }
+   
+  }
+  CancelRequest(){
+    if(this.dialogRef != undefined){
+      this.dialogRef.close(0);
+    }
+
   }
 }

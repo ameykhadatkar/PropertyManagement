@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient , HttpErrorResponse } from '@angular/common/http';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-user-profile',
@@ -48,7 +49,18 @@ userPwd = ""
     // }
   }
   UpdateProfile(){
-    alert('Profile has been updated successfully')
+    try {  
+      this.http
+      .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Auth/user/update", this.userDetails)
+      .subscribe((response) => {
+         swal("Profile has been updated succesfully")
+      },
+      (error:HttpErrorResponse) => {
+
+      });
+    } catch (error) {
+  
   }
+}
 
 }

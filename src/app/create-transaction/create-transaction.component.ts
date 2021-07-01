@@ -115,14 +115,15 @@ export class CreateTransactionComponent implements OnInit {
       swal("Expense Type missing","Please select if it is a Personal,Reimburse or All property expense", "error");
       return;
       }
-    else if(this.PropertyValue===undefined || this.paymentTypes === undefined || this.Amount === undefined || this.PaymentDatetime === undefined){
+    else if(this.paymentTypes === undefined || this.Amount === undefined || this.PaymentDatetime === undefined){
     swal("Incomplete Details","Please select all required fields to save transaction", "error");
     return ;
     }
     this.transaction.PropertyId = this.PropertyValue;
+    this.transaction.tenantId = this.PropertyValue;
     this.transaction.PaymentTypeId = this.PaymentTypeId;
-    this.transaction.AllPropertyExpense = this.AllPropertyExpense;
-    this.transaction.Reimbursible = this.Reimbursible;
+    this.transaction.allPropertyExpense = this.AllPropertyExpense;
+    this.transaction.reimbursible = this.Reimbursible;
     this.transaction.Personal = this.Personal;
     this.transaction.PaymentDatetime = this.PaymentDatetime;
     this.transaction.Amount = this.Amount;
@@ -130,16 +131,17 @@ export class CreateTransactionComponent implements OnInit {
     this.transaction.transactionMode = this.TransactionMode;
     console.log(this.transaction);
 
-    
     this.http
       .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense", this.transaction)
       .subscribe((data) => {
+        swal("Transaction Has Been Added Successfully!")
         location.href = "/#/transactions";
       });
   }
 
   setPropertyId(item) {
     this.PropertyValue = item.id;
+    this.PropertyId = item.id;
     this.AllPropertyExpense = false;
   }
    handleError = (control: string, error: string) => {

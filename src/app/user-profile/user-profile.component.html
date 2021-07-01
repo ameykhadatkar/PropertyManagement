@@ -20,6 +20,16 @@
                                     <input matInput placeholder="Email address" type="email" [(ngModel)]="userDetails.email" name = "Email">
                                   </mat-form-field>
                               </div> 
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Phone" [(ngModel)]="userDetails.phone" name = "Phone">
+                                </mat-form-field>
+                            </div> 
+                            <!-- <div class="col-md-4">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Password" type="password" [(ngModel)]="userDetails.password" name = "Password">
+                              </mat-form-field>
+                          </div>  -->
                           </div>
                           <div class="row">
                               <div class="col-md-6">
@@ -41,12 +51,12 @@
                           <div class="row">
                             <div class="col-md-6">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Security Question"   name = "SecurityQuestion">
+                                <input matInput placeholder="Security Question"  [(ngModel)]="userDetails.securityQuestion"  name = "SecurityQuestion">
                               </mat-form-field>
                             </div>
                               <div class="col-md-12">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Answer" type="text"  name = "Answer">
+                                  <input matInput placeholder="Answer" type="text" [(ngModel)]="userDetails.answer"   name = "Answer">
                                 </mat-form-field>
                               </div>
                           </div>
