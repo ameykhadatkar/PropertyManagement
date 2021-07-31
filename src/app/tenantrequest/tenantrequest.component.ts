@@ -14,6 +14,8 @@ export class TenantRequestComponent implements OnInit {
   title = ""
   tenantRequestForm: FormGroup;
   signupForm:FormGroup
+  fileData: File;
+  loading: boolean;
   constructor(private http: HttpClient, public datepipe: DatePipe, private formBuilder: FormBuilder,@Optional() public dialogRef: MatDialogRef<TenantRequestComponent>) { }
 
   ngOnInit(): void {
@@ -31,13 +33,34 @@ export class TenantRequestComponent implements OnInit {
   
     if (typeof (FileReader) !== 'undefined') {
       const reader = new FileReader();
-  
       reader.onload = (e: any) => {
-       // this.srcResult = e.target.result;
+      //  this.srcResult = e.target.result;
+       console.log(btoa(e.target.result.toString()));
       };
-      reader.readAsArrayBuffer(inputNode.files[0]);
+      // reader.readAsArrayBuffer(inputNode.files[0]);
     }
   }
+
+  onUploadClicked(event) {
+    this.fileData = <File>event[0];
+    if(this.fileData != undefined) {
+      this.loading = true;
+      var reader = new FileReader();
+      // this.imagePath = files;
+      reader.readAsDataURL(this.fileData);
+      console.log(reader.result);
+      
+      console.log(reader.result);
+      reader.onload = (_event) => {
+        console.log(_event.target.result);
+        this.tenantRequestForm.controls.fileBase64String.setValue(btoa(_event.target.result.toString()));
+          
+      }
+        
+    }
+
+  } 
+  
   AddRequest(){
     this.http
     .post<any>(" https://propertymanagemet20210611034324.azurewebsites.net/api/TenantRequest",this.tenantRequestForm.value)
@@ -56,6 +79,7 @@ export class TenantRequestComponent implements OnInit {
     }
    
   }
+
   CancelRequest(){
     if(this.dialogRef != undefined){
       this.dialogRef.close(0);

@@ -38,6 +38,13 @@ export class CreateTransactionComponent implements OnInit {
   TransactionMode:""
   propertyForm: FormGroup;
   error: any;
+  fileData: File;
+  loading: boolean;
+  fileBase64String: string;
+  fileName: string;
+  entity: string;
+  checkNo: string;
+  details: string;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder) {}
 
@@ -50,6 +57,7 @@ export class CreateTransactionComponent implements OnInit {
       Personal: [null],
       PaymentDatetime: [null, Validators.required],
       Amount: [null, Validators.required],
+      Entity: [null, Validators.required],
     });
 
     this.transactionModeTypes = [{
@@ -129,6 +137,11 @@ export class CreateTransactionComponent implements OnInit {
     this.transaction.Amount = this.Amount;
     this.transaction.Type = "Expense";
     this.transaction.transactionMode = this.TransactionMode;
+    this.transaction.entity = this.entity;
+    this.transaction.checkNo = this.checkNo;
+    this.transaction.details = this.details;
+    this.transaction.fileName = this.fileName;
+    this.transaction.base64String = this.fileBase64String;
     console.log(this.transaction);
 
     this.http
@@ -147,4 +160,24 @@ export class CreateTransactionComponent implements OnInit {
    handleError = (control: string, error: string) => {
     return this.propertyForm.controls[control].hasError(error);
   }
+
+  onUploadClicked(event) {
+    this.fileData = <File>event[0];
+    if(this.fileData != undefined) {
+      this.loading = true;
+      var reader = new FileReader();
+      // this.imagePath = files;
+      reader.readAsDataURL(this.fileData);
+      console.log(reader.result);
+      
+      console.log(reader.result);
+      reader.onload = (_event) => {
+        console.log(_event.target.result);
+        this.fileBase64String = btoa(_event.target.result.toString());
+        this.fileName = this.fileData.name;
+      }
+        
+    }
+
+  } 
 }

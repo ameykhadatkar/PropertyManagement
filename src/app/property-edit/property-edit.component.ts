@@ -17,12 +17,19 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 })
 export class PropertyEditComponent implements OnInit {
   updateProperty =1;
+  path: any;
+  isEdit: boolean = false;
   constructor(private http: HttpClient, private route: ActivatedRoute,private properyManagementService:PropertyManageService,@Optional() public dialogRef: MatDialogRef<PropertyEditComponent>) { }
   id: number;
   propertyData: Property;
   loading: boolean;
   ngOnInit(): void {
     this.id = this.route.snapshot.params['Id'];
+    
+    this.path = location.href.split('/');
+    if(this.path[6] && this.path[6].includes('edit')) {
+      this.isEdit = true;
+    }
     this.loading = true;
     if(this.id != undefined){
       this.http.get<any>('https://propertymanagemet20210611034324.azurewebsites.net/api/property/' + this.id).subscribe(data => {

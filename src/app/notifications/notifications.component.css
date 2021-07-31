@@ -2,3 +2,7 @@
     max-height: 510px;
     overflow: auto;
 }
+
+.mat-expansion-panel-header-description {
+    flex-grow: 0 !important;
+}
