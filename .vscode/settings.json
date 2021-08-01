@@ -1,3 +1,9 @@
 {
-    "azure.customCloud.resourceManagerEndpointUrl": "https://portal.azure.com/#@varunvtiwari09gmail.onmicrosoft.com/resource/subscriptions/95163668-7875-402a-89cb-e3f7fee490db/resourceGroups/varun/overview"
+    "azure.customCloud.resourceManagerEndpointUrl": "https://portal.azure.com/#@varunvtiwari09gmail.onmicrosoft.com/resource/subscriptions/95163668-7875-402a-89cb-e3f7fee490db/resourceGroups/varun/overview",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/487ee5c5-b7a8-4283-927a-01f6ee53141b/resourceGroups/PropertyManagemet20210611034324ResourceGroup/providers/Microsoft.Web/sites/PropertyManagementUI",
+    "appService.deploySubpath": "dist"
 }
