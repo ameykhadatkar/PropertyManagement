@@ -2,35 +2,84 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header card-header-danger">
-                <h3 class="card-title">Notifications</h3>
-                <p class="card-category">Notification</p>
+                <h3 class="card-title">Tenant Request</h3>
+                <!-- <p class="card-category">Notification</p> -->
                 <button  (click)="AddServiceRequest()" class="btn btn-danger pull-right">Add Service request</button>
             </div>
             <div class="card-body">
-                <div class="notify">
-                    <mat-accordion>
-                        <mat-expansion-panel *ngFor="let notification of notifications" class="mb-4">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                   <b> {{notification.title}} </b>        
-                                </mat-panel-title>
-                                <mat-panel-description>
-                                    <!-- Currently I am {{panelOpenState ? 'open' : 'closed'}} -->
-                                </mat-panel-description>
-                            </mat-expansion-panel-header>
-                            <div>
-                               <p>   From : {{notification.tenantEmail}}</p>
-                            </div>
-                            <div>
-                                <p>   Phone : {{notification.tenantPhone}}</p>
-                             </div>
-                            <p> Description : {{notification.description}}</p>
-                            <div class="form-group form-button">
-                                <button mat-raised-button (click)="closeRequest(notification)" class="btn btn-danger pull-right">Close</button>
-                            </div>
-                        </mat-expansion-panel>
-                    </mat-accordion>
-                </div>
+                <mat-tab-group >
+                    <mat-tab label="Pending">
+                        <div class="notify">
+                            <mat-accordion>
+                                <mat-expansion-panel *ngFor="let notification of notifications" class="mb-4">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                           <b> {{notification.title}} </b>  
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            <b>{{notification.createdDateTime | date:'medium'}}</b>      
+                                            <!-- Currently I am {{panelOpenState ? 'open' : 'closed'}} -->
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <div class="col-md-12">
+                                       <p>   From : {{notification.tenantEmail}}</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p>   Phone : {{notification.tenantPhone}}</p>
+                                     </div>
+                                    <div class="col-md-12">
+                                        <p> Description : {{notification.description}}</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                            <p>
+                                                Status : {{notification.status}}
+                                            </p>
+                                    </div>
+                                    <div class="form-group form-button">
+                                        <button mat-raised-button (click)="closeRequest(notification)" class="btn btn-danger pull-right">Close</button>
+                                        <button mat-raised-button (click)="updateStatus(notification)" class="btn btn-danger pull-right">Update Status</button>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Completed">
+                        <div class="notify">
+                            <mat-accordion>
+                                <mat-expansion-panel *ngFor="let notification of notifications"  class="mb-4">
+                                        <mat-expansion-panel-header *ngIf="notification.status == 'Completed'"> 
+                                            <mat-panel-title >
+                                               <b> {{notification.title}} </b>  
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                <b>{{notification.createdDateTime | date:'medium'}}</b>      
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <div class="col-md-12" *ngIf="notification.status == 'Completed'">
+                                           <p>   From : {{notification.tenantEmail}}</p>
+                                        </div>
+                                        <div class="col-md-12" *ngIf="notification.status == 'Completed'">
+                                            <p>   Phone : {{notification.tenantPhone}}</p>
+                                         </div>
+                                        <div class="col-md-12" *ngIf="notification.status == 'Completed'">
+                                            <p> Description : {{notification.description}}</p>
+                                        </div>
+                                        <div class="col-md-12" *ngIf="notification.status == 'Completed'">
+                                                <p>
+                                                    Status : {{notification.status}}
+                                                </p>
+                                        </div>
+                                        <div class="form-group form-button" *ngIf="notification.id == 'Pending'">
+                                            <button mat-raised-button (click)="closeRequest(notification)" class="btn btn-danger pull-right">Close</button>
+                                            <button mat-raised-button (click)="updateStatus(notification)" class="btn btn-danger pull-right">Update Status</button>
+                                        </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+
+                
             </div>
         </div>
     </div>

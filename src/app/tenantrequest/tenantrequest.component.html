@@ -45,13 +45,15 @@
                                   </mat-form-field>
                               </div>
                           </div>
-                          <!-- <div class="col-md-12 row">
-                            <div class="form-group col-md-12">
-                                    <button type="button"  (click)="fileInput.click()">Choose File</button>
-                                    <input  hidden (change)="onFileSelected()" formControlName="fileBase64String" #fileInput type="file" id="file" name = "file">
-
-                            </div>
-                        </div> -->
+                          <div class="col-md-12 row">
+                            <mat-file-upload [labelText]="'Select a file to upload:'"
+                                        [selectButtonText]="'Choose File'" [selectFilesButtonType]="button"
+                                        [uploadButtonText]="'Upload'" [uploadButtonType]="submit"
+                                        [allowMultipleFiles]="false" [showUploadButton]="true"
+                                        (uploadClicked)="onUploadClicked($event)">
+                                    </mat-file-upload>
+                     
+                        </div>
                           <div class="col-md-12 row">
                           </div>
                           <div class="row col-md-12">  

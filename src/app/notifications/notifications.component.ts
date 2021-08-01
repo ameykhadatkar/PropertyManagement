@@ -17,13 +17,11 @@ export class NotificationsComponent implements OnInit {
   constructor(private http: HttpClient,private dialog: MatDialog) { }
 
   ngOnInit() {
-    debugger
     this.getNotifications();
   }
 
   getNotifications() {
     this.loading = true;
-    debugger
     this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/TenantRequest").subscribe((data) => {
       this.loading = false;
       if (data.message == "Success") {
@@ -36,8 +34,6 @@ export class NotificationsComponent implements OnInit {
       });
   }
   AddServiceRequest(){
-    debugger
-    debugger
     const dialogref = this.dialog.open(TenantRequestComponent, {
       width: '50%',
       height: 'auto',
@@ -73,5 +69,29 @@ export class NotificationsComponent implements OnInit {
         this.loading = false;
         swal("Something went wrong", "Please try again", "error");
       });*/
+  }
+
+  updateStatus(notifications) {
+    this.loading = true;
+    let data = {
+      "id": notifications.id,
+      "title": notifications.title,
+      "description": notifications.description,
+      "tenantEmail": notifications.tenantEmail,
+      "tenantPhone": notifications.tenantPhone,
+      "fileBase64String": notifications.fileBase64String,
+      "status": "Completed"
+    }
+    this.http.put<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/TenantRequest", data).subscribe((data) => {
+      this.loading = false;
+      if (data.message == "Success") {
+        swal("Success", "This request has been closed.", "info");
+        this.getNotifications();
+      }
+    },
+      (error: HttpErrorResponse) => {
+        this.loading = false;
+        swal("Something went wrong", "Please try again", "error");
+      });
   }
 }

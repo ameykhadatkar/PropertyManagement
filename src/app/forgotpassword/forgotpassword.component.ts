@@ -25,7 +25,6 @@ export class ForgotpasswordComponent implements OnInit {
     }
   }
   GenerateCode(){
-    debugger
     this.http
     .post<any>(" https://propertymanagemet20210611034324.azurewebsites.net/api/Auth/forgotpassword",this.userEmail)
     .subscribe((data) => {

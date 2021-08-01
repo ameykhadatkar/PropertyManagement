@@ -11,5 +11,8 @@ export class TransactionModel {
     Type: string;
     transactionMode:string;
     fileName:string;
-    base64String:string
+    base64String:string;
+    entity: string;
+    checkNo: string;
+    details: string;
 }

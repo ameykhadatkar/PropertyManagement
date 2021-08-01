@@ -70,7 +70,7 @@ export class DocumentStorageComponent implements OnInit {
         console.log(_event.target.result);
         let data = {
           "fileName": this.fileData.name,
-          "base64String":btoa(_event.target.result.toString()),
+          "base64String": btoa(_event.target.result.toString()),
           "propertyId": this.propertyId,
           "tenantRequestId": 0
         }
