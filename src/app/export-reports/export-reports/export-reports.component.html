@@ -22,6 +22,16 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
+                                    <mat-form-field>
+                                        <mat-select [(ngModel)]="selectedReport" name="Report Type" placeholder="Report Type" (ngModelChange)="ShowProperties()">
+                                            <mat-option *ngFor="let rep of reportTypes" 
+                                                [value]="rep.report">
+                                                {{ rep.report }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3" *ngIf = "showProperty == 1">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Property</mat-label>
                                         <input type="text" matInput [formControl]="propertyControl" [matAutocomplete]="auto" required />
@@ -32,18 +42,7 @@
                                             </mat-option>
                                         </mat-autocomplete>
                                     </mat-form-field>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <mat-form-field>
-                                        <mat-select [(ngModel)]="transactionMode" name="transactionMode" placeholder="Transaction Mode">
-                                            <mat-option *ngFor="let transactionMode of transactionModeTypes"
-                                                [value]="transactionMode.transactionMode">
-                                                {{ transactionMode.transactionMode }}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
+                                </div>    
                             </div>
                             <button mat-raised-button type="submit" (click)="export();"
                                 class="btn btn-danger pull-right">Export</button>
