@@ -18,11 +18,13 @@ export class ExportReportsComponent implements OnInit {
   propertyControl = new FormControl();
   propertyId: any;
   transactionMode: any;
+  selectedReport : any;
   startDate: any;
   endDate: any;
   exportData: any = [];
   loading: boolean;
-
+  reportTypes: any = [];
+  showProperty = 0;
   constructor(private http: HttpClient, private excelService: ExcelService) { }
 
   ngOnInit(): void {
@@ -34,6 +36,23 @@ export class ExportReportsComponent implements OnInit {
       id: 2,
       transactionMode: "Credit Card"
     }];
+    this.reportTypes = [{
+      id:1,
+      report: "BankCheckingAccount"
+    },
+    {
+      id:1,
+      report: "BankCreditCard"
+    } , {
+      id:1,
+      report: "IndividualProperty"
+    },{
+      id:1,
+      report: "AllPropertiesAccount"
+    },{
+      id:1,
+      report: "GeneralExpenseAccount"
+    }]
 
     this.http
       .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property")
@@ -56,19 +75,31 @@ export class ExportReportsComponent implements OnInit {
   }
 
   export() {
-    if (this.propertyControl.invalid) {
-      swal("Property is required", "Please select Property", "info");
-      return false;
-    }
+    // if (this.propertyControl.invalid) {
+    //   swal("Property is required", "Please select Property", "info");
+    //   return false;
+    // }
+    
+  var APIurl = 'https://propertymanagemet20210611034324.azurewebsites.net/api/Export/'
+  if (this.selectedReport === 'IndividualProperty') 
+   {
+        if (this.propertyControl.invalid) {
+          swal("Property is required for Individual Report Type", "Please select Property", "info");
+          return false;
+       }
+        APIurl = APIurl + 'IndividualProperty/'+this.propertyId
+   }
+   else {
+    APIurl = APIurl + this.selectedReport
+   }
     this.loading = true;
-
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Report/PropertyEvaluation/" + this.propertyId)
+      .post<any>(APIurl,'')
       .subscribe((result) => {
         this.loading = false;
-        if (result.message == "Success") {
+        if (result.message == "Created") {
           this.exportData.push(result.data)
-          this.excelService.exportAsExcelFile(this.exportData, 'export-to-excel');
+          this.excelService.exportAsExcelFile(this.exportData, this.selectedReport);
         } else {
           swal("No data available", "No data available for this filter", "info");
         }
@@ -83,5 +114,13 @@ export class ExportReportsComponent implements OnInit {
   setPropertyId(item) {
     this.propertyId = item.id;
   }
-
+  ShowProperties(reports)  {
+    
+    if(this.selectedReport === 'IndividualProperty'){
+      this.showProperty = 1;
+    }
+    else {
+      this.showProperty = 0;
+    }
+  }
 }
