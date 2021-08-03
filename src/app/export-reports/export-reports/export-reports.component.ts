@@ -25,6 +25,7 @@ export class ExportReportsComponent implements OnInit {
   loading: boolean;
   reportTypes: any = [];
   showProperty = 0;
+  postrequest: any = [];
   constructor(private http: HttpClient, private excelService: ExcelService) { }
 
   ngOnInit(): void {
@@ -87,10 +88,11 @@ export class ExportReportsComponent implements OnInit {
           swal("Property is required for Individual Report Type", "Please select Property", "info");
           return false;
        }
-        APIurl = APIurl + 'IndividualProperty/'+this.propertyId
+        APIurl = APIurl + 'IndividualProperty/'+this.propertyId +'?startdate='+this.startDate+'&enddate='+this.endDate
    }
    else {
-    APIurl = APIurl + this.selectedReport
+    APIurl = APIurl + this.selectedReport+'?startdate='+this.startDate+'&enddate='+this.endDate
+    
    }
     this.loading = true;
     this.http
