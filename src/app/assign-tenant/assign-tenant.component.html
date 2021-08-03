@@ -150,21 +150,30 @@
               <button
                 mat-raised-button
                 type="submit"
-                *nIf = "(deleteTenant===0)"
+                *ngIf = "tenantExist===0"
                 class="btn btn-danger pull-right"
               >
                 Assign
               </button>
-              <button
-              mat-raised-button
-              type="submit"
-              *nIf="deleteTenant==1"
-              class="btn btn-danger pull-right"
-            >
-              Remove Tenant
-            </button>
+             
               <div class="clearfix"></div>
             </form>
+            <button
+            mat-raised-button
+            (click)="updateTenant()"
+            *ngIf = "tenantExist===1"
+            class="btn btn-danger pull-right"
+          >
+            Update
+          </button>
+            <button
+            mat-raised-button
+            (click)="removeTenant()"
+            *ngIf="tenantExist==1"
+            class="btn btn-danger pull-right"
+          >
+            Remove Tenant
+          </button>
           </div>
         </div>
       </div>
