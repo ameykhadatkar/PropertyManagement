@@ -24,6 +24,7 @@ export class TenantRequestComponent implements OnInit {
       description: ['', Validators.required],
       tenantEmail: ['', Validators.required],
       tenantPhone: [''],
+      fileName:[''],
       fileBase64String: ['']
     });
 
@@ -47,9 +48,9 @@ export class TenantRequestComponent implements OnInit {
       this.loading = true;
       var reader = new FileReader();
       // this.imagePath = files;
-      reader.readAsDataURL(this.fileData);
+      reader.readAsBinaryString(this.fileData);
       console.log(reader.result);
-      
+      this.tenantRequestForm.controls.fileName.setValue(this.fileData.name);
       console.log(reader.result);
       reader.onload = (_event) => {
         console.log(_event.target.result);

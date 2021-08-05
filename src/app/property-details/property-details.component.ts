@@ -35,7 +35,7 @@ export class PropertyDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params["Id"];
-   
+   debugger
     this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/" + this.id).subscribe((data) => {
       this.propertyData = data.data;
       console.log(this.propertyData);

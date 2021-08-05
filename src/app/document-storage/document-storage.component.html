@@ -40,11 +40,13 @@
                             <table class="table table-bordered">
                                 <thead class="text-primary">
                                     <th>File</th>
+                                    <th>Property</th>
                                     <th>Download</th>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let file of documentList">
                                         <td>{{file.fileName}}</td>
+                                        <td>{{file.property.name}}</td>
                                         <td><span><i class="material-icons"><a
                                                         href="{{file.link}}">file_download</a></i></span></td>
                                     </tr>

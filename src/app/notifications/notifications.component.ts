@@ -12,7 +12,8 @@ declare var $: any;
 })
 export class NotificationsComponent implements OnInit {
   loading: boolean;
-  notifications: any;
+  notifications: any = [];
+  closedNotifications: any = [];
   tenantRequestComponent : TenantRequestComponent;
   constructor(private http: HttpClient,private dialog: MatDialog) { }
 
@@ -22,10 +23,16 @@ export class NotificationsComponent implements OnInit {
 
   getNotifications() {
     this.loading = true;
+    this.notifications = [];
     this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/TenantRequest").subscribe((data) => {
       this.loading = false;
       if (data.message == "Success") {
-        this.notifications = data.records;
+        debugger
+        data.records.forEach( (element) => {
+          if(element.status == "Pending")
+         { this.notifications.push(element)}
+         else{this.closedNotifications.push(element)}
+      });
       }
     },
       (error: HttpErrorResponse) => {

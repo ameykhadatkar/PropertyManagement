@@ -34,6 +34,7 @@ export class DocumentStorageComponent implements OnInit {
       .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property")
       .subscribe((data) => {
         this.loading = false;
+        debugger
         this.properties = data.records;
         console.log(this.properties);
         this.propertyFilteredOptions = this.propertyControl.valueChanges.pipe(
@@ -62,7 +63,7 @@ export class DocumentStorageComponent implements OnInit {
       this.loading = true;
       var reader = new FileReader();
       // this.imagePath = files;
-      reader.readAsDataURL(this.fileData);
+      reader.readAsBinaryString(this.fileData);
       console.log(reader.result);
   
       console.log(reader.result);
@@ -100,6 +101,7 @@ export class DocumentStorageComponent implements OnInit {
       .subscribe((res) => {
         this.loading = false;
         if (res.message == "Success") {
+          debugger
           this.documentList = res.records;
         }
         console.log(res);

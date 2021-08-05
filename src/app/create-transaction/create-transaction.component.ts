@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,Inject } from "@angular/core";
 import { ThemePalette } from "@angular/material/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
@@ -8,7 +8,10 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { Property } from "app/models/propertymodel";
 import { TransactionModel } from "app/models/TransactionModel";
 import swal from 'sweetalert';
+import { MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Optional } from '@angular/core'; 
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from "@angular/forms";
+import { NULL_EXPR } from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: "app-create-transaction",
@@ -45,8 +48,8 @@ export class CreateTransactionComponent implements OnInit {
   entity: string;
   checkNo: string;
   details: string;
-
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder) {}
+  existingtransactionID = 0
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder,@Optional() public dialogRef: MatDialogRef<CreateTransactionComponent>,@Optional() @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit(): void {
     this.productForm = this.formBuilder.group({
@@ -59,7 +62,34 @@ export class CreateTransactionComponent implements OnInit {
       Amount: [null, Validators.required],
       Entity: [null, Validators.required],
     });
-
+    debugger
+    var s = this.data
+    if(this.data != null){
+      this.existingtransactionID = this.data.transactions.id
+      this.PropertyValue = this.data.transactions.property.id;
+      this.PaymentTypeId = this.data.transactions.PaymentTypeId;
+      this.AllPropertyExpense =this.data.transactions.allPropertyExpense
+      this.Reimbursible = this.data.transactions.reimbursible
+      this.Personal = this.data.transactions.Personal
+      this.PaymentDatetime = this.data.transactions.PaymentDatetime
+      this.Amount = this.data.transactions.Amount
+      //this.transaction.Type = "Expense";
+      this.TransactionMode = this.data.transactions.TransactionMode
+      this.entity = this.data.transactions.entity
+      this.checkNo = this.data.transactions.checkNo      
+      this.details = this.data.transactions.details      
+      this.fileName = this.data.transactions.fileName      
+      this.fileBase64String = this.data.transactions.base64String      
+      this.productForm.controls.PropertyId.setValue(this.PropertyId);
+      this.productForm.controls.PaymentTypeId.setValue(this.PaymentTypeId);
+      this.productForm.controls.AllPropertyExpense.setValue(this.AllPropertyExpense);
+      this.productForm.controls.Reimbursible.setValue(this.Reimbursible);
+      this.productForm.controls.Personal.setValue(this.Personal);
+      this.productForm.controls.PaymentDatetime.setValue(this.PaymentDatetime);
+      this.productForm.controls.Amount.setValue(this.Amount);
+      this.productForm.controls.Entity.setValue(this.entity);
+    }
+    
     this.transactionModeTypes = [{
         id:1,
         transactionMode:"Checking Account"
@@ -119,16 +149,13 @@ export class CreateTransactionComponent implements OnInit {
     swal("Property missing","Please select a property to save transaction", "error");
     return;
     }
-    else if((this.AllPropertyExpense === false ||this.AllPropertyExpense ===undefined)  && (this.Reimbursible === false || this.Reimbursible=== undefined) && (this.Personal === false || this.Personal === undefined)){
-      swal("Expense Type missing","Please select if it is a Personal,Reimburse or All property expense", "error");
-      return;
-      }
     else if(this.paymentTypes === undefined || this.Amount === undefined || this.PaymentDatetime === undefined){
     swal("Incomplete Details","Please select all required fields to save transaction", "error");
     return ;
     }
+    debugger
     this.transaction.PropertyId = this.PropertyValue;
-    this.transaction.tenantId = this.PropertyValue;
+    this.transaction.tenantId = null;
     this.transaction.PaymentTypeId = this.PaymentTypeId;
     this.transaction.allPropertyExpense = this.AllPropertyExpense;
     this.transaction.reimbursible = this.Reimbursible;
@@ -142,14 +169,25 @@ export class CreateTransactionComponent implements OnInit {
     this.transaction.details = this.details;
     this.transaction.fileName = this.fileName;
     this.transaction.base64String = this.fileBase64String;
-    console.log(this.transaction);
-
-    this.http
+   debugger
+    if(this.existingtransactionID == 0){
+      this.http
       .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense", this.transaction)
       .subscribe((data) => {
         swal("Transaction Has Been Added Successfully!")
         location.href = "/#/transactions";
       });
+    }
+    else{
+      this.transaction.id = this.existingtransactionID;
+      this.http
+      .put<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense", this.transaction)
+      .subscribe((data) => {
+        swal("Transaction Has Been updated Successfully!")
+        this.dialogRef.close()
+      });
+    }
+  
   }
 
   setPropertyId(item) {
@@ -160,14 +198,16 @@ export class CreateTransactionComponent implements OnInit {
    handleError = (control: string, error: string) => {
     return this.propertyForm.controls[control].hasError(error);
   }
-
+  CancelTransaction(){
+    this.dialogRef.close(0);
+  }
   onUploadClicked(event) {
     this.fileData = <File>event[0];
     if(this.fileData != undefined) {
       this.loading = true;
       var reader = new FileReader();
       // this.imagePath = files;
-      reader.readAsDataURL(this.fileData);
+      reader.readAsBinaryString(this.fileData);
       console.log(reader.result);
       
       console.log(reader.result);
