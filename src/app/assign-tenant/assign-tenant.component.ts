@@ -14,6 +14,7 @@ import {
   NgForm,
   Validators,
 } from "@angular/forms";
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-assign-tenant",
@@ -42,7 +43,8 @@ export class AssignTenantComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -67,8 +69,8 @@ export class AssignTenantComponent implements OnInit {
       this.rent = this.tenant.rent;
       this.securityDeposit = this.tenant.securityDeposit;
       this.lateFees = this.tenant.lateFees;
-      this.startDate = this.tenant.tenant.startDate;
-      this.endDate = this.tenant.tenant.endDate;
+      this.startDate = this.datePipe.transform(this.tenant.tenant.startDate, 'dd-MM-yyy');
+      this.endDate = this.datePipe.transform(this.tenant.tenant.endDate, 'dd-MM-yyyy');
       this.email = this.tenant.tenant.email;
       this.phone = this.tenant.tenant.phone;
       this.tenantId = this.tenant.tenantId
