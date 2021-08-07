@@ -14,7 +14,7 @@
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Property</mat-label>
-                                        <input type="text" matInput [formControl]="propertyControl"
+                                        <input type="text" matInput [formControl]="propertyControl" [(ngModel)]="searchText"
                                             [matAutocomplete]="auto" required />
                                         <mat-autocomplete #auto="matAutocomplete">
                                             <mat-option *ngFor="let option of propertyFilteredOptions | async"
@@ -44,7 +44,7 @@
                                     <th>Download</th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let file of documentList">
+                                    <tr *ngFor="let file of documentList | filter:searchText">
                                         <td>{{file.fileName}}</td>
                                         <td>{{file.property.name}}</td>
                                         <td><span><i class="material-icons"><a

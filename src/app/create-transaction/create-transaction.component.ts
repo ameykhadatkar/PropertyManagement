@@ -63,7 +63,6 @@ export class CreateTransactionComponent implements OnInit {
       Amount: [null, Validators.required],
       Entity: [null, Validators.required],
     });
-    debugger
 
     this.http
       .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property")
@@ -157,7 +156,6 @@ export class CreateTransactionComponent implements OnInit {
       swal("Incomplete Details", "Please select all required fields to save transaction", "error");
       return;
     }
-    debugger
     this.transaction.PropertyId = this.PropertyValue;
     this.transaction.tenantId = null;
     this.transaction.PaymentTypeId = this.PaymentTypeId;
@@ -173,7 +171,6 @@ export class CreateTransactionComponent implements OnInit {
     this.transaction.details = this.details;
     this.transaction.fileName = this.fileName;
     this.transaction.base64String = this.fileBase64String;
-    debugger
     if (this.existingtransactionID == 0) {
       this.http
         .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense", this.transaction)
@@ -203,7 +200,11 @@ export class CreateTransactionComponent implements OnInit {
     return this.propertyForm.controls[control].hasError(error);
   }
   CancelTransaction() {
-    this.dialogRef.close(0);
+    if(this.dialogRef == undefined){
+      location.href = "/#/transactions";}
+    else{   this.dialogRef.close(0);}
+ 
+
   }
   onUploadClicked(event) {
     this.fileData = <File>event[0];

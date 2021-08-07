@@ -1,0 +1,41 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="offset-md-2 col-md-8">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Add Payment Type</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                  <mat-label>Payment Type</mat-label>
+                  <mat-select [(ngModel)]="PaymentTypeId" name="paymenttype" required>
+                    <mat-option *ngFor="let paymentType of paymentTypes" [value]="paymentType.name">
+                      {{ paymentType.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                  <input aria-required="true" matInput [(ngModel)]="paymentName"
+                    placeholder="Name" type="text" name="entity" />
+                </mat-form-field>
+              </div>
+            </div>
+            <button mat-raised-button  (click)="onFormSubmit()"
+              class="btn btn-danger pull-right">Save</button>
+              <button mat-raised-button type="submit" (click)="CancelTransaction()"
+              class="btn btn-danger pull-right">Cancel</button>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

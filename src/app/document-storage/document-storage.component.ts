@@ -6,6 +6,7 @@ import { ExcelService } from 'app/services/excel.service';
 import { catchError, retry, map, startWith } from "rxjs/operators";
 import swal from 'sweetalert';
 
+
 @Component({
   selector: 'app-document-storage',
   templateUrl: './document-storage.component.html',
@@ -25,6 +26,7 @@ export class DocumentStorageComponent implements OnInit {
   loading: boolean;
   fileData: File;
   documentList: any;
+  searchText: any;
 
   constructor(private http: HttpClient, private excelService: ExcelService) { }
 
@@ -34,7 +36,6 @@ export class DocumentStorageComponent implements OnInit {
       .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property")
       .subscribe((data) => {
         this.loading = false;
-        debugger
         this.properties = data.records;
         console.log(this.properties);
         this.propertyFilteredOptions = this.propertyControl.valueChanges.pipe(
@@ -101,7 +102,6 @@ export class DocumentStorageComponent implements OnInit {
       .subscribe((res) => {
         this.loading = false;
         if (res.message == "Success") {
-          debugger
           this.documentList = res.records;
         }
         console.log(res);

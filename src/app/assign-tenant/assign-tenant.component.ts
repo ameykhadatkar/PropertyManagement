@@ -69,8 +69,11 @@ export class AssignTenantComponent implements OnInit {
       this.rent = this.tenant.rent;
       this.securityDeposit = this.tenant.securityDeposit;
       this.lateFees = this.tenant.lateFees;
-      this.startDate = this.datePipe.transform(this.tenant.tenant.startDate, 'dd-MM-yyy');
-      this.endDate = this.datePipe.transform(this.tenant.tenant.endDate, 'dd-MM-yyyy');
+      debugger
+     // this.startDate = this.datePipe.transform(this.tenant.startDate, 'mm-dd-yyy');
+     this.startDate = this.tenant.startDate
+     this.endDate = this.datePipe.transform(this.tenant.endDate, 'mm-dd-yyyy');
+      this.productForm.controls.startDate.setValue(this.startDate);
       this.email = this.tenant.tenant.email;
       this.phone = this.tenant.tenant.phone;
       this.tenantId = this.tenant.tenantId

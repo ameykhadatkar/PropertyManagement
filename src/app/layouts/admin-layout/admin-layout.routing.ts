@@ -20,6 +20,7 @@ import { EmailComponent } from '../../emailservice/email.component';
 import { CreateTransactionComponent } from '../../create-transaction/create-transaction.component';
 import { ExportReportsComponent } from 'app/export-reports/export-reports/export-reports.component';
 import { DocumentStorageComponent } from 'app/document-storage/document-storage.component';
+import { CreatePaymentTypeComponent } from '../../create-paymentType/create-paymentType.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -40,6 +41,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'account-monitoring',     component: AccountComponent },
     { path: 'emailservice',     component: EmailComponent },
     { path: 'transactions/add',     component: CreateTransactionComponent },
+    { path: 'paymentType/add',     component: CreatePaymentTypeComponent },
     { path: 'export',     component: ExportReportsComponent },
     { path: 'document-storage',     component: DocumentStorageComponent }
 ];

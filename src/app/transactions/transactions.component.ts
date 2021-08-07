@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTransactionComponent } from '../create-transaction/create-transaction.component';
+import { CreatePaymentTypeComponent } from '../create-paymentType/create-paymentType.component';
 import swal from 'sweetalert';
 
 @Component({
@@ -33,6 +34,15 @@ export class TransactionsComponent implements OnInit {
         });
         console.log(this.transactions);
       });
+  }
+  addPaymentType(){
+    const dialogref = this.dialog.open(CreatePaymentTypeComponent, {
+      width: '50%',
+      height: 'auto',
+      maxHeight: '70%',
+      // disableClose: true,
+      backdropClass: 'cdk-overlay-transparent-backdrop',
+    });
   }
   editTransaction(transactions:any): void {
     const dialogref = this.dialog.open(CreateTransactionComponent, {
