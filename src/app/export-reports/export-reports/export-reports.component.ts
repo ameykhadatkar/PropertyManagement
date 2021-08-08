@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Property } from 'app/models/propertymodel';
 import { ExcelService } from 'app/services/excel.service';
 import { catchError, retry, map, startWith } from "rxjs/operators";
+import * as FileSaver from 'file-saver';
 import swal from 'sweetalert';
 
 @Component({
@@ -101,7 +102,8 @@ export class ExportReportsComponent implements OnInit {
         this.loading = false;
         if (result.message == "Created") {
           this.exportData.push(result.data)
-          this.excelService.exportAsExcelFile(this.exportData, this.selectedReport);
+          //this.excelService.exportAsExcelFile(this.exportData, result.data);
+          FileSaver.saveAs(result.data, this.selectedReport+ '_export_' + new Date().getTime() + '.xlsx');
         } else {
           swal("No data available", "No data available for this filter", "info");
         }

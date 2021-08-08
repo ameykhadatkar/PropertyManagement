@@ -35,7 +35,7 @@ import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatFileUploadModule } from 'mat-file-upload';
-
+import { CreatePaymentTypeComponent } from '../../create-paymentType/create-paymentType.component';
 
 @NgModule({
   imports: [
@@ -79,7 +79,8 @@ import { MatFileUploadModule } from 'mat-file-upload';
     CreateTransactionComponent,
     TenantComponent,
     AccountComponent,
-    EmailComponent
+    EmailComponent,
+    CreatePaymentTypeComponent
     // TenantRequestComponent
   ],
   schemas: [

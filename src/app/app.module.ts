@@ -31,8 +31,7 @@ import { BasicAuthInterceptor } from 'interceptors/basic-auth.interceptor';
 import { DocumentStorageComponent } from './document-storage/document-storage.component';
 import { MatFileUploadModule } from 'mat-file-upload';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
-
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -42,6 +41,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    Ng2SearchPipeModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     }),

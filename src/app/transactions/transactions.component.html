@@ -8,6 +8,9 @@
             <div>
               <a href="/#/transactions/add" class="btn btn-success pull-right">Log Transaction</a>
             </div>
+            <div>
+              <a class="btn btn-success pull-right" (click)="addPaymentType()">Add Payment Type</a>
+            </div>
           </div>
           <div class="card-body">
             <div class="table-responsive">
@@ -39,7 +42,8 @@
                     </td>
                     <td>
                       <a><i class="fa fa-trash fa-lg" (click)="deleteTransaction(prop.id)"></i></a>
-                      <a href="/#/property/{{ prop.id }}/edit"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                    
+                      <a><i class="fa fa-pencil fa-lg" (click)="editTransaction(prop)"></i></a>
                     </td>
                   </tr>
                 </tbody>

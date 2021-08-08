@@ -6,6 +6,7 @@ import { ExcelService } from 'app/services/excel.service';
 import { catchError, retry, map, startWith } from "rxjs/operators";
 import swal from 'sweetalert';
 
+
 @Component({
   selector: 'app-document-storage',
   templateUrl: './document-storage.component.html',
@@ -25,6 +26,7 @@ export class DocumentStorageComponent implements OnInit {
   loading: boolean;
   fileData: File;
   documentList: any;
+  searchText: any;
 
   constructor(private http: HttpClient, private excelService: ExcelService) { }
 
@@ -62,7 +64,7 @@ export class DocumentStorageComponent implements OnInit {
       this.loading = true;
       var reader = new FileReader();
       // this.imagePath = files;
-      reader.readAsDataURL(this.fileData);
+      reader.readAsBinaryString(this.fileData);
       console.log(reader.result);
   
       console.log(reader.result);

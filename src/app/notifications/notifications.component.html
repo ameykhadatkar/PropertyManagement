@@ -35,9 +35,12 @@
                                                 Status : {{notification.status}}
                                             </p>
                                     </div>
+                                    <div class="col-md-12" *ngIf = "notification.fileLink != null">
+                                        <p> Download attached file  : <a href= {{notification.fileLink}}>Attachment</a></p>
+                                    </div>
                                     <div class="form-group form-button">
-                                        <button mat-raised-button (click)="closeRequest(notification)" class="btn btn-danger pull-right">Close</button>
-                                        <button mat-raised-button (click)="updateStatus(notification)" class="btn btn-danger pull-right">Update Status</button>
+                                        <!-- <button mat-raised-button (click)="closeRequest(notification)" class="btn btn-danger pull-right">Close</button> -->
+                                        <button mat-raised-button (click)="updateStatus(notification)" class="btn btn-danger pull-right">Move To completed</button>
                                     </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
@@ -46,8 +49,8 @@
                     <mat-tab label="Completed">
                         <div class="notify">
                             <mat-accordion>
-                                <mat-expansion-panel *ngFor="let notification of notifications"  class="mb-4">
-                                        <mat-expansion-panel-header *ngIf="notification.status == 'Completed'"> 
+                                <mat-expansion-panel *ngFor="let notification of closedNotifications"  class="mb-4">
+                                        <mat-expansion-panel-header > 
                                             <mat-panel-title >
                                                <b> {{notification.title}} </b>  
                                             </mat-panel-title>
@@ -69,10 +72,12 @@
                                                     Status : {{notification.status}}
                                                 </p>
                                         </div>
-                                        <div class="form-group form-button" *ngIf="notification.id == 'Pending'">
-                                            <button mat-raised-button (click)="closeRequest(notification)" class="btn btn-danger pull-right">Close</button>
-                                            <button mat-raised-button (click)="updateStatus(notification)" class="btn btn-danger pull-right">Update Status</button>
+                                        <div class="col-md-12" *ngIf = "notification.fileLink != null">
+                                            <p> Download attached file  : <a href= {{notification.fileLink}}>Attachment</a></p>
                                         </div>
+                                        <!-- <div class="form-group form-button" >
+                                            <button mat-raised-button (click)="closeRequest(notification)" class="btn btn-danger pull-right">Close</button>                                            
+                                        </div> -->
                                 </mat-expansion-panel>
                             </mat-accordion>
                         </div>
