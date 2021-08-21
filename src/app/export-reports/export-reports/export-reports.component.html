@@ -37,7 +37,7 @@
                                         <input type="text" matInput [formControl]="propertyControl" [matAutocomplete]="auto" required />
                                         <mat-autocomplete #auto="matAutocomplete">
                                             <mat-option *ngFor="let option of propertyFilteredOptions | async"
-                                                [value]="option.name" (onSelectionChange)="setPropertyId(option)">
+                                                [value]="option.name" (onSelectionChange)="setPropertyId(option,$event)">
                                                 {{ option.name }}
                                             </mat-option>
                                         </mat-autocomplete>

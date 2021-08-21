@@ -6,6 +6,7 @@ import { ExcelService } from 'app/services/excel.service';
 import { catchError, retry, map, startWith } from "rxjs/operators";
 import * as FileSaver from 'file-saver';
 import swal from 'sweetalert';
+import { Properties } from 'xlsx/types';
 
 @Component({
   selector: 'app-export-reports',
@@ -27,6 +28,7 @@ export class ExportReportsComponent implements OnInit {
   reportTypes: any = [];
   showProperty = 0;
   postrequest: any = [];
+  selectedProperty = "";
   constructor(private http: HttpClient, private excelService: ExcelService) { }
 
   ngOnInit(): void {
@@ -81,7 +83,6 @@ export class ExportReportsComponent implements OnInit {
     //   swal("Property is required", "Please select Property", "info");
     //   return false;
     // }
-    
   var APIurl = 'https://propertymanagemet20210611034324.azurewebsites.net/api/Export/'
   if (this.selectedReport === 'IndividualProperty') 
    {
@@ -102,7 +103,7 @@ export class ExportReportsComponent implements OnInit {
         this.loading = false;
         if (result.message == "Created") {
           this.exportData.push(result.data)
-          //this.excelService.exportAsExcelFile(this.exportData, result.data);
+          //this.excelService.exportAsExcelFile(this.exportData, result.data);          
           FileSaver.saveAs(result.data, this.selectedReport+ '_export_' + new Date().getTime() + '.xlsx');
         } else {
           swal("No data available", "No data available for this filter", "info");
@@ -115,8 +116,10 @@ export class ExportReportsComponent implements OnInit {
 
   }
 
-  setPropertyId(item) {
-    this.propertyId = item.id;
+  setPropertyId(item,event : any) {
+    if (event.isUserInput) {
+      this.propertyId = item.id;
+    }  
   }
   ShowProperties(reports)  {
     
