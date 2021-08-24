@@ -53,6 +53,13 @@
                                 </tbody>
                             </table>
                         </div>
+                        
+                        <div>
+                            <div>
+                            <input type="button" [disabled]="pageNumber == maxPage" (click)="next()" class="btn btn-success pull-right" value="Next" />
+                            <input type="button" [disabled]="pageNumber == 1" (click)="previous()" class="btn btn-success pull-right" value="Previous" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

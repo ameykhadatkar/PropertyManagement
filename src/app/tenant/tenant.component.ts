@@ -13,14 +13,25 @@ export class TenantComponent implements OnInit {
   tenantList : any = [];
   tenantUpdate : any = [];
   disableEdit = 0;
+  pageNumber: number;
+  maxPage: number;
   emailComponent : EmailComponent
   constructor(private http: HttpClient, public datepipe: DatePipe,private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    
+    this.pageNumber = 1;
+    this.loadPage(this.pageNumber);
+
+   }
+
+   loadPage(pageNumber){
     this.http
-    .get<any>(" https://propertymanagemet20210611034324.azurewebsites.net/api/Tenant/list/1")
+    .get<any>(" https://propertymanagemet20210611034324.azurewebsites.net/api/Tenant/list/" + this.pageNumber)
     .subscribe((data) => {
      // this.tenantList = data.records;
+      this.maxPage = Math.floor(data.totalRecords / 10) + 1;
+      this.tenantList = [];
       data.records.forEach((element, index) => {
         this.tenantList.push({
           id:element.id,
@@ -35,8 +46,17 @@ export class TenantComponent implements OnInit {
         })});
         this.disableEdit = 1;
     });
-
    }
+
+  next(): void {
+    this.pageNumber = this.pageNumber + 1;
+    this.loadPage(this.pageNumber);
+  }
+
+  previous(): void {
+    this.pageNumber = this.pageNumber - 1;
+    this.loadPage(this.pageNumber);
+  }
   editTenant(tenant) {
     this.tenantList.map((element) => {
       if (tenant === element.id) {

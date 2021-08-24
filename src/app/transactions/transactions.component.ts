@@ -14,16 +14,35 @@ import swal from 'sweetalert';
 export class TransactionsComponent implements OnInit {
   transactions: Array<any>;
   loading: boolean;
+  pageNumber: number;
+  maxPage: number;
   createTransactionComponent:CreateTransactionComponent
   constructor(private http: HttpClient, public datepipe: DatePipe,private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loading = true;
+    this.pageNumber = 1;
+    this.loadPage(this.pageNumber);
+  }
+
+  next(): void {
+    this.loading = true;
+    this.pageNumber = this.pageNumber + 1;
+    this.loadPage(this.pageNumber);
+  }
+
+  previous(): void {
+    this.loading = true;
+    this.pageNumber = this.pageNumber - 1;
+    this.loadPage(this.pageNumber);
+  }
+
+  loadPage(pageNumber){
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense/list/1")
+      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense/list/" + this.pageNumber)
       .subscribe((data) => {
         this.loading = false;
-
+        this.maxPage = Math.floor(data.totalRecords / 10) + 1;
         this.transactions = data.records;
         this.transactions.forEach(function (item, index) {
           var formattedDate = item.paymentDateTime.substring(
@@ -35,6 +54,7 @@ export class TransactionsComponent implements OnInit {
         console.log(this.transactions);
       });
   }
+
   addPaymentType(){
     const dialogref = this.dialog.open(CreatePaymentTypeComponent, {
       width: '50%',

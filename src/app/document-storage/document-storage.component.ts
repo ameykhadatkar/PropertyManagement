@@ -27,11 +27,14 @@ export class DocumentStorageComponent implements OnInit {
   fileData: File;
   documentList: any;
   searchText: any;
+  pageNumber: number;
+  maxPage: number;
 
   constructor(private http: HttpClient, private excelService: ExcelService) { }
 
   ngOnInit(): void {
     this.loading = true;
+    this.pageNumber = 1;
     this.http
       .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property")
       .subscribe((data) => {
@@ -97,11 +100,28 @@ export class DocumentStorageComponent implements OnInit {
   }
 
   getDocuments() {
+    this.loadPage(this.pageNumber);
+  }
+
+  next(): void {
+    this.loading = true;
+    this.pageNumber = this.pageNumber + 1;
+    this.loadPage(this.pageNumber);
+  }
+
+  previous(): void {
+    this.loading = true;
+    this.pageNumber = this.pageNumber - 1;
+    this.loadPage(this.pageNumber);
+  }
+
+  loadPage(pageNumber){
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/DocumentStorage/list/1")
+      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/DocumentStorage/list/" + this.pageNumber)
       .subscribe((res) => {
         this.loading = false;
         if (res.message == "Success") {
+          this.maxPage = Math.floor(res.totalRecords / 10) + 1;
           this.documentList = res.records;
         }
         console.log(res);

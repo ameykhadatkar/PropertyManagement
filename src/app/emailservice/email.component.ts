@@ -32,7 +32,7 @@ export class EmailComponent implements OnInit {
    
  }
  sendEmail() {
-  this.http.post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Notification" ,this.tenant ).subscribe((data) => {
+  this.http.post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Notification/manual" ,this.tenant ).subscribe((data) => {
     if(data.responseCode = 'OK'){
       alert("email has been sent");
     }
