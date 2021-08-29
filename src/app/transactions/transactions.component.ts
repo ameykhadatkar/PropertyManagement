@@ -14,6 +14,8 @@ import swal from 'sweetalert';
 export class TransactionsComponent implements OnInit {
   transactions: Array<any>;
   loading: boolean;
+  startdate: Date;
+  enddate: Date;
   pageNumber: number;
   maxPage: number;
   createTransactionComponent:CreateTransactionComponent
@@ -37,9 +39,24 @@ export class TransactionsComponent implements OnInit {
     this.loadPage(this.pageNumber);
   }
 
+  search(): void {
+    this.loading = true;
+    this.pageNumber = 1;
+    this.loadPage(this.pageNumber);
+  }
+
   loadPage(pageNumber){
+    console.log(this.startdate);
+    console.log(this.enddate);
+    var url = "https://propertymanagemet20210611034324.azurewebsites.net/api/expense/list/" + this.pageNumber + "?";
+    if(this.startdate != undefined && this.startdate != null){
+      url = url + "startdate=" + this.startdate
+    }
+    if(this.enddate != undefined && this.enddate != null){
+        url = url + "&enddate=" + this.enddate;
+    }
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense/list/" + this.pageNumber)
+      .get<any>(url)
       .subscribe((data) => {
         this.loading = false;
         this.maxPage = Math.floor(data.totalRecords / 10) + 1;

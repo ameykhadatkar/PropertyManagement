@@ -5,14 +5,35 @@
         <div class="card">
           <div class="card-header card-header-danger">
             <h4 class="card-title">Transactions</h4>
-            <div>
-              <a href="/#/transactions/add" class="btn btn-success pull-right">Log Transaction</a>
-            </div>
-            <div>
-              <a class="btn btn-success pull-right" (click)="addPaymentType()">Add Payment Type</a>
-            </div>
+            
           </div>
           <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input aria-required="true" required matInput [(ngModel)]="startdate" placeholder="Start Date"
+                    type="date" name="startdate" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input aria-required="true" required matInput [(ngModel)]="enddate" placeholder="End Date"
+                    type="date" name="enddate" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <button mat-raised-button type="button" (click)="search()"
+              class="btn btn-success pull-right">Search</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="pull-right">
+                <a href="/#/transactions/add" class="btn btn-success pull-right">Log Transaction</a>
+              </div>
+              <div class="pull-right">
+                <a class="btn btn-success pull-right" (click)="addPaymentType()">Add Payment Type</a>
+              </div>
+            </div>
             <div class="table-responsive">
               <table class="table">
                 <thead class="text-primary">

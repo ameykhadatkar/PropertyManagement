@@ -32,7 +32,12 @@ export class CreatePaymentTypeComponent implements OnInit {
     },{
       name : "Expense"
     }   ];
-  }   
+  }
+
+  CancelTransaction(): void {
+    this.dialogRef.close();
+  }
+
   onFormSubmit(){
     debugger
     var request = {
