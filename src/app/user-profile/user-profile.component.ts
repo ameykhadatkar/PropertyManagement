@@ -12,6 +12,8 @@ userDetails : any = []
 userLogin : any = []
 userEmail =""
 userPwd = ""
+fileData: File;
+loading: boolean;
   constructor( private http: HttpClient) { }
 
   ngOnInit() {
@@ -62,5 +64,35 @@ userPwd = ""
   
   }
 }
+
+  onUploadClicked(event) {
+    
+    this.fileData = <File>event[0];
+    if(this.fileData != undefined) {
+      this.loading = true;
+      var reader = new FileReader();
+      // this.imagePath = files;
+      reader.readAsBinaryString(this.fileData);
+      reader.onload = (_event) => {
+        let data = {
+          "FileBase64String": btoa(_event.target.result.toString())
+        }
+        console.log(data);
+        this.http
+          .put<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/tenant/Rules", data)
+          .subscribe((res) => {
+            this.loading = false;
+            swal("Rules document updated!")
+          }, (error: HttpErrorResponse) => {
+            event = null;
+            this.loading = false;
+            swal("Something went wrong", "Please try again", "error");
+          });
+      }
+
+    } else {
+      swal("Something went wrong", "Please choose file again", "error");
+    }
+  }
 
 }

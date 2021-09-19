@@ -8,6 +8,8 @@
                       <p class="card-category">Complete your profile</p>
                   </div>
                   <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-12">
                       <form>
                           <div class="row">
                               <div class="col-md-3">
@@ -24,12 +26,7 @@
                                 <mat-form-field class="example-full-width">
                                   <input matInput placeholder="Phone" [(ngModel)]="userDetails.phone" name = "Phone">
                                 </mat-form-field>
-                            </div> 
-                            <!-- <div class="col-md-4">
-                              <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Password" type="password" [(ngModel)]="userDetails.password" name = "Password">
-                              </mat-form-field>
-                          </div>  -->
+                            </div>
                           </div>
                           <div class="row">
                               <div class="col-md-6">
@@ -37,11 +34,6 @@
                                   <input matInput placeholder="FirstName"  [(ngModel)]="userDetails.firstName" name = "FirstName">
                                 </mat-form-field>
                               </div>
-                              <!-- <div class="col-md-6">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="LastName"  [(ngModel)]="userDetails.lastName" name = "LastName">
-                                </mat-form-field>
-                              </div> -->
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
                                   <input matInput placeholder="LastName"  [(ngModel)]="userDetails.lastName" name = "LastName">
@@ -62,6 +54,28 @@
                           </div>
                           <button mat-raised-button type="submit"  (click)="UpdateProfile();"class="btn btn-danger pull-right">Update Profile</button>
                       </form>
+                    </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <hr />
+                        <h4><b>Update Tenant Rules</b></h4>
+                        <hr />
+                      </div>
+                      <div class="col-md-12">
+                      <form>
+                                <mat-file-upload [labelText]="'Select a file to upload:'"
+                                    [selectButtonText]="'Choose File'" [selectFilesButtonType]="button"
+                                    [uploadButtonText]="'Submit'" [uploadButtonType]="submit"
+                                    [allowMultipleFiles]="false" [showUploadButton]="true"
+                                    (uploadClicked)="onUploadClicked($event)">
+                                </mat-file-upload>
+                      </form>
+                    </div>
+                    </div>
+                  </div>
+                  <div>
+                    
                   </div>
               </div>
           </div>

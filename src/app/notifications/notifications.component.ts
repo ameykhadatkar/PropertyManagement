@@ -80,6 +80,7 @@ export class NotificationsComponent implements OnInit {
 
   updateStatus(notifications) {
     this.loading = true;
+    console.log(notifications);
     let data = {
       "id": notifications.id,
       "title": notifications.title,
@@ -87,8 +88,13 @@ export class NotificationsComponent implements OnInit {
       "tenantEmail": notifications.tenantEmail,
       "tenantPhone": notifications.tenantPhone,
       "fileBase64String": notifications.fileBase64String,
-      "status": "Completed"
-    }
+      "status": "Completed",
+      "repairableEntity": notifications.repairableEntity,
+      "tenantName": notifications.tenantName,
+      "propertyAddress": notifications.propertyAddress
+    };
+
+
     this.http.put<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/TenantRequest", data).subscribe((data) => {
       this.loading = false;
       if (data.message == "Success") {

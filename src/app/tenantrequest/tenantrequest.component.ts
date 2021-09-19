@@ -16,6 +16,8 @@ export class TenantRequestComponent implements OnInit {
   signupForm:FormGroup
   fileData: File;
   loading: boolean;
+  RepairableEntities: string[];
+  other: string;
   constructor(private http: HttpClient, public datepipe: DatePipe, private formBuilder: FormBuilder,@Optional() public dialogRef: MatDialogRef<TenantRequestComponent>) { }
 
   ngOnInit(): void {
@@ -25,9 +27,18 @@ export class TenantRequestComponent implements OnInit {
       tenantEmail: ['', Validators.required],
       tenantPhone: [''],
       fileName:[''],
-      fileBase64String: ['']
+      fileBase64String: [''],
+      RepairableEntity: [''],
+      tenantName: ['', Validators.required],
+      PropertyAddress: ['', Validators.required]
     });
 
+    this.http
+      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/tenantrequest/RepairableItems")
+      .subscribe((data) => {
+        this.RepairableEntities = data.data;
+        this.RepairableEntities.push("Other");
+      });
   }
   onFileSelected() {
     const inputNode: any = document.querySelector('#file');
@@ -66,19 +77,30 @@ export class TenantRequestComponent implements OnInit {
     this.http
     .post<any>(" https://propertymanagemet20210611034324.azurewebsites.net/api/TenantRequest",this.tenantRequestForm.value)
     .subscribe((data) => {
-      swal("Your Request Has Been Submitted!")
-      this.tenantRequestForm = this.formBuilder.group({
-        title: ['', Validators.required],
-        description: ['', Validators.required],
-        tenantEmail: ['', Validators.required],
-        tenantPhone: [''],
-        fileBase64String: ['']
-      });
+      console.log(data);
+      if(data.responseCode != 'BadRequest'){
+        swal("Your Request Has Been Submitted!")
+        this.tenantRequestForm = this.formBuilder.group({
+          title: ['', Validators.required],
+          description: ['', Validators.required],
+          tenantEmail: ['', Validators.required],
+          tenantPhone: [''],
+          fileName:[''],
+          fileBase64String: [''],
+          RepairableEntity: [''],
+          tenantName: ['', Validators.required],
+          PropertyAddress: ['', Validators.required]
+        });
+        if(this.dialogRef != undefined){
+          this.dialogRef.close();
+        }
+      } else {
+        swal(data.message);
+      }
+    }, (error) => {
+      
+      swal(error.error.message);
     });
-    if(this.dialogRef != undefined){
-      this.dialogRef.close();
-    }
-   
   }
 
   CancelRequest(){
