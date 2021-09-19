@@ -16,8 +16,10 @@ export class TenantRequestComponent implements OnInit {
   signupForm:FormGroup
   fileData: File;
   loading: boolean;
+  RepairableEntity: string;
   RepairableEntities: string[];
   other: string;
+  showOther: boolean;
   constructor(private http: HttpClient, public datepipe: DatePipe, private formBuilder: FormBuilder,@Optional() public dialogRef: MatDialogRef<TenantRequestComponent>) { }
 
   ngOnInit(): void {
@@ -101,6 +103,16 @@ export class TenantRequestComponent implements OnInit {
       
       swal(error.error.message);
     });
+  }
+
+  showOthers()  {
+    
+    if(this.RepairableEntity === 'Other'){
+      this.showOther = true;
+    }
+    else {
+      this.showOther = false;
+    }
   }
 
   CancelRequest(){

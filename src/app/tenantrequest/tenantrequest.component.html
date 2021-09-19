@@ -53,17 +53,17 @@
                                 
                                 <mat-form-field appearance="fill">
                                     <mat-label>Area or the items need repairs</mat-label>
-                                    <mat-select [(ngModel)]="RepairableEntity" formControlName="RepairableEntity" name="RepairableEntity" required>
+                                    <mat-select [(ngModel)]="RepairableEntity" formControlName="RepairableEntity"  (ngModelChange)="showOthers()" name="RepairableEntity" required>
                                       <mat-option *ngFor="let rep of RepairableEntities" [value]="rep">
                                         {{ rep }}
                                       </mat-option>
                                     </mat-select>
                                   </mat-form-field>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12"  *ngIf = "showOther == true">
                                 <mat-form-field class="example-full-width">
                                     <!-- <label for="pass"><i class="material-icons">lock</i></label> -->
-                                    <input matInput type="text" formControlName="RepairableEntity"
+                                    <input matInput disabled="true" type="text" formControlName="RepairableEntity"
                                         placeholder="Others" />
                                 </mat-form-field>
                             </div>
@@ -73,7 +73,7 @@
                               <div class="form-group col-md-12">
                                   <mat-form-field class="example-full-width">
                                       <input matInput type="text" formControlName="description"
-                                          placeholder="Description">
+                                          placeholder="Details of the repair">
 
                                   </mat-form-field>
                               </div>
