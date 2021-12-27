@@ -62,11 +62,17 @@ export class TransactionsComponent implements OnInit {
         this.maxPage = Math.floor(data.totalRecords / 10) + 1;
         this.transactions = data.records;
         this.transactions.forEach(function (item, index) {
-          var formattedDate = item.paymentDateTime.substring(
-            0,
-            item.paymentDateTime.indexOf("T")
-          );
-          item.paymentDateTime = formattedDate;
+          // var formattedDate = item.paymentDateTime.substring(
+          //   0,
+          //   item.paymentDateTime.indexOf("T")
+          // );
+          // item.paymentDateTime = formattedDate;
+
+          var dateobj = new Date(item.paymentDateTime);
+          console.log(dateobj);
+          item.paymentDateTime = dateobj.toLocaleDateString("en-US");
+          console.log(item.paymentDateTime);
+
         });
         console.log(this.transactions);
       });

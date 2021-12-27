@@ -59,6 +59,8 @@ export class PropertyEditComponent implements OnInit {
 
   onFormSubmit(form: NgForm): void {
     this.loading = true;
+    console.log(this.propertyData);
+    this.propertyData.preferredRent = Number(this.propertyData.preferredRent);
     this.http.put<any>('https://propertymanagemet20210611034324.azurewebsites.net/api/property', this.propertyData).subscribe(data => {
       this.loading = false;
       location.href = "/#/property/" + this.propertyData.id;

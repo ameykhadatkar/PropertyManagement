@@ -63,20 +63,22 @@ export class AssignTenantComponent implements OnInit {
     this.tenantExist = 0;
     
     if(this.tenant != null) {
+      console.log(this.tenant);
       this.tenantExist = 1;
       this.firstName = this.tenant.tenant.firstName;
       this.lastName = this.tenant.tenant.lastName;
       this.rent = this.tenant.rent;
       this.securityDeposit = this.tenant.securityDeposit;
       this.lateFees = this.tenant.lateFees;
-      debugger
-     // this.startDate = this.datePipe.transform(this.tenant.startDate, 'mm-dd-yyy');
-     this.startDate = this.tenant.startDate
-     this.endDate = this.datePipe.transform(this.tenant.endDate, 'mm-dd-yyyy');
-      this.productForm.controls.startDate.setValue(this.startDate);
       this.email = this.tenant.tenant.email;
       this.phone = this.tenant.tenant.phone;
-      this.tenantId = this.tenant.tenantId
+      this.tenantId = this.tenant.tenantId;
+      //this.datePipe.transform(yesterday, 'yyyy-MM-dd');//
+     this.startDate = this.datePipe.transform(new Date(this.tenant.startDate), 'yyyy-MM-dd');
+     this.endDate = this.datePipe.transform(new Date(this.tenant.endDate), 'yyyy-MM-dd');
+     console.log(this.startDate);
+     console.log(this.endDate);
+      this.productForm.controls.startDate.setValue(this.startDate);
 
     }
     this.tenantdata = new TenantModel();
@@ -84,10 +86,12 @@ export class AssignTenantComponent implements OnInit {
   }
 
   onFormSubmit(form: NgForm): void {
+    debugger;
     this.tenantdata.firstName = this.firstName;
     this.tenantdata.lastName = this.lastName;
     this.tenantdata.email = this.email;
     this.tenantdata.phone = this.phone;
+    
 
     
     this.propertyMapping.rent = this.rent;
@@ -118,11 +122,27 @@ export class AssignTenantComponent implements OnInit {
     this.tenantdata.lastName = this.lastName;
     this.tenantdata.email = this.email;
     this.tenantdata.phone = this.phone;
+    if(this.tenant != null) {
+      this.tenantdata.id = this.tenantId;
+    }
     this.http
     .put<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Tenant", this.tenantdata)
     .subscribe((data) => {
       this.loading = false;
-      swal("Success", "Tenant information has been updated", "info");
+      var postData = {
+        TenantId: this.tenantId,
+        Rent: this.rent,
+        PropertyId: Number(this.propertyId),
+        LateFees: this.lateFees,
+        EndDate: this.endDate
+      };
+      this.http
+        .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/tenant/updatetenancy", postData)
+        .subscribe((data) => {
+          swal("Success", "Tenant has been updated successfully", "info");
+          this.tenantExist = 1;
+          location.href="/#/property/" + this.propertyId;
+        });
     });
   }
   removeTenant() {

@@ -42,6 +42,8 @@ export class TenantComponent implements OnInit {
           createdDateTime:element.createdDateTime,
           lastModifiedDateTime : element.lastModifiedDateTime,
           email:element.email,
+          propertyId:element.propertyId,
+          propertyName:element.propertyName,
           editMode:0
         })});
         this.disableEdit = 1;

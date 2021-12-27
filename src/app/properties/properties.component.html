@@ -16,6 +16,7 @@
                   <th>Preferred Rent</th>
                   <th>City</th>
                   <th>State</th>
+                  <th>Rent Paid</th>
                   <th>Actions</th>
                 </thead>
                 <tbody>
@@ -34,6 +35,10 @@
                     </td>
                     <td>
                       {{ prop.state }}
+                    </td>
+                    <td>
+                      <p class="renticongreen" *ngIf = "prop.rentPaid == true"></p>
+                      <p class="renticonred" *ngIf = "prop.rentPaid == false"></p>
                     </td>
                     <td>
                       <a><i class="fa fa-trash fa-lg" (click)="deleteProperty(prop.id)"></i></a>

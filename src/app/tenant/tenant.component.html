@@ -38,7 +38,7 @@
                           [(ngModel)]="tenant.phone"></span>
                     </td>
                     <td>
-                      <span *ngIf="(tenant.editMode ===0)">property will be populated later</span>
+                      <span *ngIf="(tenant.editMode ===0)"><a href="/#/property/{{ tenant.propertyId }}">{{tenant.propertyName}}</a></span>
                       <!-- <span *ngIf="(tenant.editMode ===1)"> <input matInput placeholder="Username" [(ngModel)]="tenant.property"></span> -->
                     </td>
 
