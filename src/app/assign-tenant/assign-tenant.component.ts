@@ -134,6 +134,7 @@ export class AssignTenantComponent implements OnInit {
         Rent: this.rent,
         PropertyId: Number(this.propertyId),
         LateFees: this.lateFees,
+        SecurityDeposit: this.securityDeposit,
         EndDate: this.endDate
       };
       this.http

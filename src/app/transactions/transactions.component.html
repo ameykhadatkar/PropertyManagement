@@ -38,8 +38,6 @@
               <table class="table">
                 <thead class="text-primary">
                   <th>Property</th>
-                  <th>Personal</th>
-                  <th>Re-imbursible</th>
                   <th>Transaction Date</th>
                   <th>Amount</th>
                   <th>Actions</th>
@@ -50,16 +48,10 @@
                       <a href="/#/property/{{ prop?.property?.id || 0 }}">{{ prop?.property?.name || "" }}</a>
                     </td>
                     <td>
-                      {{ prop.personal }}
-                    </td>
-                    <td>
-                      {{ prop.reimbursible }}
-                    </td>
-                    <td>
                       {{ prop.paymentDateTime }}
                     </td>
                     <td>
-                      {{ prop.amount }}
+                      {{ prop.amount | currency }}
                     </td>
                     <td>
                       <a><i class="fa fa-trash fa-lg" (click)="deleteTransaction(prop.id)"></i></a>

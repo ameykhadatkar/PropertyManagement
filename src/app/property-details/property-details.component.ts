@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, ɵCompiler_compileModuleSync__POST_R3__ } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
+import { DatePipe } from '@angular/common';
 import { Observable, throwError } from "rxjs";
 import { catchError, retry } from "rxjs/operators";
 import { Property } from "app/models/propertymodel";
@@ -27,7 +28,7 @@ export interface RelatedExpenseModel {
 })
 export class PropertyDetailsComponent implements OnInit {
   showButton: boolean = true;
-  constructor(private http: HttpClient, private route: ActivatedRoute, public dialog: MatDialog) {}
+  constructor(private http: HttpClient, public datepipe: DatePipe, private route: ActivatedRoute, public dialog: MatDialog) {}
   id: number;
   propertyData: any;
   relatedExpenses: Array<RelatedExpenseModel>;
@@ -44,8 +45,9 @@ export class PropertyDetailsComponent implements OnInit {
     this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/" + this.id + "/relatedexpenses").subscribe((data) => {
       this.relatedExpenses = data.records;
       this.relatedExpenses.forEach(function (relatedExpense, index) {
-        var formattedDate = relatedExpense.expenseDate.substring(0, relatedExpense.expenseDate.indexOf("T"));
-        relatedExpense.expenseDate = formattedDate;
+        //var formattedDate = relatedExpense.expenseDate.substring(0, relatedExpense.expenseDate.indexOf("T"));
+        var dateobj = new Date(relatedExpense.expenseDate);
+        relatedExpense.expenseDate = dateobj.toLocaleDateString("en-US");;
       });
     });
   }

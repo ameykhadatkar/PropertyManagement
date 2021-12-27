@@ -47,8 +47,6 @@
                           <thead>
                             <tr>
                               <th>Property</th>
-                              <th>Personal</th>
-                              <th>Re-imbursible</th>
                               <th>Transaction Date</th>
                               <th>Amount</th>
                               <th>Type</th>
@@ -63,13 +61,7 @@
                                 {{ prop.personal }}
                               </td>
                               <td>
-                                {{ prop.reimbursible }}
-                              </td>
-                              <td>
-                                {{ prop.paymentDateTime }}
-                              </td>
-                              <td>
-                                {{ prop.amount }}
+                                {{ prop.amount | currency }}
                               </td>
                               <td>
                                 {{ prop.type }}

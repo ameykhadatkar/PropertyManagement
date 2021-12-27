@@ -31,7 +31,9 @@ export class PropertiesComponent implements OnInit {
       .subscribe((data) => {
         this.loading = false;
         this.properties = data.records;
-        console.log(this.properties);
+        // this.properties.forEach(function(item, index){
+        //   item.preferredRent = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(item.preferredRent);
+        // });
       });
   }
   AddNewProperty(){
