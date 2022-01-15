@@ -2,6 +2,7 @@ import { HttpClient , HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GlobalConstants } from 'app/global-constants';
 import swal from 'sweetalert';
 @Component({
   selector: 'app-login',
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     try {
       this.http
-      .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Auth/login", this.loginForm.value)
+      .post<any>(GlobalConstants.apiURL + "api/Auth/login", this.loginForm.value)
       .subscribe((response) => {
         
         this.loading = false;

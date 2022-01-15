@@ -105,17 +105,34 @@
                   <mat-form-field class="example-full-width">
                     <input
                       aria-required="true"
+                      formControlName="petDeposit"
+                      required
+                      matInput
+                      [(ngModel)]="petDeposit"
+                      required
+                      type="number"
+                      placeholder="Pet Deposit"
+                      name="petDeposit"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input
+                      aria-required="true"
                       formControlName="lateFees"
                       required
                       matInput
                       [(ngModel)]="lateFees"
                       required
-                      type="number"
+                      type="text"
                       placeholder="Late Fees"
                       name="lateFees"
                     />
                   </mat-form-field>
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-md-4">
                   <mat-form-field class="example-full-width">
                     <input
@@ -144,6 +161,22 @@
                       placeholder="End Date"
                       name="endDate"
                     />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field>
+                    <mat-label>Notes</mat-label>
+                    <textarea matInput
+                    aria-required="false"
+                    formControlName="notes"
+                    matInput
+                    [(ngModel)]="notes"
+                    required
+                    type="text"
+                    placeholder="Notes"
+                    name="notes"></textarea>
                   </mat-form-field>
                 </div>
               </div>

@@ -3,7 +3,9 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { TenantModel } from "app/models/TenantModel";
 import { PropertyMappingModel } from "app/models/PropertyMappingModel";
+import { GlobalConstants } from 'app/global-constants';
 import swal from 'sweetalert';
+//import { CurrencyMaskModule } from "ng2-currency-mask";
 import { Observable, throwError } from "rxjs";
 import { catchError, retry } from "rxjs/operators";
 import {
@@ -29,11 +31,13 @@ export class AssignTenantComponent implements OnInit {
   phone: string;
   rent: string;
   securityDeposit: string;
+  petDeposit: number;
   lateFees: string;
   propertyId: number;
   tenantId: number;
   startDate: string;
   endDate: string;
+  notes: string;
   tenantdata: TenantModel;
   propertyMapping: PropertyMappingModel;
   loading: boolean;
@@ -58,7 +62,9 @@ export class AssignTenantComponent implements OnInit {
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
       securityDeposit: [null, Validators.required],
+      petDeposit: [null, Validators.required],
       lateFees: [null, Validators.required],
+      notes: [null, null],
     });
     this.tenantExist = 0;
     
@@ -69,15 +75,15 @@ export class AssignTenantComponent implements OnInit {
       this.lastName = this.tenant.tenant.lastName;
       this.rent = this.tenant.rent;
       this.securityDeposit = this.tenant.securityDeposit;
+      this.petDeposit = this.tenant.petDeposit;
       this.lateFees = this.tenant.lateFees;
       this.email = this.tenant.tenant.email;
       this.phone = this.tenant.tenant.phone;
       this.tenantId = this.tenant.tenantId;
+      this.notes = this.tenant.tenant.notes;
       //this.datePipe.transform(yesterday, 'yyyy-MM-dd');//
      this.startDate = this.datePipe.transform(new Date(this.tenant.startDate), 'yyyy-MM-dd');
      this.endDate = this.datePipe.transform(new Date(this.tenant.endDate), 'yyyy-MM-dd');
-     console.log(this.startDate);
-     console.log(this.endDate);
       this.productForm.controls.startDate.setValue(this.startDate);
 
     }
@@ -91,11 +97,13 @@ export class AssignTenantComponent implements OnInit {
     this.tenantdata.lastName = this.lastName;
     this.tenantdata.email = this.email;
     this.tenantdata.phone = this.phone;
+    this.tenantdata.notes = this.notes;
     
 
     
     this.propertyMapping.rent = this.rent;
     this.propertyMapping.securityDeposit = this.securityDeposit;
+    this.propertyMapping.petDeposit = this.petDeposit;
     this.propertyMapping.lateFees = this.lateFees;
     this.propertyMapping.startDate = this.startDate;
     this.propertyMapping.endDate = this.endDate;
@@ -103,13 +111,13 @@ export class AssignTenantComponent implements OnInit {
     this.propertyMapping.propertyId = propertyIdNumber;
     this.loading = true;
     this.http
-      .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/tenant", this.tenantdata)
+      .post<any>(GlobalConstants.apiURL + "api/tenant", this.tenantdata)
       .subscribe((data) => {
         this.loading = false;
         this.tenantId = data.data.id;
         this.propertyMapping.tenantId = this.tenantId;
         this.http
-          .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/tenant/" + this.tenantId + "/property", this.propertyMapping)
+          .post<any>(GlobalConstants.apiURL + "api/tenant/" + this.tenantId + "/property", this.propertyMapping)
           .subscribe((data) => {
             swal("Success", "Tenant has been added successfully", "info");
             this.tenantExist = 1;
@@ -122,11 +130,12 @@ export class AssignTenantComponent implements OnInit {
     this.tenantdata.lastName = this.lastName;
     this.tenantdata.email = this.email;
     this.tenantdata.phone = this.phone;
+    this.tenantdata.notes = this.notes;
     if(this.tenant != null) {
       this.tenantdata.id = this.tenantId;
     }
     this.http
-    .put<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Tenant", this.tenantdata)
+    .put<any>(GlobalConstants.apiURL + "api/Tenant", this.tenantdata)
     .subscribe((data) => {
       this.loading = false;
       var postData = {
@@ -135,10 +144,12 @@ export class AssignTenantComponent implements OnInit {
         PropertyId: Number(this.propertyId),
         LateFees: this.lateFees,
         SecurityDeposit: this.securityDeposit,
-        EndDate: this.endDate
+        petDeposit: this.petDeposit,
+        EndDate: this.endDate,
+        Notes: this.notes
       };
       this.http
-        .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/tenant/updatetenancy", postData)
+        .post<any>(GlobalConstants.apiURL + "api/tenant/updatetenancy", postData)
         .subscribe((data) => {
           swal("Success", "Tenant has been updated successfully", "info");
           this.tenantExist = 1;
@@ -148,7 +159,7 @@ export class AssignTenantComponent implements OnInit {
   }
   removeTenant() {
     this.http
-    .delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Tenant/"+this.tenantId )
+    .delete<any>(GlobalConstants.apiURL + "api/Tenant/"+this.tenantId )
     .subscribe((data) => {
       this.loading = false;
       this.tenantExist = 0;
@@ -161,7 +172,9 @@ export class AssignTenantComponent implements OnInit {
         startDate: [null, Validators.required],
         endDate: [null, Validators.required],
         securityDeposit: [null, Validators.required],
+        petDeposit: [null, Validators.required],
         lateFees: [null, Validators.required],
+        notes: [null, null]
       });
       swal("Success", "Tenant has been deleted successfully", "info");
     });

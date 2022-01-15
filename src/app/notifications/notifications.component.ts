@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import swal from 'sweetalert';
 import { TenantRequestComponent } from '../tenantrequest/tenantrequest.component';
+import { GlobalConstants } from 'app/global-constants';
 
 declare var $: any;
 @Component({
@@ -24,7 +25,7 @@ export class NotificationsComponent implements OnInit {
   getNotifications() {
     this.loading = true;
     this.notifications = [];
-    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/TenantRequest").subscribe((data) => {
+    this.http.get<any>(GlobalConstants.apiURL + "api/TenantRequest").subscribe((data) => {
       this.loading = false;
       if (data.message == "Success") {
         debugger
@@ -66,7 +67,7 @@ export class NotificationsComponent implements OnInit {
       "tenantPhone": "string",
       "fileBase64String": "string"
     }
-    this.http.put<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/TenantRequest", data).subscribe((data) => {
+    this.http.put<any>(GlobalConstants.apiURL + "api/TenantRequest", data).subscribe((data) => {
       this.loading = false;
       if (data.message == "Success") {
         this.getNotifications();
@@ -95,7 +96,7 @@ export class NotificationsComponent implements OnInit {
     };
 
 
-    this.http.put<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/TenantRequest", data).subscribe((data) => {
+    this.http.put<any>(GlobalConstants.apiURL + "api/TenantRequest", data).subscribe((data) => {
       this.loading = false;
       if (data.message == "Success") {
         swal("Success", "This request has been closed.", "info");

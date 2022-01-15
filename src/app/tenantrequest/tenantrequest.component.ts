@@ -1,6 +1,7 @@
 import { Component, OnInit,Optional } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { DatePipe } from '@angular/common';
+import { GlobalConstants } from 'app/global-constants';
 import swal from 'sweetalert';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from "@angular/forms";
@@ -36,7 +37,7 @@ export class TenantRequestComponent implements OnInit {
     });
 
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/tenantrequest/RepairableItems")
+      .get<any>(GlobalConstants.apiURL + "api/tenantrequest/RepairableItems")
       .subscribe((data) => {
         this.RepairableEntities = data.data;
         this.RepairableEntities.push("Other");

@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { EmailComponent } from '../emailservice/email.component';
+import { GlobalConstants } from 'app/global-constants';
 @Component({
   selector: 'app-tenant',
   templateUrl: './tenant.component.html',

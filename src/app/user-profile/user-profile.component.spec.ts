@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { GlobalConstants } from 'app/global-constants';
 
 import { UserProfileComponent } from './user-profile.component';
 

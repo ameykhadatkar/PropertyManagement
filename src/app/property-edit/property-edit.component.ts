@@ -8,6 +8,7 @@ import { PropertyManageService } from '../services/propertymanage.service';
 import swal from 'sweetalert';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Optional } from '@angular/core'; 
+import { GlobalConstants } from 'app/global-constants';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
@@ -49,8 +50,8 @@ export class PropertyEditComponent implements OnInit {
         state:'',
         zipCode: '',
         createdDateTime: '2021-06-13T18:08:49.316Z',
-        lastModifiedDateTime: '2021-06-13T18:08:49.316Z',
-        preferredRent:0
+        lastModifiedDateTime: '2021-06-13T18:08:49.316Z'//,
+        //preferredRent:0
       }
       this.loading = false;
     }
@@ -60,7 +61,7 @@ export class PropertyEditComponent implements OnInit {
   onFormSubmit(form: NgForm): void {
     this.loading = true;
     console.log(this.propertyData);
-    this.propertyData.preferredRent = Number(this.propertyData.preferredRent);
+    //this.propertyData.preferredRent = Number(this.propertyData.preferredRent);
     this.http.put<any>('https://propertymanagemet20210611034324.azurewebsites.net/api/property', this.propertyData).subscribe(data => {
       this.loading = false;
       location.href = "/#/property/" + this.propertyData.id;
@@ -69,7 +70,7 @@ export class PropertyEditComponent implements OnInit {
   AddProperty(){
     this.loading = true;
     if(this.propertyData.id === 0){
-      this.propertyData.preferredRent = Number(this.propertyData.preferredRent);
+      //this.propertyData.preferredRent = Number(this.propertyData.preferredRent);
       this.http.post<any>('https://propertymanagemet20210611034324.azurewebsites.net/api/property', this.propertyData).subscribe(data => {
       this.loading = false;
       swal("Property has been added successfully")

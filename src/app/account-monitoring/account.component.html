@@ -48,6 +48,8 @@
                             <tr>
                               <th>Property</th>
                               <th>Transaction Date</th>
+                              <th>Payment Type</th>
+                              <th>Mode</th>
                               <th>Amount</th>
                               <th>Type</th>
                             </tr>
@@ -58,7 +60,13 @@
                                 <a href="/#/property/{{ prop?.property?.id || 0 }}">{{ prop?.property?.name || "" }}</a>
                               </td>
                               <td>
-                                {{ prop.personal }}
+                                {{ prop.paymentDateTime }}
+                              </td>
+                              <td>
+                                {{ prop.paymentType }}
+                              </td>
+                              <td>
+                                {{ prop.transactionMode }}
                               </td>
                               <td>
                                 {{ prop.amount | currency }}

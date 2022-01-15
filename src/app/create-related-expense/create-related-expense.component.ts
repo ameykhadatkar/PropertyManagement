@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError, retry } from "rxjs/operators";
+import { GlobalConstants } from 'app/global-constants';
 import { RelatedExpenseModel } from "app/models/relatedExpense";
 import {
   FormControl,
@@ -53,7 +54,7 @@ export class CreateRelatedExpenseComponent implements OnInit {
 
     this.http
       .post<any>(
-        "https://propertymanagemet20210611034324.azurewebsites.net/api/property/" +
+        GlobalConstants.apiURL + "api/property/" +
           this.propertyId +
           "/relatedexpenses",
         this.relatedExpense

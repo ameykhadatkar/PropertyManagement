@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { DatePipe } from '@angular/common';
+import { GlobalConstants } from 'app/global-constants';
 import swal from 'sweetalert';
 @Component({
   selector: 'app-account',
@@ -25,14 +26,18 @@ export class AccountComponent implements OnInit {
       "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
     };
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Finance", { headers })
+      .get<any>(GlobalConstants.apiURL + "api/Finance", { headers })
       .subscribe((data) => {
         this.account = data.data;
       });
       this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Finance/expenses", { headers })
+      .get<any>(GlobalConstants.apiURL + "api/Finance/expenses", { headers })
       .subscribe((data) => {
         this.transactions = data.records;
+        this.transactions.forEach(function (item, index) {
+          var dateobj = new Date(item.paymentDateTime);
+          item.paymentDateTime = dateobj.toLocaleDateString("en-US");
+        });
       });
   this.accountTransactions = [{
     id:23,
@@ -83,7 +88,7 @@ export class AccountComponent implements OnInit {
     creditCardExpense : Number(this.account.creditCardExpense)
   }
   this.http
-    .put<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Finance",this.account_update, { headers })
+    .put<any>(GlobalConstants.apiURL + "api/Finance",this.account_update, { headers })
     .subscribe((data) => {
       swal("Account has been updated")
     });

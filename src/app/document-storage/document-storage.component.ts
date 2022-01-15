@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Property } from 'app/models/propertymodel';
 import { ExcelService } from 'app/services/excel.service';
 import { catchError, retry, map, startWith } from "rxjs/operators";
+import { GlobalConstants } from 'app/global-constants';
 import swal from 'sweetalert';
 
 
@@ -36,7 +37,7 @@ export class DocumentStorageComponent implements OnInit {
     this.loading = true;
     this.pageNumber = 1;
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property")
+      .get<any>(GlobalConstants.apiURL + "api/property")
       .subscribe((data) => {
         this.loading = false;
         this.properties = data.records;
@@ -81,7 +82,7 @@ export class DocumentStorageComponent implements OnInit {
         }
         console.log(data);
         this.http
-          .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/DocumentStorage", data)
+          .post<any>(GlobalConstants.apiURL + "api/DocumentStorage", data)
           .subscribe((res) => {
             this.loading = false;
             swal("Document has been added successfully")
@@ -117,7 +118,7 @@ export class DocumentStorageComponent implements OnInit {
 
   loadPage(pageNumber){
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/DocumentStorage/list/" + this.pageNumber)
+      .get<any>(GlobalConstants.apiURL + "api/DocumentStorage/list/" + this.pageNumber)
       .subscribe((res) => {
         this.loading = false;
         if (res.message == "Success") {

@@ -8,6 +8,7 @@ import { Property } from "app/models/propertymodel";
 //import { RelatedExpenseModel } from "app/models/relatedExpense";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { NumberFormatValidator } from "ajv";
+import { GlobalConstants } from 'app/global-constants';
 
 export interface RelatedExpenseModel {
   id: number;
@@ -37,12 +38,12 @@ export class PropertyDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params["Id"];
    debugger
-    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/" + this.id).subscribe((data) => {
+    this.http.get<any>(GlobalConstants.apiURL + "api/property/" + this.id).subscribe((data) => {
       this.propertyData = data.data;
       console.log(this.propertyData);
     });
 
-    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/" + this.id + "/relatedexpenses").subscribe((data) => {
+    this.http.get<any>(GlobalConstants.apiURL + "api/property/" + this.id + "/relatedexpenses").subscribe((data) => {
       this.relatedExpenses = data.records;
       this.relatedExpenses.forEach(function (relatedExpense, index) {
         //var formattedDate = relatedExpense.expenseDate.substring(0, relatedExpense.expenseDate.indexOf("T"));
@@ -73,7 +74,7 @@ export class PropertyDetailsComponent implements OnInit {
   }
   deleteRelatedExpense(expenseID:number): void {
     
-    this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/relatedexpense/" + expenseID ).subscribe((data) => {
+    this.http.delete<any>(GlobalConstants.apiURL + "api/property/relatedexpense/" + expenseID ).subscribe((data) => {
       if(data.responseCode = 'OK'){
         alert("Related expense has been removed")
         this.relatedExpenses.forEach((value,index)=>{
@@ -91,7 +92,7 @@ export class PropertyDetailsComponent implements OnInit {
         PropertyId: id
       }
 
-      this.http.post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property/" + this.id + "/sell", data).subscribe((data) => {
+      this.http.post<any>(GlobalConstants.apiURL + "api/property/" + this.id + "/sell", data).subscribe((data) => {
         if(data.responseCode = 'OK'){
           location.href="/#/properties"
         }

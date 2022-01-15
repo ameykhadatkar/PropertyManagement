@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { GlobalConstants } from 'app/global-constants';
 import * as Chartist from "chartist";
 import swal from 'sweetalert';
 
@@ -84,7 +85,7 @@ export class DashboardComponent implements OnInit {
       return Math.ceil(num * precision) / precision;
     }
     this.loading = true;
-    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/report/last6month").subscribe((data) => {
+    this.http.get<any>(GlobalConstants.apiURL + "api/report/last6month").subscribe((data) => {
       this.loading = false;
 
       var chartData = {
@@ -105,7 +106,7 @@ export class DashboardComponent implements OnInit {
           minValue = x.profit;
         }
       });
-      this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/report/tiles").subscribe((data) => {
+      this.http.get<any>(GlobalConstants.apiURL + "api/report/tiles").subscribe((data) => {
         this.totalIncomeLast30Days= data.data.totalIncomeLast30Days;
         this.totalExpenseLast30Days= data.data.totalExpenseLast30Days;
         this.upcomingExpenseNext30Days = data.data.upcomingExpenseNext30Days;
@@ -134,7 +135,7 @@ export class DashboardComponent implements OnInit {
 
     this.loading = true;
 
-    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/report/incomeexpense").subscribe((data) => {
+    this.http.get<any>(GlobalConstants.apiURL + "api/report/incomeexpense").subscribe((data) => {
       this.loading = false;
 
       var chartData = {
@@ -188,7 +189,7 @@ export class DashboardComponent implements OnInit {
    getNotifications() {
     this.loading = true;
 
-    this.http.get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/TenantRequest").subscribe((data) => {
+    this.http.get<any>(GlobalConstants.apiURL + "api/TenantRequest").subscribe((data) => {
       this.loading = false;
       if (data.message == "Success") {
         if(data.records.length > 0) {

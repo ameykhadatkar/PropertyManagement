@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient , HttpErrorResponse } from '@angular/common/http';
+import { GlobalConstants } from 'app/global-constants';
 import swal from 'sweetalert';
 
 @Component({
@@ -26,7 +27,7 @@ loading: boolean;
       this.userLogin.password  = sessionStorage.getItem("loginPwd");
       try {
         this.http
-        .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Auth/login", this.userLogin)
+        .post<any>(GlobalConstants.apiURL + "api/Auth/login", this.userLogin)
         .subscribe((response) => {
           if(response.message == "Success") {
             this.userDetails = response.data.userDetails
@@ -53,7 +54,7 @@ loading: boolean;
   UpdateProfile(){
     try {  
       this.http
-      .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Auth/user/update", this.userDetails)
+      .post<any>(GlobalConstants.apiURL + "api/Auth/user/update", this.userDetails)
       .subscribe((response) => {
          swal("Profile has been updated succesfully")
       },
@@ -79,7 +80,7 @@ loading: boolean;
         }
         console.log(data);
         this.http
-          .put<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/tenant/Rules", data)
+          .put<any>(GlobalConstants.apiURL + "api/tenant/Rules", data)
           .subscribe((res) => {
             this.loading = false;
             swal("Rules document updated!")

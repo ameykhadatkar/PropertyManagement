@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { DatePipe } from '@angular/common';
+import { GlobalConstants } from 'app/global-constants';
 import swal from 'sweetalert';
 @Component({
   selector: 'email-service',
@@ -32,7 +33,7 @@ export class EmailComponent implements OnInit {
    
  }
  sendEmail() {
-  this.http.post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Notification/manual" ,this.tenant ).subscribe((data) => {
+  this.http.post<any>(GlobalConstants.apiURL + "api/Notification/manual" ,this.tenant ).subscribe((data) => {
     if(data.responseCode = 'OK'){
       alert("email has been sent");
     }

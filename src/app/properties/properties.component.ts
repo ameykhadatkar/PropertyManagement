@@ -6,6 +6,7 @@ import { Property } from "app/models/propertymodel";
 import { MatDialog } from '@angular/material/dialog';
 import { PropertyEditComponent } from '../property-edit/property-edit.component';
 import { PropertyManageService } from '../services/propertymanage.service';
+import { GlobalConstants } from 'app/global-constants';
 import swal from 'sweetalert';
 @Component({
   selector: "app-properties",
@@ -27,13 +28,10 @@ export class PropertiesComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net//api/property")
+      .get<any>(GlobalConstants.apiURL + "api/property")
       .subscribe((data) => {
         this.loading = false;
         this.properties = data.records;
-        // this.properties.forEach(function(item, index){
-        //   item.preferredRent = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(item.preferredRent);
-        // });
       });
   }
   AddNewProperty(){
@@ -49,7 +47,7 @@ export class PropertiesComponent implements OnInit {
       if (dialogResult != 0) {
         this.loading = true;
         this.http
-          .get<any>("https://propertymanagemet20210611034324.azurewebsites.net//api/property")
+          .get<any>(GlobalConstants.apiURL + "/api/property")
           .subscribe((data) => {
             this.loading = false;
     
@@ -73,7 +71,7 @@ export class PropertiesComponent implements OnInit {
     })
     .then((willDelete) => {
       if (willDelete) {
-        this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Property/" + propertyId).subscribe((data) => {
+        this.http.delete<any>(GlobalConstants.apiURL + "api/Property/" + propertyId).subscribe((data) => {
           if (data.responseCode = 'OK') {
             this.loading = false;
     
@@ -97,7 +95,7 @@ export class PropertiesComponent implements OnInit {
     this.loading = true;
     
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Report/PropertyEvaluation/"+id)
+      .get<any>(GlobalConstants.apiURL + "api/Report/PropertyEvaluation/"+id)
       .subscribe((data) => {
         this.loading = false;
         if(data.message == "Success") {
@@ -121,7 +119,7 @@ export class PropertiesComponent implements OnInit {
         sellingAmount : Number(sellAmount)
       }
       this.http
-      .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Report/SellingEvaluation",this.prop )
+      .post<any>(GlobalConstants.apiURL + "api/Report/SellingEvaluation",this.prop )
       .subscribe((data) => {
         this.loading = false;
         if(data.message == "Success") {
@@ -139,7 +137,7 @@ export class PropertiesComponent implements OnInit {
    else{
     this.showSellingEvaluationFeilds = 0
     this.http
-    .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Report/PropertyEvaluation/"+this.evalutions.id)
+    .get<any>(GlobalConstants.apiURL + "api/Report/PropertyEvaluation/"+this.evalutions.id)
     .subscribe((data) => {
       this.loading = false;
       if(data.message == "Success") {

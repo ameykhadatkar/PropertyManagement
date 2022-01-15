@@ -4,4 +4,5 @@ export class TenantModel {
   lastName: string;
   email: string;
   phone: string;
+  notes: string;
 }

@@ -10,6 +10,7 @@ import { TransactionModel } from "app/models/TransactionModel";
 import swal from 'sweetalert';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Optional } from '@angular/core';
+import { GlobalConstants } from 'app/global-constants';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from "@angular/forms";
 import { NULL_EXPR } from "@angular/compiler/src/output/output_ast";
 
@@ -46,7 +47,7 @@ export class CreatePaymentTypeComponent implements OnInit {
       Type:this.PaymentTypeId
     }
     this.http
-        .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Expense/paymenttypes", request)
+        .post<any>(GlobalConstants.apiURL + "api/Expense/paymenttypes", request)
         .subscribe((data) => {
           swal("PaymentType Has Been Added Successfully!")
           this.dialogRef.close()

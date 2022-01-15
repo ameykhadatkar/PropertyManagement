@@ -5,6 +5,7 @@ import { Property } from 'app/models/propertymodel';
 import { ExcelService } from 'app/services/excel.service';
 import { catchError, retry, map, startWith } from "rxjs/operators";
 import * as FileSaver from 'file-saver';
+import { GlobalConstants } from 'app/global-constants';
 import swal from 'sweetalert';
 import { Properties } from 'xlsx/types';
 
@@ -59,7 +60,7 @@ export class ExportReportsComponent implements OnInit {
     }]
 
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property")
+      .get<any>(GlobalConstants.apiURL + "api/property")
       .subscribe((data) => {
         this.loading = false;
         this.properties = data.records;

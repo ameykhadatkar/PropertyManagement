@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTransactionComponent } from '../create-transaction/create-transaction.component';
 import { CreatePaymentTypeComponent } from '../create-paymentType/create-paymentType.component';
+import { GlobalConstants } from 'app/global-constants';
 import swal from 'sweetalert';
 
 @Component({
@@ -48,7 +49,7 @@ export class TransactionsComponent implements OnInit {
   loadPage(pageNumber){
     console.log(this.startdate);
     console.log(this.enddate);
-    var url = "https://propertymanagemet20210611034324.azurewebsites.net/api/expense/list/" + this.pageNumber + "?";
+    var url = GlobalConstants.apiURL + "api/expense/list/" + this.pageNumber + "?";
     if(this.startdate != undefined && this.startdate != null){
       url = url + "startdate=" + this.startdate
     }
@@ -105,7 +106,7 @@ export class TransactionsComponent implements OnInit {
     })
     .then((willDelete) => {
       if (willDelete) {
-        this.http.delete<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Expense/" + expenseID).subscribe((data) => {
+        this.http.delete<any>(GlobalConstants.apiURL + "api/Expense/" + expenseID).subscribe((data) => {
           if (data.responseCode = 'OK') {
             this.loading = false;   
             swal("Transaction has been removed")

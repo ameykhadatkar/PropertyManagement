@@ -7,6 +7,7 @@ import { catchError, retry, map, startWith } from "rxjs/operators";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { Property } from "app/models/propertymodel";
 import { TransactionModel } from "app/models/TransactionModel";
+import { GlobalConstants } from 'app/global-constants';
 import swal from 'sweetalert';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Optional } from '@angular/core';
@@ -65,7 +66,7 @@ export class CreateTransactionComponent implements OnInit {
     });
 
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/property")
+      .get<any>(GlobalConstants.apiURL + "api/property")
       .subscribe((data) => {
         this.properties = data.records;
         console.log(this.properties);
@@ -76,7 +77,7 @@ export class CreateTransactionComponent implements OnInit {
         );
       });
     this.http
-      .get<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense/paymenttypes")
+      .get<any>(GlobalConstants.apiURL + "api/expense/paymenttypes")
       .subscribe((data) => {
         this.paymentTypes = data.records;
       });
@@ -118,6 +119,11 @@ export class CreateTransactionComponent implements OnInit {
       this.productForm.controls.Entity.setValue(this.entity);
     }
   }
+
+  sortBy(prop: string) {
+    return this.paymentTypes.sort((a, b) => a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1);
+  }
+
   getPropertyName(id) {
 
     var j = id;
@@ -173,7 +179,7 @@ export class CreateTransactionComponent implements OnInit {
     this.transaction.base64String = this.fileBase64String;
     if (this.existingtransactionID == 0) {
       this.http
-        .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense", this.transaction)
+        .post<any>(GlobalConstants.apiURL + "api/expense", this.transaction)
         .subscribe((data) => {
           swal("Transaction Has Been Added Successfully!")
           location.href = "/#/transactions";
@@ -182,7 +188,7 @@ export class CreateTransactionComponent implements OnInit {
     else {
       this.transaction.id = this.existingtransactionID;
       this.http
-        .put<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/expense", this.transaction)
+        .put<any>(GlobalConstants.apiURL + "api/expense", this.transaction)
         .subscribe((data) => {
           swal("Transaction Has Been updated Successfully!")
           this.dialogRef.close()

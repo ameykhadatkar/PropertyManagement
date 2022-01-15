@@ -53,15 +53,15 @@
                     </td>
 
                     <td class="alignMiddle">
-                      <button *ngIf="(tenant.editMode ===0)" class="btn btn-default btnAnimation"
+                      <button *ngIf="(tenant.editMode ===0)" class="btn btn-default btnAnimation btn-sm"
                         (click)="editTenant(tenant.id)" [disabled]="(disableEdit===0)">
                         <i class="fa fa-pencil"></i>
                       </button>
-                      <button *ngIf="(tenant.editMode ===1)" class="btn btn-default btnAnimation"
+                      <button *ngIf="(tenant.editMode ===1)" class="btn btn-default btnAnimation btn-sm"
                         (click)="updateTenant(tenant.id)">
                         <i class="fa fa-check-circle-o"></i>
                       </button>
-                      <button *ngIf="(tenant.editMode ===1)" class="btn btn-default btnAnimation"
+                      <button *ngIf="(tenant.editMode ===1)" class="btn btn-default btnAnimation btn-sm"
                         (click)="updateTenant(tenant.id)">
                         <i class="fa fa-times-circle-o"></i>
                       </button>

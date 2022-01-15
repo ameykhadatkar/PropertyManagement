@@ -8,6 +8,7 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { Property } from "app/models/propertymodel";
 import { TransactionModel } from "app/models/TransactionModel";
 import swal from 'sweetalert';
+import { GlobalConstants } from 'app/global-constants';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from "@angular/forms";
 
 
@@ -49,7 +50,7 @@ export class SignupComponent implements OnInit {
     this.loading = true;
     
     this.http
-      .post<any>("https://propertymanagemet20210611034324.azurewebsites.net/api/Auth/register", this.signupForm.value)
+      .post<any>(GlobalConstants.apiURL + "api/Auth/register", this.signupForm.value)
       .subscribe((data) => {
         this.loading = false;
         swal("You Have Been Registered Successfully");

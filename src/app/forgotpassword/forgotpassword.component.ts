@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import {  FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from '@angular/router';
+import { GlobalConstants } from 'app/global-constants';
 import swal from 'sweetalert';
 @Component({
   selector: 'app-forgotpassword',
@@ -26,7 +27,7 @@ export class ForgotpasswordComponent implements OnInit {
   }
   GenerateCode(){
     this.http
-    .post<any>(" https://propertymanagemet20210611034324.azurewebsites.net/api/Auth/forgotpassword",this.userEmail)
+    .post<any>(GlobalConstants.apiURL + "api/Auth/forgotpassword",this.userEmail)
     .subscribe((data) => {
       this.showCode = 0;
       swal("A code has been sent on you email address, Please enter to reset your password")
